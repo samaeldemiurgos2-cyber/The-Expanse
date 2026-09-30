@@ -1,0 +1,2094 @@
+{
+  "_about": "Single source of truth. 1 scene unit = 1 Mly. Milky Way at origin. J2000 equatorial Cartesian: x = d*cos(dec)*cos(ra), y = d*sin(dec), z = d*cos(dec)*sin(ra), ra in decimal hours, dec signed degrees.",
+  "galaxyGroups": [
+    {
+      "id": "local",
+      "name": "Local Group",
+      "ra": 17.76,
+      "dec": -29.01,
+      "dist": 0,
+      "members": 134,
+      "diam": 16.7,
+      "origin": "catalog",
+      "sample": {
+        "count": 200,
+        "radius": 6.0,
+        "core": 1.6,
+        "ex": [
+          1.2,
+          0.9,
+          1.2
+        ],
+        "mix": [
+          0.3,
+          0.65,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: Local Group",
+          "url": "https://en.wikipedia.org/w/index.php?title=Local_Group&printable=yes"
+        },
+        {
+          "name": "Fouqu\u00e9 / Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "virgo",
+      "name": "Virgo Cluster",
+      "ra": 12.45,
+      "dec": 12.72,
+      "dist": 53.8,
+      "members": 1500,
+      "diam": 7.5,
+      "origin": "catalog",
+      "sample": {
+        "count": 1050,
+        "radius": 3.4,
+        "core": 1.3,
+        "ex": [
+          1.0,
+          1.0,
+          1.25
+        ],
+        "mix": [
+          0.62,
+          0.34,
+          0.04
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: Virgo Cluster",
+          "url": "http://en.wikipedia.org/wiki/Virgo_Cluster"
+        },
+        {
+          "name": "Atlas of the Universe: Virgo",
+          "url": "http://www.atlasoftheuniverse.com/galgrps/vir.html"
+        }
+      ]
+    },
+    {
+      "id": "m81",
+      "name": "M81 Group",
+      "ra": 10.17,
+      "dec": 69.1,
+      "dist": 11.7,
+      "members": 34,
+      "origin": "catalog",
+      "sample": {
+        "count": 130,
+        "radius": 1.9,
+        "core": 0.7,
+        "mix": [
+          0.25,
+          0.7,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: M81 Group",
+          "url": "https://en.wikipedia.org/wiki/M81_Group"
+        },
+        {
+          "name": "Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "ic342",
+      "name": "IC 342 / Maffei Group",
+      "ra": 3.82,
+      "dec": 68.0,
+      "dist": 10.7,
+      "members": 18,
+      "origin": "catalog",
+      "sample": {
+        "count": 80,
+        "radius": 1.9,
+        "core": 0.7,
+        "mix": [
+          0.2,
+          0.75,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: IC 342/Maffei Group",
+          "url": "https://en.wikipedia.org/wiki/IC_342/Maffei_Group"
+        },
+        {
+          "name": "Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "sculptor",
+      "name": "Sculptor Group",
+      "ra": 0.8,
+      "dec": -25.28,
+      "dist": 12.7,
+      "members": 13,
+      "origin": "catalog",
+      "sample": {
+        "count": 70,
+        "radius": 1.9,
+        "core": 0.8,
+        "mix": [
+          0.15,
+          0.8,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: Sculptor Group",
+          "url": "https://en.wikipedia.org/wiki/Sculptor_Group"
+        },
+        {
+          "name": "Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "cena",
+      "name": "Centaurus A / M83 Group",
+      "ra": 13.33,
+      "dec": -44.97,
+      "dist": 13.4,
+      "members": 44,
+      "origin": "catalog",
+      "_note": "midpoint of Cen A 11.9 / M83 14.9 Mly subgroups",
+      "sample": {
+        "count": 160,
+        "radius": 2.4,
+        "core": 0.9,
+        "mix": [
+          0.4,
+          0.55,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: Centaurus A/M83 Group",
+          "url": "https://en.wikipedia.org/wiki/Centaurus_A/M83_Group"
+        },
+        {
+          "name": "Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "cvn1",
+      "name": "Canes Venatici I Group",
+      "ra": 12.3,
+      "dec": 35.8,
+      "dist": 13.0,
+      "members": 24,
+      "origin": "catalog",
+      "sample": {
+        "count": 80,
+        "radius": 1.9,
+        "core": 0.7,
+        "mix": [
+          0.2,
+          0.75,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: M94 Group",
+          "url": "https://en.wikipedia.org/wiki/M94_Group"
+        },
+        {
+          "name": "Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "cvn2",
+      "name": "Canes Venatici II Group",
+      "ra": 12.37,
+      "dec": 45.4,
+      "dist": 23.7,
+      "members": 24,
+      "origin": "catalog",
+      "_note": "atlas lists 30 Mly; Wikipedia group value used",
+      "sample": {
+        "count": 80,
+        "radius": 2.4,
+        "core": 0.9,
+        "mix": [
+          0.22,
+          0.73,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: Canes II Group",
+          "url": "https://en.wikipedia.org/wiki/Canes_II_Group"
+        },
+        {
+          "name": "SEDS: M106 group",
+          "url": "http://www.messier.seds.org/more/m106gr.html"
+        }
+      ]
+    },
+    {
+      "id": "leo1",
+      "name": "Leo I Group",
+      "ra": 10.81,
+      "dec": 12.67,
+      "dist": 37,
+      "members": 16,
+      "origin": "catalog",
+      "_note": "M96 group; namesake galaxy at 31 Mly",
+      "sample": {
+        "count": 90,
+        "radius": 2.9,
+        "core": 1.0,
+        "mix": [
+          0.3,
+          0.65,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: M96 Group",
+          "url": "https://en.wikipedia.org/wiki/M96_Group"
+        },
+        {
+          "name": "Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "draco",
+      "name": "Draco Group",
+      "ra": 12.05,
+      "dec": 63.2,
+      "dist": 70,
+      "members": 8,
+      "origin": "catalog",
+      "_note": "NGC 4125 group; 50 Mly mission figure unsupported",
+      "sample": {
+        "count": 70,
+        "radius": 2.8,
+        "core": 1.0,
+        "mix": [
+          0.35,
+          0.6,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: NGC 4125",
+          "url": "https://en.wikipedia.org/wiki/NGC_4125"
+        },
+        {
+          "name": "Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "leo2",
+      "name": "Leo II Group",
+      "ra": 11.28,
+      "dec": 18.05,
+      "dist": 73.4,
+      "members": 16,
+      "origin": "catalog",
+      "sample": {
+        "count": 90,
+        "radius": 3.0,
+        "core": 1.0,
+        "mix": [
+          0.3,
+          0.65,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: NGC 3607",
+          "url": "https://en.wikipedia.org/wiki/NGC_3607"
+        },
+        {
+          "name": "Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "virgo2",
+      "name": "Virgo II Groups",
+      "ra": 12.75,
+      "dec": -10.0,
+      "dist": 68,
+      "members": 100,
+      "diam": 30,
+      "origin": "catalog",
+      "_note": "midpoint of Binggeli W/S cloud ranges (55\u201380 Mly)",
+      "sample": {
+        "count": 150,
+        "radius": 9.0,
+        "core": 3.0,
+        "ex": [
+          1.0,
+          0.7,
+          1.4
+        ],
+        "mix": [
+          0.45,
+          0.5,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: Virgo II Groups",
+          "url": "https://en.wikipedia.org/wiki/Virgo_II_Groups"
+        },
+        {
+          "name": "Atlas of the Universe: virii",
+          "url": "http://www.atlasoftheuniverse.com/galgrps/virii.html"
+        }
+      ]
+    },
+    {
+      "id": "virgo3",
+      "name": "Virgo III Groups",
+      "ra": 14.42,
+      "dec": 2.5,
+      "dist": 75,
+      "members": 75,
+      "origin": "catalog",
+      "_note": "midpoint of cloud range (65\u201385 Mly)",
+      "sample": {
+        "count": 110,
+        "radius": 9.0,
+        "core": 3.0,
+        "ex": [
+          1.4,
+          0.6,
+          1.0
+        ],
+        "mix": [
+          0.45,
+          0.5,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: Virgo III Cloud",
+          "url": "https://en.wikipedia.org/wiki/Virgo_III_Cloud"
+        },
+        {
+          "name": "Atlas of the Universe: viriii",
+          "url": "http://www.atlasoftheuniverse.com/galgrps/viriii.html"
+        }
+      ]
+    },
+    {
+      "id": "ngc5643",
+      "name": "NGC 5643 Field",
+      "ra": 14.54,
+      "dec": -44.17,
+      "dist": 41,
+      "members": 1,
+      "origin": "catalog",
+      "_note": "no published group; single-marker galaxy",
+      "sample": {
+        "count": 10,
+        "radius": 1.2,
+        "core": 0.5,
+        "mix": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: NGC 5643",
+          "url": "https://en.wikipedia.org/wiki/NGC_5643"
+        }
+      ]
+    },
+    {
+      "id": "antlia",
+      "name": "Antlia Group",
+      "ra": 10.36,
+      "dec": -34.27,
+      "dist": 109.5,
+      "members": 16,
+      "origin": "catalog",
+      "_note": "NGC 3223 group; 40 Mly was a Mpc/Mly mix-up",
+      "sample": {
+        "count": 70,
+        "radius": 2.8,
+        "core": 1.0,
+        "mix": [
+          0.4,
+          0.55,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: NGC 3223",
+          "url": "https://en.wikipedia.org/wiki/NGC_3223"
+        },
+        {
+          "name": "Wikipedia: Antlia Cluster",
+          "url": "https://en.wikipedia.org/wiki/Antlia_Cluster"
+        }
+      ]
+    },
+    {
+      "id": "eridanus",
+      "name": "Eridanus Group",
+      "ra": 3.47,
+      "dec": -20.74,
+      "dist": 75,
+      "members": 200,
+      "origin": "catalog",
+      "sample": {
+        "count": 280,
+        "radius": 6.0,
+        "core": 2.0,
+        "mix": [
+          0.5,
+          0.45,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: Eridanus Cluster",
+          "url": "https://en.wikipedia.org/wiki/Eridanus_Cluster"
+        },
+        {
+          "name": "Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "ashcluster",
+      "name": "The Ash Cluster",
+      "ra": 4.0,
+      "dec": -8.0,
+      "dist": 64,
+      "members": 0,
+      "origin": "fiction",
+      "_note": "Samael's canon: sparse red-tinted field around Karna Vex",
+      "sample": {
+        "count": 130,
+        "radius": 4.2,
+        "core": 1.2,
+        "mix": [
+          0.55,
+          0.25,
+          0.2
+        ],
+        "ember": true
+      },
+      "sources": []
+    }
+  ],
+  "virgoCatalog": {
+    "_note": "160 largest Virgo Cluster members \u2014 REAL catalog data (atlasoftheuniverse.com/galgrps/vir.html, HyperLeda-based). Rows keep the table's order; columns: [ra_h, dec_deg, blue_mag, diam_kly, type: 0=E/S0, 1=S/SB, 2=Irr]. Plotted at true J2000 RA/Dec, true type/mag/size, projected at cluster distance.",
+    "dist": 53.8,
+    "rows": [
+      [
+        12.02,
+        14.1,
+        14.8,
+        30,
+        1
+      ],
+      [
+        12.0233,
+        13.4,
+        13.1,
+        35,
+        1
+      ],
+      [
+        12.07,
+        18.45,
+        12.3,
+        60,
+        1
+      ],
+      [
+        12.1367,
+        10.3833,
+        12.5,
+        50,
+        0
+      ],
+      [
+        12.1767,
+        18.8333,
+        14.9,
+        45,
+        1
+      ],
+      [
+        12.1767,
+        16.0333,
+        13.0,
+        30,
+        1
+      ],
+      [
+        12.205,
+        13.2,
+        12.2,
+        40,
+        0
+      ],
+      [
+        12.2083,
+        12.1167,
+        13.4,
+        40,
+        1
+      ],
+      [
+        12.2133,
+        10.8667,
+        12.1,
+        75,
+        1
+      ],
+      [
+        12.23,
+        13.4167,
+        12.5,
+        35,
+        1
+      ],
+      [
+        12.23,
+        14.9,
+        10.9,
+        150,
+        1
+      ],
+      [
+        12.2317,
+        13.1667,
+        13.3,
+        35,
+        1
+      ],
+      [
+        12.2367,
+        7.7833,
+        13.9,
+        30,
+        2
+      ],
+      [
+        12.2433,
+        5.8,
+        13.6,
+        50,
+        1
+      ],
+      [
+        12.2517,
+        14.0333,
+        14.4,
+        35,
+        1
+      ],
+      [
+        12.255,
+        13.0167,
+        12.8,
+        80,
+        1
+      ],
+      [
+        12.2617,
+        13.9,
+        11.9,
+        45,
+        1
+      ],
+      [
+        12.265,
+        13.15,
+        10.9,
+        120,
+        1
+      ],
+      [
+        12.265,
+        6.4,
+        13.0,
+        30,
+        0
+      ],
+      [
+        12.2733,
+        13.3,
+        13.9,
+        50,
+        1
+      ],
+      [
+        12.2767,
+        7.4667,
+        13.0,
+        40,
+        1
+      ],
+      [
+        12.285,
+        7.6167,
+        12.9,
+        35,
+        0
+      ],
+      [
+        12.2867,
+        12.45,
+        15.1,
+        30,
+        1
+      ],
+      [
+        12.2867,
+        7.1833,
+        12.6,
+        60,
+        1
+      ],
+      [
+        12.2867,
+        15.3167,
+        12.5,
+        30,
+        1
+      ],
+      [
+        12.29,
+        6.6833,
+        13.1,
+        35,
+        0
+      ],
+      [
+        12.3133,
+        14.4167,
+        10.4,
+        80,
+        1
+      ],
+      [
+        12.3233,
+        6.1,
+        12.7,
+        35,
+        1
+      ],
+      [
+        12.3233,
+        5.8333,
+        11.3,
+        60,
+        0
+      ],
+      [
+        12.325,
+        14.8833,
+        12.4,
+        30,
+        0
+      ],
+      [
+        12.3283,
+        5.5333,
+        14.3,
+        30,
+        1
+      ],
+      [
+        12.33,
+        12.8,
+        12.0,
+        45,
+        0
+      ],
+      [
+        12.33,
+        5.4667,
+        13.1,
+        30,
+        0
+      ],
+      [
+        12.3317,
+        5.35,
+        12.7,
+        30,
+        1
+      ],
+      [
+        12.3533,
+        18.3833,
+        11.2,
+        85,
+        1
+      ],
+      [
+        12.355,
+        11.5167,
+        12.7,
+        45,
+        1
+      ],
+      [
+        12.3583,
+        14.6,
+        12.1,
+        45,
+        1
+      ],
+      [
+        12.3617,
+        14.6,
+        12.5,
+        75,
+        1
+      ],
+      [
+        12.3683,
+        12.7333,
+        13.4,
+        30,
+        1
+      ],
+      [
+        12.3683,
+        9.05,
+        12.8,
+        50,
+        1
+      ],
+      [
+        12.37,
+        7.15,
+        14.4,
+        30,
+        0
+      ],
+      [
+        12.375,
+        15.5333,
+        12.5,
+        70,
+        1
+      ],
+      [
+        12.3767,
+        11.8,
+        12.6,
+        60,
+        1
+      ],
+      [
+        12.3783,
+        9.3333,
+        13.7,
+        40,
+        1
+      ],
+      [
+        12.3817,
+        15.8167,
+        10.1,
+        115,
+        1
+      ],
+      [
+        12.385,
+        5.25,
+        12.5,
+        45,
+        0
+      ],
+      [
+        12.3883,
+        11.3667,
+        13.3,
+        60,
+        1
+      ],
+      [
+        12.3917,
+        19.4333,
+        13.2,
+        30,
+        1
+      ],
+      [
+        12.3933,
+        6.0833,
+        12.3,
+        35,
+        0
+      ],
+      [
+        12.3933,
+        16.7167,
+        12.1,
+        50,
+        0
+      ],
+      [
+        12.3933,
+        6.95,
+        13.2,
+        35,
+        1
+      ],
+      [
+        12.4,
+        16.7,
+        11.9,
+        45,
+        0
+      ],
+      [
+        12.4,
+        12.2,
+        13.1,
+        30,
+        1
+      ],
+      [
+        12.4017,
+        11.2167,
+        13.5,
+        30,
+        0
+      ],
+      [
+        12.4033,
+        8.5333,
+        14.0,
+        40,
+        1
+      ],
+      [
+        12.4083,
+        7.3167,
+        10.6,
+        85,
+        0
+      ],
+      [
+        12.415,
+        11.7,
+        11.8,
+        60,
+        0
+      ],
+      [
+        12.4183,
+        12.8833,
+        10.1,
+        90,
+        0
+      ],
+      [
+        12.42,
+        15.6,
+        12.6,
+        30,
+        0
+      ],
+      [
+        12.4217,
+        4.9333,
+        12.5,
+        40,
+        1
+      ],
+      [
+        12.4233,
+        10.0167,
+        12.6,
+        50,
+        1
+      ],
+      [
+        12.4233,
+        18.1833,
+        10.0,
+        105,
+        0
+      ],
+      [
+        12.4233,
+        16.4667,
+        12.6,
+        30,
+        1
+      ],
+      [
+        12.4283,
+        7.2167,
+        14.0,
+        45,
+        1
+      ],
+      [
+        12.43,
+        12.6667,
+        11.9,
+        85,
+        1
+      ],
+      [
+        12.4317,
+        7.55,
+        14.2,
+        35,
+        1
+      ],
+      [
+        12.4317,
+        18.2167,
+        11.7,
+        50,
+        1
+      ],
+      [
+        12.4333,
+        15.6667,
+        13.1,
+        50,
+        1
+      ],
+      [
+        12.435,
+        13.1167,
+        12.6,
+        55,
+        1
+      ],
+      [
+        12.4367,
+        12.95,
+        9.9,
+        155,
+        0
+      ],
+      [
+        12.4417,
+        8.8667,
+        13.7,
+        30,
+        1
+      ],
+      [
+        12.4417,
+        12.6167,
+        13.1,
+        35,
+        1
+      ],
+      [
+        12.4467,
+        8.8833,
+        13.2,
+        35,
+        1
+      ],
+      [
+        12.4467,
+        9.5833,
+        12.0,
+        50,
+        0
+      ],
+      [
+        12.4483,
+        15.05,
+        12.0,
+        50,
+        1
+      ],
+      [
+        12.45,
+        15.4667,
+        12.5,
+        45,
+        0
+      ],
+      [
+        12.4517,
+        5.8833,
+        14.2,
+        35,
+        1
+      ],
+      [
+        12.4533,
+        7.2667,
+        13.5,
+        45,
+        2
+      ],
+      [
+        12.4533,
+        9.4167,
+        12.5,
+        50,
+        1
+      ],
+      [
+        12.4533,
+        12.7333,
+        12.8,
+        45,
+        0
+      ],
+      [
+        12.4567,
+        6.2667,
+        12.9,
+        35,
+        1
+      ],
+      [
+        12.4567,
+        11.1,
+        11.0,
+        90,
+        0
+      ],
+      [
+        12.4583,
+        9.6,
+        16.4,
+        30,
+        1
+      ],
+      [
+        12.4617,
+        13.0833,
+        11.7,
+        45,
+        0
+      ],
+      [
+        12.4633,
+        13.0167,
+        11.0,
+        130,
+        1
+      ],
+      [
+        12.4683,
+        9.8,
+        11.3,
+        70,
+        0
+      ],
+      [
+        12.4717,
+        9.4333,
+        13.7,
+        40,
+        1
+      ],
+      [
+        12.475,
+        17.0833,
+        10.9,
+        80,
+        1
+      ],
+      [
+        12.4783,
+        15.0,
+        13.1,
+        35,
+        1
+      ],
+      [
+        12.4783,
+        11.75,
+        13.0,
+        45,
+        0
+      ],
+      [
+        12.4833,
+        13.9833,
+        11.3,
+        60,
+        0
+      ],
+      [
+        12.485,
+        13.1833,
+        12.1,
+        50,
+        0
+      ],
+      [
+        12.4917,
+        8.75,
+        12.4,
+        50,
+        1
+      ],
+      [
+        12.4967,
+        8.0,
+        9.3,
+        150,
+        0
+      ],
+      [
+        12.4967,
+        13.4333,
+        11.1,
+        60,
+        0
+      ],
+      [
+        12.4983,
+        14.0667,
+        12.5,
+        35,
+        0
+      ],
+      [
+        12.5,
+        13.6333,
+        11.4,
+        55,
+        0
+      ],
+      [
+        12.5133,
+        12.3833,
+        9.6,
+        125,
+        0
+      ],
+      [
+        12.515,
+        8.3667,
+        13.2,
+        55,
+        1
+      ],
+      [
+        12.5167,
+        8.0833,
+        13.2,
+        30,
+        1
+      ],
+      [
+        12.525,
+        11.6167,
+        13.3,
+        30,
+        0
+      ],
+      [
+        12.5283,
+        16.85,
+        12.8,
+        45,
+        1
+      ],
+      [
+        12.5333,
+        14.4167,
+        10.3,
+        100,
+        1
+      ],
+      [
+        12.535,
+        11.1833,
+        12.1,
+        55,
+        0
+      ],
+      [
+        12.545,
+        14.05,
+        13.4,
+        30,
+        2
+      ],
+      [
+        12.5583,
+        8.65,
+        12.5,
+        45,
+        1
+      ],
+      [
+        12.5617,
+        9.1667,
+        13.1,
+        55,
+        1
+      ],
+      [
+        12.5633,
+        15.1667,
+        14.0,
+        30,
+        2
+      ],
+      [
+        12.5683,
+        7.7,
+        10.6,
+        105,
+        0
+      ],
+      [
+        12.5717,
+        13.0833,
+        12.5,
+        50,
+        0
+      ],
+      [
+        12.5717,
+        6.4667,
+        12.6,
+        45,
+        2
+      ],
+      [
+        12.5717,
+        8.2,
+        10.6,
+        105,
+        1
+      ],
+      [
+        12.5767,
+        18.2,
+        12.9,
+        50,
+        1
+      ],
+      [
+        12.58,
+        15.55,
+        12.5,
+        30,
+        1
+      ],
+      [
+        12.59,
+        14.5,
+        11.0,
+        80,
+        1
+      ],
+      [
+        12.5917,
+        12.2167,
+        12.5,
+        50,
+        0
+      ],
+      [
+        12.595,
+        12.55,
+        10.7,
+        75,
+        0
+      ],
+      [
+        12.6067,
+        11.4333,
+        11.9,
+        50,
+        0
+      ],
+      [
+        12.6083,
+        11.25,
+        12.1,
+        40,
+        1
+      ],
+      [
+        12.61,
+        11.2333,
+        11.7,
+        65,
+        1
+      ],
+      [
+        12.61,
+        6.6167,
+        14.0,
+        35,
+        2
+      ],
+      [
+        12.6133,
+        13.1667,
+        10.2,
+        160,
+        1
+      ],
+      [
+        12.615,
+        7.25,
+        11.8,
+        60,
+        0
+      ],
+      [
+        12.615,
+        14.2167,
+        11.9,
+        55,
+        1
+      ],
+      [
+        12.625,
+        9.55,
+        12.4,
+        45,
+        0
+      ],
+      [
+        12.6283,
+        11.8167,
+        10.6,
+        85,
+        1
+      ],
+      [
+        12.63,
+        5.3667,
+        12.9,
+        30,
+        1
+      ],
+      [
+        12.665,
+        10.1833,
+        11.4,
+        60,
+        0
+      ],
+      [
+        12.6833,
+        11.9167,
+        12.6,
+        45,
+        1
+      ],
+      [
+        12.6867,
+        11.8833,
+        13.8,
+        45,
+        1
+      ],
+      [
+        12.6867,
+        10.15,
+        12.2,
+        50,
+        0
+      ],
+      [
+        12.6917,
+        7.3167,
+        12.2,
+        35,
+        0
+      ],
+      [
+        12.7,
+        11.65,
+        10.8,
+        75,
+        0
+      ],
+      [
+        12.7033,
+        7.6833,
+        13.3,
+        35,
+        0
+      ],
+      [
+        12.71,
+        14.35,
+        13.8,
+        30,
+        1
+      ],
+      [
+        12.7117,
+        14.3,
+        13.2,
+        35,
+        1
+      ],
+      [
+        12.7133,
+        11.45,
+        12.1,
+        35,
+        0
+      ],
+      [
+        12.715,
+        13.25,
+        12.2,
+        45,
+        1
+      ],
+      [
+        12.725,
+        11.5833,
+        11.9,
+        45,
+        1
+      ],
+      [
+        12.7283,
+        11.55,
+        9.8,
+        110,
+        0
+      ],
+      [
+        12.7283,
+        16.4,
+        11.4,
+        60,
+        1
+      ],
+      [
+        12.7317,
+        13.1333,
+        11.1,
+        75,
+        1
+      ],
+      [
+        12.7417,
+        11.1833,
+        12.1,
+        30,
+        0
+      ],
+      [
+        12.7467,
+        12.35,
+        14.0,
+        40,
+        1
+      ],
+      [
+        12.78,
+        5.95,
+        13.9,
+        30,
+        1
+      ],
+      [
+        12.7967,
+        13.7667,
+        11.6,
+        70,
+        1
+      ],
+      [
+        12.805,
+        10.9833,
+        12.3,
+        45,
+        0
+      ],
+      [
+        12.8067,
+        8.4833,
+        11.7,
+        55,
+        1
+      ],
+      [
+        12.8267,
+        15.1667,
+        11.9,
+        75,
+        0
+      ],
+      [
+        12.8333,
+        5.3167,
+        12.3,
+        35,
+        1
+      ],
+      [
+        12.8517,
+        10.9167,
+        12.7,
+        30,
+        0
+      ],
+      [
+        12.865,
+        12.0833,
+        13.4,
+        60,
+        1
+      ],
+      [
+        12.8717,
+        11.3167,
+        11.6,
+        65,
+        0
+      ],
+      [
+        12.8783,
+        15.85,
+        13.6,
+        45,
+        2
+      ],
+      [
+        12.8817,
+        11.2333,
+        11.3,
+        115,
+        0
+      ],
+      [
+        12.9117,
+        13.2333,
+        13.9,
+        40,
+        1
+      ],
+      [
+        12.9133,
+        19.1833,
+        13.8,
+        55,
+        1
+      ],
+      [
+        12.9717,
+        14.55,
+        14.6,
+        40,
+        1
+      ],
+      [
+        12.99,
+        14.1667,
+        12.1,
+        95,
+        0
+      ],
+      [
+        13.0033,
+        12.4833,
+        12.9,
+        45,
+        0
+      ]
+    ]
+  },
+  "landmarks": [
+    {
+      "id": "m87",
+      "name": "M87",
+      "group": "virgo",
+      "kind": "elliptical galaxy \u00b7 cluster core",
+      "color": "#ffc27d",
+      "size": 1.0,
+      "note": "The Expanses's ground zero."
+    },
+    {
+      "id": "milkyway",
+      "name": "Milky Way",
+      "group": "local",
+      "kind": "barred spiral",
+      "color": "#bcd6ff",
+      "size": 0.8,
+      "note": "Origin of the chart. Backwater, locally famous."
+    },
+    {
+      "id": "m81",
+      "name": "M81",
+      "group": "m81",
+      "kind": "spiral galaxy",
+      "color": "#9fc0ff",
+      "size": 0.55
+    },
+    {
+      "id": "m83",
+      "name": "M83",
+      "group": "cena",
+      "kind": "spiral galaxy",
+      "color": "#9fc0ff",
+      "size": 0.55
+    },
+    {
+      "id": "m94",
+      "name": "M94",
+      "group": "cvn1",
+      "kind": "spiral galaxy",
+      "color": "#a8c8ff",
+      "size": 0.5
+    },
+    {
+      "id": "m106",
+      "name": "M106",
+      "group": "cvn2",
+      "kind": "spiral galaxy",
+      "color": "#a8c8ff",
+      "size": 0.5
+    },
+    {
+      "id": "m96",
+      "name": "M96",
+      "group": "leo1",
+      "kind": "spiral galaxy",
+      "color": "#a8c8ff",
+      "size": 0.5
+    }
+  ],
+  "worlds": [
+    {
+      "id": "lexor-aurex-prime",
+      "name": "Lexor-Aurex Prime",
+      "class": "capital world",
+      "anchor": {
+        "type": "group",
+        "ref": "virgo",
+        "offset": [
+          0,
+          0.28,
+          0
+        ]
+      },
+      "starSystem": "single",
+      "color": "#e8b34a",
+      "status": "charted",
+      "lore": [
+        "Seat of the Galactic Authority. Senate, military docks.",
+        "Pinned to the Virgo Cluster core \u2014 where the power sits now, not where it sat in myth."
+      ]
+    },
+    {
+      "id": "karna-vex",
+      "name": "Karna Vex",
+      "class": "throneworld",
+      "anchor": {
+        "type": "group",
+        "ref": "ashcluster",
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "starSystem": "single",
+      "color": "#e0532f",
+      "status": "charted",
+      "lore": [
+        "Fractured Throneworld of the Creators. Gas giant, seven habitable moons.",
+        "The Ash Cluster \u2014 everyone pretends it isn't there."
+      ],
+      "moons": [
+        {
+          "id": "veyra",
+          "name": "Veyra",
+          "class": "moon",
+          "offset": [
+            0.55,
+            0.15,
+            0.1
+          ],
+          "lore": "Habitable moon of Karna Vex."
+        },
+        {
+          "id": "dramnos",
+          "name": "Dramnos",
+          "class": "moon",
+          "offset": [
+            -0.35,
+            0.05,
+            0.45
+          ],
+          "lore": "Habitable moon of Karna Vex."
+        },
+        {
+          "id": "callistra",
+          "name": "Callistra",
+          "class": "moon",
+          "offset": [
+            0.15,
+            -0.25,
+            -0.5
+          ],
+          "lore": "Habitable moon of Karna Vex."
+        },
+        {
+          "id": "velkor",
+          "name": "Velkor",
+          "class": "moon",
+          "offset": [
+            -0.5,
+            -0.1,
+            -0.2
+          ],
+          "lore": "Habitable moon of Karna Vex."
+        },
+        {
+          "id": "neythra",
+          "name": "Neythra",
+          "class": "moon",
+          "offset": [
+            -0.1,
+            0.4,
+            0.35
+          ],
+          "lore": "Habitable moon of Karna Vex."
+        },
+        {
+          "id": "zyphor",
+          "name": "Zyphor",
+          "class": "moon",
+          "offset": [
+            0.4,
+            -0.35,
+            0.15
+          ],
+          "lore": "Habitable moon of Karna Vex."
+        },
+        {
+          "id": "micqui-nobara",
+          "name": "Micqui-Nobara",
+          "class": "moon",
+          "offset": [
+            0.05,
+            0.1,
+            -0.65
+          ],
+          "lore": "Habitable moon of Karna Vex."
+        },
+        {
+          "id": "relics-roost",
+          "name": "Relic's Roost",
+          "class": "site",
+          "offset": [
+            -0.75,
+            0.3,
+            0.15
+          ],
+          "lore": "A site of interest in Karna Vex space."
+        }
+      ]
+    },
+    {
+      "id": "calavra",
+      "name": "Calavra",
+      "class": "desert world",
+      "anchor": {
+        "type": "coords",
+        "ra": 21.8,
+        "dec": -18.0,
+        "dist": 98
+      },
+      "starSystem": "single",
+      "color": "#d98e45",
+      "status": "outer rim",
+      "lore": [
+        "Desert planet. The black structure."
+      ]
+    },
+    {
+      "id": "evergreen",
+      "name": "Evergreen Planet",
+      "class": "shrine world",
+      "anchor": {
+        "type": "coords",
+        "ra": 7.4,
+        "dec": 52.0,
+        "dist": 92
+      },
+      "starSystem": "single",
+      "color": "#4fd07a",
+      "status": "outer rim",
+      "lore": [
+        "Vel'Zan. The Temple of Memory."
+      ]
+    },
+    {
+      "id": "myxan-homeworld",
+      "name": "Myxan Homeworld",
+      "class": "homeworld",
+      "anchor": {
+        "type": "group",
+        "ref": "leo1",
+        "offset": [
+          0.8,
+          -0.3,
+          0.5
+        ]
+      },
+      "starSystem": "single",
+      "color": "#9be15d",
+      "status": "charted",
+      "lore": [
+        "Homeworld of the Myxan."
+      ]
+    },
+    {
+      "id": "qor-mazaan",
+      "name": "Qor'Mazaan",
+      "class": "storm world",
+      "anchor": {
+        "type": "group",
+        "ref": "draco",
+        "offset": [
+          -0.6,
+          0.4,
+          0.3
+        ]
+      },
+      "starSystem": "single",
+      "color": "#8b93c9",
+      "status": "charted",
+      "lore": [
+        "Storm-wrapped."
+      ]
+    },
+    {
+      "id": "vaskor-3",
+      "name": "Vaskor-3",
+      "class": "settlement",
+      "anchor": {
+        "type": "group",
+        "ref": "cvn2",
+        "offset": [
+          0.5,
+          0.2,
+          -0.4
+        ]
+      },
+      "starSystem": "single",
+      "color": "#d9a441",
+      "status": "charted",
+      "lore": [
+        "Draquari village."
+      ]
+    },
+    {
+      "id": "ardea-9",
+      "name": "Ardea-9",
+      "class": "waystation",
+      "anchor": {
+        "type": "group",
+        "ref": "m81",
+        "offset": [
+          -0.5,
+          -0.2,
+          0.3
+        ]
+      },
+      "starSystem": "single",
+      "color": "#4fc3d0",
+      "status": "charted",
+      "lore": []
+    },
+    {
+      "id": "ugat",
+      "name": "Ugat",
+      "class": "trading outpost",
+      "anchor": {
+        "type": "group",
+        "ref": "ic342",
+        "offset": [
+          1.0,
+          0.35,
+          -0.55
+        ]
+      },
+      "starSystem": "single",
+      "color": "#9fb6c9",
+      "status": "charted",
+      "lore": [
+        "Trading outpost."
+      ]
+    },
+    {
+      "id": "atlan-verdan",
+      "name": "Atlan Verdan",
+      "class": "terra world",
+      "anchor": {
+        "type": "group",
+        "ref": "sculptor",
+        "offset": [
+          0.45,
+          0.25,
+          0.35
+        ]
+      },
+      "starSystem": "single",
+      "color": "#3ecd8f",
+      "status": "charted",
+      "lore": []
+    },
+    {
+      "id": "caldrith-5",
+      "name": "Caldrith V",
+      "class": "ruin world",
+      "anchor": {
+        "type": "group",
+        "ref": "eridanus",
+        "offset": [
+          -1.2,
+          0.5,
+          0.8
+        ]
+      },
+      "starSystem": "single",
+      "color": "#b06a5a",
+      "status": "charted",
+      "lore": [
+        "Ashen plains. Shattered ruins."
+      ]
+    },
+    {
+      "id": "krelios-7",
+      "name": "Krelios-7",
+      "class": "outpost",
+      "anchor": {
+        "type": "group",
+        "ref": "leo2",
+        "offset": [
+          0.9,
+          -0.2,
+          -0.5
+        ]
+      },
+      "starSystem": "single",
+      "color": "#cfd8dc",
+      "status": "charted",
+      "lore": []
+    },
+    {
+      "id": "vel-malvara",
+      "name": "Vel'Malvara",
+      "class": "trade spire",
+      "anchor": {
+        "type": "group",
+        "ref": "cena",
+        "offset": [
+          0.6,
+          -0.35,
+          -0.4
+        ]
+      },
+      "starSystem": "single",
+      "color": "#d56fb0",
+      "status": "charted",
+      "lore": [
+        "Tower of trade and temptation."
+      ]
+    },
+    {
+      "id": "uncharted",
+      "name": "Uncharted",
+      "class": "classified world",
+      "anchor": {
+        "type": "coords",
+        "ra": 15.3,
+        "dec": 14.0,
+        "dist": 40
+      },
+      "starSystem": "single",
+      "color": "#35e0c8",
+      "status": "uncharted",
+      "lore": [
+        "Not on any star map.",
+        "Warbrood-Captain-only."
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "id": "r-evergreen",
+      "from": "calavra",
+      "to": "evergreen",
+      "label": "3 hours",
+      "note": "Calavra run to the Temple of Memory"
+    },
+    {
+      "id": "r-lexor",
+      "from": "evergreen",
+      "to": "lexor-aurex-prime",
+      "label": "12 hours",
+      "note": "The long haul to the Senate world"
+    },
+    {
+      "id": "r-myxan",
+      "from": "lexor-aurex-prime",
+      "to": "myxan-homeworld",
+      "label": "\u2248 1 day",
+      "note": "All due respect \u2014 a slow, inevitable descent into Hell"
+    },
+    {
+      "id": "r-ugat",
+      "from": "ugat",
+      "to": "ardea-9",
+      "label": "1 hour",
+      "note": "Station run"
+    }
+  ]
+}
