@@ -1,9 +1,7 @@
 # The Expanse — Virgo Supercluster Chart
 
-> **MIRROR — DO NOT EDIT.** This public repo is a read-only mirror of the
-> private source-of-truth repo `The-Virgo-Supercluster`. Every few minutes an
-> automated sync force-aligns it to the source; any direct edits here are
-> reverted. To change anything, change it in the source.
+> **SOURCE OF TRUTH (private).** This repo is auto-mirrored to the public
+> `The-Expanse` every few minutes. Push here; the mirror follows.
 
 A navigable Three.js visualization of **The Expanse**, which *is* the Virgo Supercluster.
 Fly the GAS *Ripley* through ~110 million light-years of real cosmic structure,
@@ -48,3 +46,4 @@ The engine reads that block and nothing else for content.
 Canon pins: **Lexor-Aurex Prime** at the Virgo Cluster core (M87) — seat of the
 Galactic Authority. **Karna Vex** peripheral — the throneworld in exile,
 "The Ash Cluster," with its seven moons + Micqui-Nobara.
+
