@@ -1,397 +1,2723 @@
 {
   "_about": "Single source of truth. 1 scene unit = 1 Mly. Milky Way at origin. J2000 equatorial Cartesian: x = d*cos(dec)*cos(ra), y = d*sin(dec), z = d*cos(dec)*sin(ra), ra in decimal hours, dec signed degrees.",
   "galaxyGroups": [
-    { "id": "local", "name": "Local Group", "ra": 17.76, "dec": -29.01, "dist": 0, "members": 134, "diam": 16.7,
+    {
+      "id": "local",
+      "name": "Local Group",
+      "ra": 17.76,
+      "dec": -29.01,
+      "dist": 0,
+      "members": 134,
+      "diam": 16.7,
       "origin": "catalog",
-      "sample": { "count": 200, "radius": 6.0, "core": 1.6, "ex": [1.2, 0.9, 1.2], "mix": [0.30, 0.65, 0.05] },
+      "sample": {
+        "count": 200,
+        "radius": 6.0,
+        "core": 1.6,
+        "ex": [
+          1.2,
+          0.9,
+          1.2
+        ],
+        "mix": [
+          0.3,
+          0.65,
+          0.05
+        ]
+      },
       "sources": [
-        { "name": "Wikipedia: Local Group", "url": "https://en.wikipedia.org/w/index.php?title=Local_Group&printable=yes" },
-        { "name": "Fouqué / Atlas of the Universe", "url": "http://www.atlasoftheuniverse.com/galaclus.html" }
-      ] },
-    { "id": "virgo", "name": "Virgo Cluster", "ra": 12.45, "dec": 12.72, "dist": 53.8, "members": 1500, "diam": 7.5,
+        {
+          "name": "Wikipedia: Local Group",
+          "url": "https://en.wikipedia.org/w/index.php?title=Local_Group&printable=yes"
+        },
+        {
+          "name": "Fouqué / Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "virgo",
+      "name": "Virgo Cluster",
+      "ra": 12.45,
+      "dec": 12.72,
+      "dist": 53.8,
+      "members": 1500,
+      "diam": 7.5,
       "origin": "catalog",
-      "sample": { "count": 1050, "radius": 3.4, "core": 1.3, "ex": [1.0, 1.0, 1.25], "mix": [0.62, 0.34, 0.04] },
+      "sample": {
+        "count": 1050,
+        "radius": 3.4,
+        "core": 1.3,
+        "ex": [
+          1.0,
+          1.0,
+          1.25
+        ],
+        "mix": [
+          0.62,
+          0.34,
+          0.04
+        ]
+      },
       "sources": [
-        { "name": "Wikipedia: Virgo Cluster", "url": "http://en.wikipedia.org/wiki/Virgo_Cluster" },
-        { "name": "Atlas of the Universe: Virgo", "url": "http://www.atlasoftheuniverse.com/galgrps/vir.html" }
-      ] },
-    { "id": "m81", "name": "M81 Group", "ra": 10.17, "dec": 69.1, "dist": 11.7, "members": 34,
+        {
+          "name": "Wikipedia: Virgo Cluster",
+          "url": "http://en.wikipedia.org/wiki/Virgo_Cluster"
+        },
+        {
+          "name": "Atlas of the Universe: Virgo",
+          "url": "http://www.atlasoftheuniverse.com/galgrps/vir.html"
+        }
+      ]
+    },
+    {
+      "id": "m81",
+      "name": "M81 Group",
+      "ra": 10.17,
+      "dec": 69.1,
+      "dist": 11.7,
+      "members": 34,
       "origin": "catalog",
-      "sample": { "count": 130, "radius": 1.9, "core": 0.7, "mix": [0.25, 0.70, 0.05] },
+      "sample": {
+        "count": 130,
+        "radius": 1.9,
+        "core": 0.7,
+        "mix": [
+          0.25,
+          0.7,
+          0.05
+        ]
+      },
       "sources": [
-        { "name": "Wikipedia: M81 Group", "url": "https://en.wikipedia.org/wiki/M81_Group" },
-        { "name": "Atlas of the Universe", "url": "http://www.atlasoftheuniverse.com/galaclus.html" }
-      ] },
-    { "id": "ic342", "name": "IC 342 / Maffei Group", "ra": 3.82, "dec": 68.0, "dist": 10.7, "members": 18,
+        {
+          "name": "Wikipedia: M81 Group",
+          "url": "https://en.wikipedia.org/wiki/M81_Group"
+        },
+        {
+          "name": "Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "ic342",
+      "name": "IC 342 / Maffei Group",
+      "ra": 3.82,
+      "dec": 68.0,
+      "dist": 10.7,
+      "members": 18,
       "origin": "catalog",
-      "sample": { "count": 80, "radius": 1.9, "core": 0.7, "mix": [0.20, 0.75, 0.05] },
+      "sample": {
+        "count": 80,
+        "radius": 1.9,
+        "core": 0.7,
+        "mix": [
+          0.2,
+          0.75,
+          0.05
+        ]
+      },
       "sources": [
-        { "name": "Wikipedia: IC 342/Maffei Group", "url": "https://en.wikipedia.org/wiki/IC_342/Maffei_Group" },
-        { "name": "Atlas of the Universe", "url": "http://www.atlasoftheuniverse.com/galaclus.html" }
-      ] },
-    { "id": "sculptor", "name": "Sculptor Group", "ra": 0.80, "dec": -25.28, "dist": 12.7, "members": 13,
+        {
+          "name": "Wikipedia: IC 342/Maffei Group",
+          "url": "https://en.wikipedia.org/wiki/IC_342/Maffei_Group"
+        },
+        {
+          "name": "Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "sculptor",
+      "name": "Sculptor Group",
+      "ra": 0.8,
+      "dec": -25.28,
+      "dist": 12.7,
+      "members": 13,
       "origin": "catalog",
-      "sample": { "count": 70, "radius": 1.9, "core": 0.8, "mix": [0.15, 0.80, 0.05] },
+      "sample": {
+        "count": 70,
+        "radius": 1.9,
+        "core": 0.8,
+        "mix": [
+          0.15,
+          0.8,
+          0.05
+        ]
+      },
       "sources": [
-        { "name": "Wikipedia: Sculptor Group", "url": "https://en.wikipedia.org/wiki/Sculptor_Group" },
-        { "name": "Atlas of the Universe", "url": "http://www.atlasoftheuniverse.com/galaclus.html" }
-      ] },
-    { "id": "cena", "name": "Centaurus A / M83 Group", "ra": 13.33, "dec": -44.97, "dist": 13.4, "members": 44,
-      "origin": "catalog", "_note": "midpoint of Cen A 11.9 / M83 14.9 Mly subgroups",
-      "sample": { "count": 160, "radius": 2.4, "core": 0.9, "mix": [0.40, 0.55, 0.05] },
-      "sources": [
-        { "name": "Wikipedia: Centaurus A/M83 Group", "url": "https://en.wikipedia.org/wiki/Centaurus_A/M83_Group" },
-        { "name": "Atlas of the Universe", "url": "http://www.atlasoftheuniverse.com/galaclus.html" }
-      ] },
-    { "id": "cvn1", "name": "Canes Venatici I Group", "ra": 12.30, "dec": 35.8, "dist": 13.0, "members": 24,
+        {
+          "name": "Wikipedia: Sculptor Group",
+          "url": "https://en.wikipedia.org/wiki/Sculptor_Group"
+        },
+        {
+          "name": "Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "cena",
+      "name": "Centaurus A / M83 Group",
+      "ra": 13.33,
+      "dec": -44.97,
+      "dist": 13.4,
+      "members": 44,
       "origin": "catalog",
-      "sample": { "count": 80, "radius": 1.9, "core": 0.7, "mix": [0.20, 0.75, 0.05] },
+      "_note": "midpoint of Cen A 11.9 / M83 14.9 Mly subgroups",
+      "sample": {
+        "count": 160,
+        "radius": 2.4,
+        "core": 0.9,
+        "mix": [
+          0.4,
+          0.55,
+          0.05
+        ]
+      },
       "sources": [
-        { "name": "Wikipedia: M94 Group", "url": "https://en.wikipedia.org/wiki/M94_Group" },
-        { "name": "Atlas of the Universe", "url": "http://www.atlasoftheuniverse.com/galaclus.html" }
-      ] },
-    { "id": "cvn2", "name": "Canes Venatici II Group", "ra": 12.37, "dec": 45.4, "dist": 23.7, "members": 24,
-      "origin": "catalog", "_note": "atlas lists 30 Mly; Wikipedia group value used",
-      "sample": { "count": 80, "radius": 2.4, "core": 0.9, "mix": [0.22, 0.73, 0.05] },
-      "sources": [
-        { "name": "Wikipedia: Canes II Group", "url": "https://en.wikipedia.org/wiki/Canes_II_Group" },
-        { "name": "SEDS: M106 group", "url": "http://www.messier.seds.org/more/m106gr.html" }
-      ] },
-    { "id": "leo1", "name": "Leo I Group", "ra": 10.81, "dec": 12.67, "dist": 37, "members": 16,
-      "origin": "catalog", "_note": "M96 group; namesake galaxy at 31 Mly",
-      "sample": { "count": 90, "radius": 2.9, "core": 1.0, "mix": [0.30, 0.65, 0.05] },
-      "sources": [
-        { "name": "Wikipedia: M96 Group", "url": "https://en.wikipedia.org/wiki/M96_Group" },
-        { "name": "Atlas of the Universe", "url": "http://www.atlasoftheuniverse.com/galaclus.html" }
-      ] },
-    { "id": "draco", "name": "Draco Group", "ra": 12.05, "dec": 63.2, "dist": 70, "members": 8,
-      "origin": "catalog", "_note": "NGC 4125 group; 50 Mly mission figure unsupported",
-      "sample": { "count": 70, "radius": 2.8, "core": 1.0, "mix": [0.35, 0.60, 0.05] },
-      "sources": [
-        { "name": "Wikipedia: NGC 4125", "url": "https://en.wikipedia.org/wiki/NGC_4125" },
-        { "name": "Atlas of the Universe", "url": "http://www.atlasoftheuniverse.com/galaclus.html" }
-      ] },
-    { "id": "leo2", "name": "Leo II Group", "ra": 11.28, "dec": 18.05, "dist": 73.4, "members": 16,
+        {
+          "name": "Wikipedia: Centaurus A/M83 Group",
+          "url": "https://en.wikipedia.org/wiki/Centaurus_A/M83_Group"
+        },
+        {
+          "name": "Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "cvn1",
+      "name": "Canes Venatici I Group",
+      "ra": 12.3,
+      "dec": 35.8,
+      "dist": 13.0,
+      "members": 24,
       "origin": "catalog",
-      "sample": { "count": 90, "radius": 3.0, "core": 1.0, "mix": [0.30, 0.65, 0.05] },
+      "sample": {
+        "count": 80,
+        "radius": 1.9,
+        "core": 0.7,
+        "mix": [
+          0.2,
+          0.75,
+          0.05
+        ]
+      },
       "sources": [
-        { "name": "Wikipedia: NGC 3607", "url": "https://en.wikipedia.org/wiki/NGC_3607" },
-        { "name": "Atlas of the Universe", "url": "http://www.atlasoftheuniverse.com/galaclus.html" }
-      ] },
-    { "id": "virgo2", "name": "Virgo II Groups", "ra": 12.75, "dec": -10.0, "dist": 68, "members": 100, "diam": 30,
-      "origin": "catalog", "_note": "midpoint of Binggeli W/S cloud ranges (55–80 Mly)",
-      "sample": { "count": 150, "radius": 9.0, "core": 3.0, "ex": [1.0, 0.7, 1.4], "mix": [0.45, 0.50, 0.05] },
-      "sources": [
-        { "name": "Wikipedia: Virgo II Groups", "url": "https://en.wikipedia.org/wiki/Virgo_II_Groups" },
-        { "name": "Atlas of the Universe: virii", "url": "http://www.atlasoftheuniverse.com/galgrps/virii.html" }
-      ] },
-    { "id": "virgo3", "name": "Virgo III Groups", "ra": 14.42, "dec": 2.5, "dist": 75, "members": 75,
-      "origin": "catalog", "_note": "midpoint of cloud range (65–85 Mly)",
-      "sample": { "count": 110, "radius": 9.0, "core": 3.0, "ex": [1.4, 0.6, 1.0], "mix": [0.45, 0.50, 0.05] },
-      "sources": [
-        { "name": "Wikipedia: Virgo III Cloud", "url": "https://en.wikipedia.org/wiki/Virgo_III_Cloud" },
-        { "name": "Atlas of the Universe: viriii", "url": "http://www.atlasoftheuniverse.com/galgrps/viriii.html" }
-      ] },
-    { "id": "ngc5643", "name": "NGC 5643 Field", "ra": 14.54, "dec": -44.17, "dist": 41, "members": 1,
-      "origin": "catalog", "_note": "no published group; single-marker galaxy",
-      "sample": { "count": 10, "radius": 1.2, "core": 0.5, "mix": [0.0, 1.0, 0.0] },
-      "sources": [
-        { "name": "Wikipedia: NGC 5643", "url": "https://en.wikipedia.org/wiki/NGC_5643" }
-      ] },
-    { "id": "antlia", "name": "Antlia Group", "ra": 10.36, "dec": -34.27, "dist": 109.5, "members": 16,
-      "origin": "catalog", "_note": "NGC 3223 group; 40 Mly was a Mpc/Mly mix-up",
-      "sample": { "count": 70, "radius": 2.8, "core": 1.0, "mix": [0.40, 0.55, 0.05] },
-      "sources": [
-        { "name": "Wikipedia: NGC 3223", "url": "https://en.wikipedia.org/wiki/NGC_3223" },
-        { "name": "Wikipedia: Antlia Cluster", "url": "https://en.wikipedia.org/wiki/Antlia_Cluster" }
-      ] },
-    { "id": "eridanus", "name": "Eridanus Group", "ra": 3.47, "dec": -20.74, "dist": 75, "members": 200,
+        {
+          "name": "Wikipedia: M94 Group",
+          "url": "https://en.wikipedia.org/wiki/M94_Group"
+        },
+        {
+          "name": "Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "cvn2",
+      "name": "Canes Venatici II Group",
+      "ra": 12.37,
+      "dec": 45.4,
+      "dist": 23.7,
+      "members": 24,
       "origin": "catalog",
-      "sample": { "count": 280, "radius": 6.0, "core": 2.0, "mix": [0.50, 0.45, 0.05] },
+      "_note": "atlas lists 30 Mly; Wikipedia group value used",
+      "sample": {
+        "count": 80,
+        "radius": 2.4,
+        "core": 0.9,
+        "mix": [
+          0.22,
+          0.73,
+          0.05
+        ]
+      },
       "sources": [
-        { "name": "Wikipedia: Eridanus Cluster", "url": "https://en.wikipedia.org/wiki/Eridanus_Cluster" },
-        { "name": "Atlas of the Universe", "url": "http://www.atlasoftheuniverse.com/galaclus.html" }
-      ] },
-    { "id": "ashcluster", "name": "The Ash Cluster", "ra": 4.0, "dec": -8.0, "dist": 64, "members": 0,
-      "origin": "fiction", "_note": "Samael's canon: sparse red-tinted field around Karna Vex",
-      "sample": { "count": 130, "radius": 4.2, "core": 1.2, "mix": [0.55, 0.25, 0.20], "ember": true },
-      "sources": [] }
+        {
+          "name": "Wikipedia: Canes II Group",
+          "url": "https://en.wikipedia.org/wiki/Canes_II_Group"
+        },
+        {
+          "name": "SEDS: M106 group",
+          "url": "http://www.messier.seds.org/more/m106gr.html"
+        }
+      ]
+    },
+    {
+      "id": "leo1",
+      "name": "Leo I Group",
+      "ra": 10.81,
+      "dec": 12.67,
+      "dist": 37,
+      "members": 16,
+      "origin": "catalog",
+      "_note": "M96 group; namesake galaxy at 31 Mly",
+      "sample": {
+        "count": 90,
+        "radius": 2.9,
+        "core": 1.0,
+        "mix": [
+          0.3,
+          0.65,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: M96 Group",
+          "url": "https://en.wikipedia.org/wiki/M96_Group"
+        },
+        {
+          "name": "Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "draco",
+      "name": "Draco Group",
+      "ra": 12.05,
+      "dec": 63.2,
+      "dist": 70,
+      "members": 8,
+      "origin": "catalog",
+      "_note": "NGC 4125 group; 50 Mly mission figure unsupported",
+      "sample": {
+        "count": 70,
+        "radius": 2.8,
+        "core": 1.0,
+        "mix": [
+          0.35,
+          0.6,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: NGC 4125",
+          "url": "https://en.wikipedia.org/wiki/NGC_4125"
+        },
+        {
+          "name": "Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "leo2",
+      "name": "Leo II Group",
+      "ra": 11.28,
+      "dec": 18.05,
+      "dist": 73.4,
+      "members": 16,
+      "origin": "catalog",
+      "sample": {
+        "count": 90,
+        "radius": 3.0,
+        "core": 1.0,
+        "mix": [
+          0.3,
+          0.65,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: NGC 3607",
+          "url": "https://en.wikipedia.org/wiki/NGC_3607"
+        },
+        {
+          "name": "Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "virgo2",
+      "name": "Virgo II Groups",
+      "ra": 12.75,
+      "dec": -10.0,
+      "dist": 68,
+      "members": 100,
+      "diam": 30,
+      "origin": "catalog",
+      "_note": "midpoint of Binggeli W/S cloud ranges (55–80 Mly)",
+      "sample": {
+        "count": 150,
+        "radius": 9.0,
+        "core": 3.0,
+        "ex": [
+          1.0,
+          0.7,
+          1.4
+        ],
+        "mix": [
+          0.45,
+          0.5,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: Virgo II Groups",
+          "url": "https://en.wikipedia.org/wiki/Virgo_II_Groups"
+        },
+        {
+          "name": "Atlas of the Universe: virii",
+          "url": "http://www.atlasoftheuniverse.com/galgrps/virii.html"
+        }
+      ]
+    },
+    {
+      "id": "virgo3",
+      "name": "Virgo III Groups",
+      "ra": 14.42,
+      "dec": 2.5,
+      "dist": 75,
+      "members": 75,
+      "origin": "catalog",
+      "_note": "midpoint of cloud range (65–85 Mly)",
+      "sample": {
+        "count": 110,
+        "radius": 9.0,
+        "core": 3.0,
+        "ex": [
+          1.4,
+          0.6,
+          1.0
+        ],
+        "mix": [
+          0.45,
+          0.5,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: Virgo III Cloud",
+          "url": "https://en.wikipedia.org/wiki/Virgo_III_Cloud"
+        },
+        {
+          "name": "Atlas of the Universe: viriii",
+          "url": "http://www.atlasoftheuniverse.com/galgrps/viriii.html"
+        }
+      ]
+    },
+    {
+      "id": "ngc5643",
+      "name": "NGC 5643 Field",
+      "ra": 14.54,
+      "dec": -44.17,
+      "dist": 41,
+      "members": 1,
+      "origin": "catalog",
+      "_note": "no published group; single-marker galaxy",
+      "sample": {
+        "count": 10,
+        "radius": 1.2,
+        "core": 0.5,
+        "mix": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: NGC 5643",
+          "url": "https://en.wikipedia.org/wiki/NGC_5643"
+        }
+      ]
+    },
+    {
+      "id": "antlia",
+      "name": "Antlia Group",
+      "ra": 10.36,
+      "dec": -34.27,
+      "dist": 109.5,
+      "members": 16,
+      "origin": "catalog",
+      "_note": "NGC 3223 group; 40 Mly was a Mpc/Mly mix-up",
+      "sample": {
+        "count": 70,
+        "radius": 2.8,
+        "core": 1.0,
+        "mix": [
+          0.4,
+          0.55,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: NGC 3223",
+          "url": "https://en.wikipedia.org/wiki/NGC_3223"
+        },
+        {
+          "name": "Wikipedia: Antlia Cluster",
+          "url": "https://en.wikipedia.org/wiki/Antlia_Cluster"
+        }
+      ]
+    },
+    {
+      "id": "eridanus",
+      "name": "Eridanus Group",
+      "ra": 3.47,
+      "dec": -20.74,
+      "dist": 75,
+      "members": 200,
+      "origin": "catalog",
+      "sample": {
+        "count": 280,
+        "radius": 6.0,
+        "core": 2.0,
+        "mix": [
+          0.5,
+          0.45,
+          0.05
+        ]
+      },
+      "sources": [
+        {
+          "name": "Wikipedia: Eridanus Cluster",
+          "url": "https://en.wikipedia.org/wiki/Eridanus_Cluster"
+        },
+        {
+          "name": "Atlas of the Universe",
+          "url": "http://www.atlasoftheuniverse.com/galaclus.html"
+        }
+      ]
+    },
+    {
+      "id": "ashcluster",
+      "name": "The Ash Cluster",
+      "ra": 4.0,
+      "dec": -8.0,
+      "dist": 64,
+      "members": 0,
+      "origin": "fiction",
+      "_note": "Samael's canon: sparse red-tinted field around Karna Vex",
+      "sample": {
+        "count": 130,
+        "radius": 4.2,
+        "core": 1.2,
+        "mix": [
+          0.55,
+          0.25,
+          0.2
+        ],
+        "ember": true
+      },
+      "sources": []
+    }
   ],
   "virgoCatalog": {
     "_note": "160 largest Virgo Cluster members — REAL catalog data (atlasoftheuniverse.com/galgrps/vir.html, HyperLeda-based). Rows keep the table's order; columns: [ra_h, dec_deg, blue_mag, diam_kly, type: 0=E/S0, 1=S/SB, 2=Irr]. Plotted at true J2000 RA/Dec, true type/mag/size, projected at cluster distance.",
     "dist": 53.8,
     "rows": [
-      [12.0200,14.1000,14.8,30,1],[12.0233,13.4000,13.1,35,1],[12.0700,18.4500,12.3,60,1],[12.1367,10.3833,12.5,50,0],
-      [12.1767,18.8333,14.9,45,1],[12.1767,16.0333,13.0,30,1],[12.2050,13.2000,12.2,40,0],[12.2083,12.1167,13.4,40,1],
-      [12.2133,10.8667,12.1,75,1],[12.2300,13.4167,12.5,35,1],[12.2300,14.9000,10.9,150,1],[12.2317,13.1667,13.3,35,1],
-      [12.2367,7.7833,13.9,30,2],[12.2433,5.8000,13.6,50,1],[12.2517,14.0333,14.4,35,1],[12.2550,13.0167,12.8,80,1],
-      [12.2617,13.9000,11.9,45,1],[12.2650,13.1500,10.9,120,1],[12.2650,6.4000,13.0,30,0],[12.2733,13.3000,13.9,50,1],
-      [12.2767,7.4667,13.0,40,1],[12.2850,7.6167,12.9,35,0],[12.2867,12.4500,15.1,30,1],[12.2867,7.1833,12.6,60,1],
-      [12.2867,15.3167,12.5,30,1],[12.2900,6.6833,13.1,35,0],[12.3133,14.4167,10.4,80,1],[12.3233,6.1000,12.7,35,1],
-      [12.3233,5.8333,11.3,60,0],[12.3250,14.8833,12.4,30,0],[12.3283,5.5333,14.3,30,1],[12.3300,12.8000,12.0,45,0],
-      [12.3300,5.4667,13.1,30,0],[12.3317,5.3500,12.7,30,1],[12.3533,18.3833,11.2,85,1],[12.3550,11.5167,12.7,45,1],
-      [12.3583,14.6000,12.1,45,1],[12.3617,14.6000,12.5,75,1],[12.3683,12.7333,13.4,30,1],[12.3683,9.0500,12.8,50,1],
-      [12.3700,7.1500,14.4,30,0],[12.3750,15.5333,12.5,70,1],[12.3767,11.8000,12.6,60,1],[12.3783,9.3333,13.7,40,1],
-      [12.3817,15.8167,10.1,115,1],[12.3850,5.2500,12.5,45,0],[12.3883,11.3667,13.3,60,1],[12.3917,19.4333,13.2,30,1],
-      [12.3933,6.0833,12.3,35,0],[12.3933,16.7167,12.1,50,0],[12.3933,6.9500,13.2,35,1],[12.4000,16.7000,11.9,45,0],
-      [12.4000,12.2000,13.1,30,1],[12.4017,11.2167,13.5,30,0],[12.4033,8.5333,14.0,40,1],[12.4083,7.3167,10.6,85,0],
-      [12.4150,11.7000,11.8,60,0],[12.4183,12.8833,10.1,90,0],[12.4200,15.6000,12.6,30,0],[12.4217,4.9333,12.5,40,1],
-      [12.4233,10.0167,12.6,50,1],[12.4233,18.1833,10.0,105,0],[12.4233,16.4667,12.6,30,1],[12.4283,7.2167,14.0,45,1],
-      [12.4300,12.6667,11.9,85,1],[12.4317,7.5500,14.2,35,1],[12.4317,18.2167,11.7,50,1],[12.4333,15.6667,13.1,50,1],
-      [12.4350,13.1167,12.6,55,1],[12.4367,12.9500,9.9,155,0],[12.4417,8.8667,13.7,30,1],[12.4417,12.6167,13.1,35,1],
-      [12.4467,8.8833,13.2,35,1],[12.4467,9.5833,12.0,50,0],[12.4483,15.0500,12.0,50,1],[12.4500,15.4667,12.5,45,0],
-      [12.4517,5.8833,14.2,35,1],[12.4533,7.2667,13.5,45,2],[12.4533,9.4167,12.5,50,1],[12.4533,12.7333,12.8,45,0],
-      [12.4567,6.2667,12.9,35,1],[12.4567,11.1000,11.0,90,0],[12.4583,9.6000,16.4,30,1],[12.4617,13.0833,11.7,45,0],
-      [12.4633,13.0167,11.0,130,1],[12.4683,9.8000,11.3,70,0],[12.4717,9.4333,13.7,40,1],[12.4750,17.0833,10.9,80,1],
-      [12.4783,15.0000,13.1,35,1],[12.4783,11.7500,13.0,45,0],[12.4833,13.9833,11.3,60,0],[12.4850,13.1833,12.1,50,0],
-      [12.4917,8.7500,12.4,50,1],[12.4967,8.0000,9.3,150,0],[12.4967,13.4333,11.1,60,0],[12.4983,14.0667,12.5,35,0],
-      [12.5000,13.6333,11.4,55,0],[12.5133,12.3833,9.6,125,0],[12.5150,8.3667,13.2,55,1],[12.5167,8.0833,13.2,30,1],
-      [12.5250,11.6167,13.3,30,0],[12.5283,16.8500,12.8,45,1],[12.5333,14.4167,10.3,100,1],[12.5350,11.1833,12.1,55,0],
-      [12.5450,14.0500,13.4,30,2],[12.5583,8.6500,12.5,45,1],[12.5617,9.1667,13.1,55,1],[12.5633,15.1667,14.0,30,2],
-      [12.5683,7.7000,10.6,105,0],[12.5717,13.0833,12.5,50,0],[12.5717,6.4667,12.6,45,2],[12.5717,8.2000,10.6,105,1],
-      [12.5767,18.2000,12.9,50,1],[12.5800,15.5500,12.5,30,1],[12.5900,14.5000,11.0,80,1],[12.5917,12.2167,12.5,50,0],
-      [12.5950,12.5500,10.7,75,0],[12.6067,11.4333,11.9,50,0],[12.6083,11.2500,12.1,40,1],[12.6100,11.2333,11.7,65,1],
-      [12.6100,6.6167,14.0,35,2],[12.6133,13.1667,10.2,160,1],[12.6150,7.2500,11.8,60,0],[12.6150,14.2167,11.9,55,1],
-      [12.6250,9.5500,12.4,45,0],[12.6283,11.8167,10.6,85,1],[12.6300,5.3667,12.9,30,1],[12.6650,10.1833,11.4,60,0],
-      [12.6833,11.9167,12.6,45,1],[12.6867,11.8833,13.8,45,1],[12.6867,10.1500,12.2,50,0],[12.6917,7.3167,12.2,35,0],
-      [12.7000,11.6500,10.8,75,0],[12.7033,7.6833,13.3,35,0],[12.7100,14.3500,13.8,30,1],[12.7117,14.3000,13.2,35,1],
-      [12.7133,11.4500,12.1,35,0],[12.7150,13.2500,12.2,45,1],[12.7250,11.5833,11.9,45,1],[12.7283,11.5500,9.8,110,0],
-      [12.7283,16.4000,11.4,60,1],[12.7317,13.1333,11.1,75,1],[12.7417,11.1833,12.1,30,0],[12.7467,12.3500,14.0,40,1],
-      [12.7800,5.9500,13.9,30,1],[12.7967,13.7667,11.6,70,1],[12.8050,10.9833,12.3,45,0],[12.8067,8.4833,11.7,55,1],
-      [12.8267,15.1667,11.9,75,0],[12.8333,5.3167,12.3,35,1],[12.8517,10.9167,12.7,30,0],[12.8650,12.0833,13.4,60,1],
-      [12.8717,11.3167,11.6,65,0],[12.8783,15.8500,13.6,45,2],[12.8817,11.2333,11.3,115,0],[12.9117,13.2333,13.9,40,1],
-      [12.9133,19.1833,13.8,55,1],[12.9717,14.5500,14.6,40,1],[12.9900,14.1667,12.1,95,0],[13.0033,12.4833,12.9,45,0]
+      [
+        12.02,
+        14.1,
+        14.8,
+        30,
+        1
+      ],
+      [
+        12.0233,
+        13.4,
+        13.1,
+        35,
+        1
+      ],
+      [
+        12.07,
+        18.45,
+        12.3,
+        60,
+        1
+      ],
+      [
+        12.1367,
+        10.3833,
+        12.5,
+        50,
+        0
+      ],
+      [
+        12.1767,
+        18.8333,
+        14.9,
+        45,
+        1
+      ],
+      [
+        12.1767,
+        16.0333,
+        13.0,
+        30,
+        1
+      ],
+      [
+        12.205,
+        13.2,
+        12.2,
+        40,
+        0
+      ],
+      [
+        12.2083,
+        12.1167,
+        13.4,
+        40,
+        1
+      ],
+      [
+        12.2133,
+        10.8667,
+        12.1,
+        75,
+        1
+      ],
+      [
+        12.23,
+        13.4167,
+        12.5,
+        35,
+        1
+      ],
+      [
+        12.23,
+        14.9,
+        10.9,
+        150,
+        1
+      ],
+      [
+        12.2317,
+        13.1667,
+        13.3,
+        35,
+        1
+      ],
+      [
+        12.2367,
+        7.7833,
+        13.9,
+        30,
+        2
+      ],
+      [
+        12.2433,
+        5.8,
+        13.6,
+        50,
+        1
+      ],
+      [
+        12.2517,
+        14.0333,
+        14.4,
+        35,
+        1
+      ],
+      [
+        12.255,
+        13.0167,
+        12.8,
+        80,
+        1
+      ],
+      [
+        12.2617,
+        13.9,
+        11.9,
+        45,
+        1
+      ],
+      [
+        12.265,
+        13.15,
+        10.9,
+        120,
+        1
+      ],
+      [
+        12.265,
+        6.4,
+        13.0,
+        30,
+        0
+      ],
+      [
+        12.2733,
+        13.3,
+        13.9,
+        50,
+        1
+      ],
+      [
+        12.2767,
+        7.4667,
+        13.0,
+        40,
+        1
+      ],
+      [
+        12.285,
+        7.6167,
+        12.9,
+        35,
+        0
+      ],
+      [
+        12.2867,
+        12.45,
+        15.1,
+        30,
+        1
+      ],
+      [
+        12.2867,
+        7.1833,
+        12.6,
+        60,
+        1
+      ],
+      [
+        12.2867,
+        15.3167,
+        12.5,
+        30,
+        1
+      ],
+      [
+        12.29,
+        6.6833,
+        13.1,
+        35,
+        0
+      ],
+      [
+        12.3133,
+        14.4167,
+        10.4,
+        80,
+        1
+      ],
+      [
+        12.3233,
+        6.1,
+        12.7,
+        35,
+        1
+      ],
+      [
+        12.3233,
+        5.8333,
+        11.3,
+        60,
+        0
+      ],
+      [
+        12.325,
+        14.8833,
+        12.4,
+        30,
+        0
+      ],
+      [
+        12.3283,
+        5.5333,
+        14.3,
+        30,
+        1
+      ],
+      [
+        12.33,
+        12.8,
+        12.0,
+        45,
+        0
+      ],
+      [
+        12.33,
+        5.4667,
+        13.1,
+        30,
+        0
+      ],
+      [
+        12.3317,
+        5.35,
+        12.7,
+        30,
+        1
+      ],
+      [
+        12.3533,
+        18.3833,
+        11.2,
+        85,
+        1
+      ],
+      [
+        12.355,
+        11.5167,
+        12.7,
+        45,
+        1
+      ],
+      [
+        12.3583,
+        14.6,
+        12.1,
+        45,
+        1
+      ],
+      [
+        12.3617,
+        14.6,
+        12.5,
+        75,
+        1
+      ],
+      [
+        12.3683,
+        12.7333,
+        13.4,
+        30,
+        1
+      ],
+      [
+        12.3683,
+        9.05,
+        12.8,
+        50,
+        1
+      ],
+      [
+        12.37,
+        7.15,
+        14.4,
+        30,
+        0
+      ],
+      [
+        12.375,
+        15.5333,
+        12.5,
+        70,
+        1
+      ],
+      [
+        12.3767,
+        11.8,
+        12.6,
+        60,
+        1
+      ],
+      [
+        12.3783,
+        9.3333,
+        13.7,
+        40,
+        1
+      ],
+      [
+        12.3817,
+        15.8167,
+        10.1,
+        115,
+        1
+      ],
+      [
+        12.385,
+        5.25,
+        12.5,
+        45,
+        0
+      ],
+      [
+        12.3883,
+        11.3667,
+        13.3,
+        60,
+        1
+      ],
+      [
+        12.3917,
+        19.4333,
+        13.2,
+        30,
+        1
+      ],
+      [
+        12.3933,
+        6.0833,
+        12.3,
+        35,
+        0
+      ],
+      [
+        12.3933,
+        16.7167,
+        12.1,
+        50,
+        0
+      ],
+      [
+        12.3933,
+        6.95,
+        13.2,
+        35,
+        1
+      ],
+      [
+        12.4,
+        16.7,
+        11.9,
+        45,
+        0
+      ],
+      [
+        12.4,
+        12.2,
+        13.1,
+        30,
+        1
+      ],
+      [
+        12.4017,
+        11.2167,
+        13.5,
+        30,
+        0
+      ],
+      [
+        12.4033,
+        8.5333,
+        14.0,
+        40,
+        1
+      ],
+      [
+        12.4083,
+        7.3167,
+        10.6,
+        85,
+        0
+      ],
+      [
+        12.415,
+        11.7,
+        11.8,
+        60,
+        0
+      ],
+      [
+        12.4183,
+        12.8833,
+        10.1,
+        90,
+        0
+      ],
+      [
+        12.42,
+        15.6,
+        12.6,
+        30,
+        0
+      ],
+      [
+        12.4217,
+        4.9333,
+        12.5,
+        40,
+        1
+      ],
+      [
+        12.4233,
+        10.0167,
+        12.6,
+        50,
+        1
+      ],
+      [
+        12.4233,
+        18.1833,
+        10.0,
+        105,
+        0
+      ],
+      [
+        12.4233,
+        16.4667,
+        12.6,
+        30,
+        1
+      ],
+      [
+        12.4283,
+        7.2167,
+        14.0,
+        45,
+        1
+      ],
+      [
+        12.43,
+        12.6667,
+        11.9,
+        85,
+        1
+      ],
+      [
+        12.4317,
+        7.55,
+        14.2,
+        35,
+        1
+      ],
+      [
+        12.4317,
+        18.2167,
+        11.7,
+        50,
+        1
+      ],
+      [
+        12.4333,
+        15.6667,
+        13.1,
+        50,
+        1
+      ],
+      [
+        12.435,
+        13.1167,
+        12.6,
+        55,
+        1
+      ],
+      [
+        12.4367,
+        12.95,
+        9.9,
+        155,
+        0
+      ],
+      [
+        12.4417,
+        8.8667,
+        13.7,
+        30,
+        1
+      ],
+      [
+        12.4417,
+        12.6167,
+        13.1,
+        35,
+        1
+      ],
+      [
+        12.4467,
+        8.8833,
+        13.2,
+        35,
+        1
+      ],
+      [
+        12.4467,
+        9.5833,
+        12.0,
+        50,
+        0
+      ],
+      [
+        12.4483,
+        15.05,
+        12.0,
+        50,
+        1
+      ],
+      [
+        12.45,
+        15.4667,
+        12.5,
+        45,
+        0
+      ],
+      [
+        12.4517,
+        5.8833,
+        14.2,
+        35,
+        1
+      ],
+      [
+        12.4533,
+        7.2667,
+        13.5,
+        45,
+        2
+      ],
+      [
+        12.4533,
+        9.4167,
+        12.5,
+        50,
+        1
+      ],
+      [
+        12.4533,
+        12.7333,
+        12.8,
+        45,
+        0
+      ],
+      [
+        12.4567,
+        6.2667,
+        12.9,
+        35,
+        1
+      ],
+      [
+        12.4567,
+        11.1,
+        11.0,
+        90,
+        0
+      ],
+      [
+        12.4583,
+        9.6,
+        16.4,
+        30,
+        1
+      ],
+      [
+        12.4617,
+        13.0833,
+        11.7,
+        45,
+        0
+      ],
+      [
+        12.4633,
+        13.0167,
+        11.0,
+        130,
+        1
+      ],
+      [
+        12.4683,
+        9.8,
+        11.3,
+        70,
+        0
+      ],
+      [
+        12.4717,
+        9.4333,
+        13.7,
+        40,
+        1
+      ],
+      [
+        12.475,
+        17.0833,
+        10.9,
+        80,
+        1
+      ],
+      [
+        12.4783,
+        15.0,
+        13.1,
+        35,
+        1
+      ],
+      [
+        12.4783,
+        11.75,
+        13.0,
+        45,
+        0
+      ],
+      [
+        12.4833,
+        13.9833,
+        11.3,
+        60,
+        0
+      ],
+      [
+        12.485,
+        13.1833,
+        12.1,
+        50,
+        0
+      ],
+      [
+        12.4917,
+        8.75,
+        12.4,
+        50,
+        1
+      ],
+      [
+        12.4967,
+        8.0,
+        9.3,
+        150,
+        0
+      ],
+      [
+        12.4967,
+        13.4333,
+        11.1,
+        60,
+        0
+      ],
+      [
+        12.4983,
+        14.0667,
+        12.5,
+        35,
+        0
+      ],
+      [
+        12.5,
+        13.6333,
+        11.4,
+        55,
+        0
+      ],
+      [
+        12.5133,
+        12.3833,
+        9.6,
+        125,
+        0
+      ],
+      [
+        12.515,
+        8.3667,
+        13.2,
+        55,
+        1
+      ],
+      [
+        12.5167,
+        8.0833,
+        13.2,
+        30,
+        1
+      ],
+      [
+        12.525,
+        11.6167,
+        13.3,
+        30,
+        0
+      ],
+      [
+        12.5283,
+        16.85,
+        12.8,
+        45,
+        1
+      ],
+      [
+        12.5333,
+        14.4167,
+        10.3,
+        100,
+        1
+      ],
+      [
+        12.535,
+        11.1833,
+        12.1,
+        55,
+        0
+      ],
+      [
+        12.545,
+        14.05,
+        13.4,
+        30,
+        2
+      ],
+      [
+        12.5583,
+        8.65,
+        12.5,
+        45,
+        1
+      ],
+      [
+        12.5617,
+        9.1667,
+        13.1,
+        55,
+        1
+      ],
+      [
+        12.5633,
+        15.1667,
+        14.0,
+        30,
+        2
+      ],
+      [
+        12.5683,
+        7.7,
+        10.6,
+        105,
+        0
+      ],
+      [
+        12.5717,
+        13.0833,
+        12.5,
+        50,
+        0
+      ],
+      [
+        12.5717,
+        6.4667,
+        12.6,
+        45,
+        2
+      ],
+      [
+        12.5717,
+        8.2,
+        10.6,
+        105,
+        1
+      ],
+      [
+        12.5767,
+        18.2,
+        12.9,
+        50,
+        1
+      ],
+      [
+        12.58,
+        15.55,
+        12.5,
+        30,
+        1
+      ],
+      [
+        12.59,
+        14.5,
+        11.0,
+        80,
+        1
+      ],
+      [
+        12.5917,
+        12.2167,
+        12.5,
+        50,
+        0
+      ],
+      [
+        12.595,
+        12.55,
+        10.7,
+        75,
+        0
+      ],
+      [
+        12.6067,
+        11.4333,
+        11.9,
+        50,
+        0
+      ],
+      [
+        12.6083,
+        11.25,
+        12.1,
+        40,
+        1
+      ],
+      [
+        12.61,
+        11.2333,
+        11.7,
+        65,
+        1
+      ],
+      [
+        12.61,
+        6.6167,
+        14.0,
+        35,
+        2
+      ],
+      [
+        12.6133,
+        13.1667,
+        10.2,
+        160,
+        1
+      ],
+      [
+        12.615,
+        7.25,
+        11.8,
+        60,
+        0
+      ],
+      [
+        12.615,
+        14.2167,
+        11.9,
+        55,
+        1
+      ],
+      [
+        12.625,
+        9.55,
+        12.4,
+        45,
+        0
+      ],
+      [
+        12.6283,
+        11.8167,
+        10.6,
+        85,
+        1
+      ],
+      [
+        12.63,
+        5.3667,
+        12.9,
+        30,
+        1
+      ],
+      [
+        12.665,
+        10.1833,
+        11.4,
+        60,
+        0
+      ],
+      [
+        12.6833,
+        11.9167,
+        12.6,
+        45,
+        1
+      ],
+      [
+        12.6867,
+        11.8833,
+        13.8,
+        45,
+        1
+      ],
+      [
+        12.6867,
+        10.15,
+        12.2,
+        50,
+        0
+      ],
+      [
+        12.6917,
+        7.3167,
+        12.2,
+        35,
+        0
+      ],
+      [
+        12.7,
+        11.65,
+        10.8,
+        75,
+        0
+      ],
+      [
+        12.7033,
+        7.6833,
+        13.3,
+        35,
+        0
+      ],
+      [
+        12.71,
+        14.35,
+        13.8,
+        30,
+        1
+      ],
+      [
+        12.7117,
+        14.3,
+        13.2,
+        35,
+        1
+      ],
+      [
+        12.7133,
+        11.45,
+        12.1,
+        35,
+        0
+      ],
+      [
+        12.715,
+        13.25,
+        12.2,
+        45,
+        1
+      ],
+      [
+        12.725,
+        11.5833,
+        11.9,
+        45,
+        1
+      ],
+      [
+        12.7283,
+        11.55,
+        9.8,
+        110,
+        0
+      ],
+      [
+        12.7283,
+        16.4,
+        11.4,
+        60,
+        1
+      ],
+      [
+        12.7317,
+        13.1333,
+        11.1,
+        75,
+        1
+      ],
+      [
+        12.7417,
+        11.1833,
+        12.1,
+        30,
+        0
+      ],
+      [
+        12.7467,
+        12.35,
+        14.0,
+        40,
+        1
+      ],
+      [
+        12.78,
+        5.95,
+        13.9,
+        30,
+        1
+      ],
+      [
+        12.7967,
+        13.7667,
+        11.6,
+        70,
+        1
+      ],
+      [
+        12.805,
+        10.9833,
+        12.3,
+        45,
+        0
+      ],
+      [
+        12.8067,
+        8.4833,
+        11.7,
+        55,
+        1
+      ],
+      [
+        12.8267,
+        15.1667,
+        11.9,
+        75,
+        0
+      ],
+      [
+        12.8333,
+        5.3167,
+        12.3,
+        35,
+        1
+      ],
+      [
+        12.8517,
+        10.9167,
+        12.7,
+        30,
+        0
+      ],
+      [
+        12.865,
+        12.0833,
+        13.4,
+        60,
+        1
+      ],
+      [
+        12.8717,
+        11.3167,
+        11.6,
+        65,
+        0
+      ],
+      [
+        12.8783,
+        15.85,
+        13.6,
+        45,
+        2
+      ],
+      [
+        12.8817,
+        11.2333,
+        11.3,
+        115,
+        0
+      ],
+      [
+        12.9117,
+        13.2333,
+        13.9,
+        40,
+        1
+      ],
+      [
+        12.9133,
+        19.1833,
+        13.8,
+        55,
+        1
+      ],
+      [
+        12.9717,
+        14.55,
+        14.6,
+        40,
+        1
+      ],
+      [
+        12.99,
+        14.1667,
+        12.1,
+        95,
+        0
+      ],
+      [
+        13.0033,
+        12.4833,
+        12.9,
+        45,
+        0
+      ]
     ]
   },
   "landmarks": [
-    { "id": "m87", "name": "M87", "group": "virgo", "kind": "elliptical galaxy · cluster core", "color": "#ffc27d", "size": 1.0,
-      "note": "The Expanses's ground zero." },
-    { "id": "milkyway", "name": "Milky Way", "group": "local", "kind": "barred spiral", "color": "#bcd6ff", "size": 0.8,
-      "note": "Origin of the chart. Backwater, locally famous." },
-    { "id": "m81", "name": "M81", "group": "m81", "kind": "spiral galaxy", "color": "#9fc0ff", "size": 0.55 },
-    { "id": "m83", "name": "M83", "group": "cena", "kind": "spiral galaxy", "color": "#9fc0ff", "size": 0.55 },
-    { "id": "m94", "name": "M94", "group": "cvn1", "kind": "spiral galaxy", "color": "#a8c8ff", "size": 0.5 },
-    { "id": "m106", "name": "M106", "group": "cvn2", "kind": "spiral galaxy", "color": "#a8c8ff", "size": 0.5 },
-    { "id": "m96", "name": "M96", "group": "leo1", "kind": "spiral galaxy", "color": "#a8c8ff", "size": 0.5 }
+    {
+      "id": "m87",
+      "name": "M87",
+      "group": "virgo",
+      "kind": "elliptical galaxy · cluster core",
+      "color": "#ffc27d",
+      "size": 1.0,
+      "note": "The Expanses's ground zero."
+    },
+    {
+      "id": "milkyway",
+      "name": "Milky Way",
+      "group": "local",
+      "kind": "barred spiral",
+      "color": "#bcd6ff",
+      "size": 0.8,
+      "note": "Origin of the chart. Backwater, locally famous."
+    },
+    {
+      "id": "m81",
+      "name": "M81",
+      "group": "m81",
+      "kind": "spiral galaxy",
+      "color": "#9fc0ff",
+      "size": 0.55
+    },
+    {
+      "id": "m83",
+      "name": "M83",
+      "group": "cena",
+      "kind": "spiral galaxy",
+      "color": "#9fc0ff",
+      "size": 0.55
+    },
+    {
+      "id": "m94",
+      "name": "M94",
+      "group": "cvn1",
+      "kind": "spiral galaxy",
+      "color": "#a8c8ff",
+      "size": 0.5
+    },
+    {
+      "id": "m106",
+      "name": "M106",
+      "group": "cvn2",
+      "kind": "spiral galaxy",
+      "color": "#a8c8ff",
+      "size": 0.5
+    },
+    {
+      "id": "m96",
+      "name": "M96",
+      "group": "leo1",
+      "kind": "spiral galaxy",
+      "color": "#a8c8ff",
+      "size": 0.5
+    },
+    {
+      "id": "the-throat",
+      "name": "The Throat",
+      "kind": "wormhole · traversable anomaly",
+      "color": "#9fd8ff",
+      "size": 1.1,
+      "coords": {
+        "ra": 8.0,
+        "dec": -32.0,
+        "dist": 42
+      },
+      "note": "A traversable throat in the dark between groups. Uncharted traffic only — the Authority denies it exists."
+    }
   ],
   "worlds": [
-    { "id": "lexor-aurex-prime", "name": "Lexor-Aurex Prime", "class": "capital world",
-      "anchor": { "type": "group", "ref": "virgo", "offset": [0, 0.28, 0] },
-      "starSystem": "single", "color": "#e8b34a", "status": "charted",
+    {
+      "id": "lexor-aurex-prime",
+      "name": "Lexor-Aurex Prime",
+      "class": "capital world",
+      "anchor": {
+        "type": "group",
+        "ref": "virgo",
+        "offset": [
+          0,
+          0.28,
+          0
+        ]
+      },
+      "starSystem": "single",
+      "color": "#e8b34a",
+      "status": "charted",
       "lore": [
         "Seat of the Galactic Authority. Senate, military docks.",
         "Pinned to the Virgo Cluster core — where the power sits now, not where it sat in myth.",
         "M87's relativistic jet threads the core: blue-white, collimated, the Senatorial sky's permanent amen."
-      ] },
-    { "id": "karna-vex", "name": "Karna Vex", "class": "throneworld",
-      "anchor": { "type": "group", "ref": "ashcluster", "offset": [0, 0, 0] },
-      "starSystem": "single", "color": "#e0532f", "status": "charted",
+      ]
+    },
+    {
+      "id": "karna-vex",
+      "name": "Karna Vex",
+      "class": "throneworld",
+      "anchor": {
+        "type": "group",
+        "ref": "ashcluster",
+        "offset": [
+          0,
+          0,
+          0
+        ]
+      },
+      "starSystem": "single",
+      "color": "#e0532f",
+      "status": "charted",
       "lore": [
         "Fractured Throneworld of the Creators. Gas giant, seven habitable moons.",
         "The Ash Cluster — everyone pretends it isn't there."
       ],
       "moons": [
-        { "id": "veyra", "name": "Veyra", "class": "moon", "offset": [0.55, 0.15, 0.10], "lore": "Habitable moon of Karna Vex." },
-        { "id": "dramnos", "name": "Dramnos", "class": "moon", "offset": [-0.35, 0.05, 0.45], "lore": "Habitable moon of Karna Vex." },
-        { "id": "callistra", "name": "Callistra", "class": "moon", "offset": [0.15, -0.25, -0.50], "lore": "Habitable moon of Karna Vex." },
-        { "id": "velkor", "name": "Velkor", "class": "moon", "offset": [-0.50, -0.10, -0.20], "lore": "Habitable moon of Karna Vex." },
-        { "id": "neythra", "name": "Neythra", "class": "moon", "offset": [-0.10, 0.40, 0.35], "lore": "Habitable moon of Karna Vex." },
-        { "id": "zyphor", "name": "Zyphor", "class": "moon", "offset": [0.40, -0.35, 0.15], "lore": "Habitable moon of Karna Vex." },
-        { "id": "micqui-nobara", "name": "Micqui-Nobara", "class": "moon", "offset": [0.05, 0.10, -0.65], "lore": "Habitable moon of Karna Vex." },
-        { "id": "relics-roost", "name": "Relic's Roost", "class": "site", "offset": [-0.75, 0.30, 0.15], "lore": "A site of interest in Karna Vex space." }
-      ] },
-    { "id": "calavra", "name": "Calavra", "class": "desert world",
-      "anchor": { "type": "coords", "ra": 21.8, "dec": -18.0, "dist": 98 },
-      "starSystem": "single", "color": "#d98e45", "status": "outer rim",
-      "lore": [ "Desert planet. The black structure." ] },
-    { "id": "evergreen", "name": "Evergreen Planet", "class": "shrine world",
-      "anchor": { "type": "coords", "ra": 7.4, "dec": 52.0, "dist": 92 },
-      "starSystem": "single", "color": "#4fd07a", "status": "outer rim",
-      "lore": [ "Vel'Zan. The Temple of Memory." ] },
-    { "id": "myxan-homeworld", "name": "Myxan Homeworld", "class": "homeworld",
-      "anchor": { "type": "group", "ref": "leo1", "offset": [0.8, -0.3, 0.5] },
-      "starSystem": "single", "color": "#9be15d", "status": "charted",
-      "lore": [ "Homeworld of the Myxan." ] },
-    { "id": "qor-mazaan", "name": "Qor'Mazaan", "class": "storm world",
-      "anchor": { "type": "group", "ref": "draco", "offset": [-0.6, 0.4, 0.3] },
-      "starSystem": "single", "color": "#8b93c9", "status": "charted",
-      "lore": [ "Storm-wrapped." ] },
-    { "id": "vaskor-3", "name": "Vaskor-3", "class": "settlement",
-      "anchor": { "type": "group", "ref": "cvn2", "offset": [0.5, 0.2, -0.4] },
-      "starSystem": "single", "color": "#d9a441", "status": "charted",
-      "lore": [ "Draquari village." ] },
-    { "id": "ardea-9", "name": "Ardea-9", "class": "waystation",
-      "anchor": { "type": "group", "ref": "m81", "offset": [-0.5, -0.2, 0.3] },
-      "starSystem": "single", "color": "#4fc3d0", "status": "charted",
-      "lore": [] },
-    { "id": "ugat", "name": "Ugat", "class": "trading outpost",
-      "anchor": { "type": "group", "ref": "ic342", "offset": [1.0, 0.35, -0.55] },
-      "starSystem": "single", "color": "#9fb6c9", "status": "charted",
-      "lore": [ "Trading outpost." ] },
-    { "id": "atlan-verdan", "name": "Atlan Verdan", "class": "terra world",
-      "anchor": { "type": "group", "ref": "sculptor", "offset": [0.45, 0.25, 0.35] },
-      "starSystem": "single", "color": "#3ecd8f", "status": "charted",
-      "lore": [] },
-    { "id": "caldrith-5", "name": "Caldrith V", "class": "ruin world",
-      "anchor": { "type": "group", "ref": "eridanus", "offset": [-1.2, 0.5, 0.8] },
-      "starSystem": "single", "color": "#b06a5a", "status": "charted",
-      "lore": [ "Ashen plains. Shattered ruins." ] },
-    { "id": "krelios-7", "name": "Krelios-7", "class": "outpost",
-      "anchor": { "type": "group", "ref": "leo2", "offset": [0.9, -0.2, -0.5] },
-      "starSystem": "single", "color": "#cfd8dc", "status": "charted",
-      "lore": [] },
-    { "id": "vel-malvara", "name": "Vel'Malvara", "class": "trade spire",
-      "anchor": { "type": "group", "ref": "cena", "offset": [0.6, -0.35, -0.4] },
-      "starSystem": "single", "color": "#d56fb0", "status": "charted",
-      "lore": [ "Tower of trade and temptation." ] },
-    { "id": "uncharted", "name": "Uncharted", "class": "classified world",
-      "anchor": { "type": "coords", "ra": 15.3, "dec": 14.0, "dist": 40 },
-      "starSystem": "single", "color": "#35e0c8", "status": "uncharted",
-      "lore": [ "Not on any star map.", "Warbrood-Captain-only." ] }
+        {
+          "id": "veyra",
+          "name": "Veyra",
+          "class": "moon",
+          "offset": [
+            0.55,
+            0.15,
+            0.1
+          ],
+          "lore": "Habitable moon of Karna Vex."
+        },
+        {
+          "id": "dramnos",
+          "name": "Dramnos",
+          "class": "moon",
+          "offset": [
+            -0.35,
+            0.05,
+            0.45
+          ],
+          "lore": "Habitable moon of Karna Vex."
+        },
+        {
+          "id": "callistra",
+          "name": "Callistra",
+          "class": "moon",
+          "offset": [
+            0.15,
+            -0.25,
+            -0.5
+          ],
+          "lore": "Habitable moon of Karna Vex."
+        },
+        {
+          "id": "velkor",
+          "name": "Velkor",
+          "class": "moon",
+          "offset": [
+            -0.5,
+            -0.1,
+            -0.2
+          ],
+          "lore": "Habitable moon of Karna Vex."
+        },
+        {
+          "id": "neythra",
+          "name": "Neythra",
+          "class": "moon",
+          "offset": [
+            -0.1,
+            0.4,
+            0.35
+          ],
+          "lore": "Habitable moon of Karna Vex."
+        },
+        {
+          "id": "zyphor",
+          "name": "Zyphor",
+          "class": "moon",
+          "offset": [
+            0.4,
+            -0.35,
+            0.15
+          ],
+          "lore": "Habitable moon of Karna Vex."
+        },
+        {
+          "id": "micqui-nobara",
+          "name": "Micqui-Nobara",
+          "class": "moon",
+          "offset": [
+            0.05,
+            0.1,
+            -0.65
+          ],
+          "lore": "Habitable moon of Karna Vex."
+        },
+        {
+          "id": "relics-roost",
+          "name": "Relic's Roost",
+          "class": "site",
+          "offset": [
+            -0.75,
+            0.3,
+            0.15
+          ],
+          "lore": "A site of interest in Karna Vex space."
+        }
+      ]
+    },
+    {
+      "id": "calavra",
+      "name": "Calavra",
+      "class": "desert world",
+      "anchor": {
+        "type": "coords",
+        "ra": 21.8,
+        "dec": -18.0,
+        "dist": 98
+      },
+      "starSystem": "single",
+      "color": "#d98e45",
+      "status": "outer rim",
+      "lore": [
+        "Desert planet. The black structure."
+      ]
+    },
+    {
+      "id": "evergreen",
+      "name": "Evergreen Planet",
+      "class": "shrine world",
+      "anchor": {
+        "type": "coords",
+        "ra": 7.4,
+        "dec": 52.0,
+        "dist": 92
+      },
+      "starSystem": "single",
+      "color": "#4fd07a",
+      "status": "outer rim",
+      "lore": [
+        "Vel'Zan. The Temple of Memory."
+      ]
+    },
+    {
+      "id": "myxan-homeworld",
+      "name": "Myxan Homeworld",
+      "class": "homeworld",
+      "anchor": {
+        "type": "group",
+        "ref": "leo1",
+        "offset": [
+          0.8,
+          -0.3,
+          0.5
+        ]
+      },
+      "starSystem": "single",
+      "color": "#9be15d",
+      "status": "charted",
+      "lore": [
+        "Homeworld of the Myxan."
+      ]
+    },
+    {
+      "id": "qor-mazaan",
+      "name": "Qor'Mazaan",
+      "class": "storm world",
+      "anchor": {
+        "type": "group",
+        "ref": "draco",
+        "offset": [
+          -0.6,
+          0.4,
+          0.3
+        ]
+      },
+      "starSystem": "single",
+      "color": "#8b93c9",
+      "status": "charted",
+      "lore": [
+        "Storm-wrapped."
+      ]
+    },
+    {
+      "id": "vaskor-3",
+      "name": "Vaskor-3",
+      "class": "settlement",
+      "anchor": {
+        "type": "group",
+        "ref": "cvn2",
+        "offset": [
+          0.5,
+          0.2,
+          -0.4
+        ]
+      },
+      "starSystem": "single",
+      "color": "#d9a441",
+      "status": "charted",
+      "lore": [
+        "Draquari village."
+      ]
+    },
+    {
+      "id": "ardea-9",
+      "name": "Ardea-9",
+      "class": "waystation",
+      "anchor": {
+        "type": "group",
+        "ref": "m81",
+        "offset": [
+          -0.5,
+          -0.2,
+          0.3
+        ]
+      },
+      "starSystem": "single",
+      "color": "#4fc3d0",
+      "status": "charted",
+      "lore": []
+    },
+    {
+      "id": "ugat",
+      "name": "Ugat",
+      "class": "trading outpost",
+      "anchor": {
+        "type": "group",
+        "ref": "ic342",
+        "offset": [
+          1.0,
+          0.35,
+          -0.55
+        ]
+      },
+      "starSystem": "single",
+      "color": "#9fb6c9",
+      "status": "charted",
+      "lore": [
+        "Trading outpost."
+      ]
+    },
+    {
+      "id": "atlan-verdan",
+      "name": "Atlan Verdan",
+      "class": "terra world",
+      "anchor": {
+        "type": "group",
+        "ref": "sculptor",
+        "offset": [
+          0.45,
+          0.25,
+          0.35
+        ]
+      },
+      "starSystem": "single",
+      "color": "#3ecd8f",
+      "status": "charted",
+      "lore": []
+    },
+    {
+      "id": "caldrith-5",
+      "name": "Caldrith V",
+      "class": "ruin world",
+      "anchor": {
+        "type": "group",
+        "ref": "eridanus",
+        "offset": [
+          -1.2,
+          0.5,
+          0.8
+        ]
+      },
+      "starSystem": "single",
+      "color": "#b06a5a",
+      "status": "charted",
+      "lore": [
+        "Ashen plains. Shattered ruins."
+      ]
+    },
+    {
+      "id": "krelios-7",
+      "name": "Krelios-7",
+      "class": "outpost",
+      "anchor": {
+        "type": "group",
+        "ref": "leo2",
+        "offset": [
+          0.9,
+          -0.2,
+          -0.5
+        ]
+      },
+      "starSystem": "single",
+      "color": "#cfd8dc",
+      "status": "charted",
+      "lore": []
+    },
+    {
+      "id": "vel-malvara",
+      "name": "Vel'Malvara",
+      "class": "trade spire",
+      "anchor": {
+        "type": "group",
+        "ref": "cena",
+        "offset": [
+          0.6,
+          -0.35,
+          -0.4
+        ]
+      },
+      "starSystem": "single",
+      "color": "#d56fb0",
+      "status": "charted",
+      "lore": [
+        "Tower of trade and temptation."
+      ]
+    },
+    {
+      "id": "uncharted",
+      "name": "Uncharted",
+      "class": "classified world",
+      "anchor": {
+        "type": "coords",
+        "ra": 15.3,
+        "dec": 14.0,
+        "dist": 40
+      },
+      "starSystem": "single",
+      "color": "#35e0c8",
+      "status": "uncharted",
+      "lore": [
+        "Not on any star map.",
+        "Warbrood-Captain-only."
+      ]
+    }
   ],
   "routes": [
-    { "id": "r-evergreen", "from": "calavra", "to": "evergreen", "label": "3 hours",
-      "note": "Calavra run to the Temple of Memory" },
-    { "id": "r-lexor", "from": "evergreen", "to": "lexor-aurex-prime", "label": "12 hours",
-      "note": "The long haul to the Senate world" },
-    { "id": "r-myxan", "from": "lexor-aurex-prime", "to": "myxan-homeworld", "label": "≈ 1 day",
-      "note": "All due respect — a slow, inevitable descent into Hell" },
-    { "id": "r-ugat", "from": "ugat", "to": "ardea-9", "label": "1 hour",
-      "note": "Station run" }
+    {
+      "id": "r-evergreen",
+      "from": "calavra",
+      "to": "evergreen",
+      "label": "3 hours",
+      "note": "Calavra run to the Temple of Memory"
+    },
+    {
+      "id": "r-lexor",
+      "from": "evergreen",
+      "to": "lexor-aurex-prime",
+      "label": "12 hours",
+      "note": "The long haul to the Senate world"
+    },
+    {
+      "id": "r-myxan",
+      "from": "lexor-aurex-prime",
+      "to": "myxan-homeworld",
+      "label": "≈ 1 day",
+      "note": "All due respect — a slow, inevitable descent into Hell"
+    },
+    {
+      "id": "r-ugat",
+      "from": "ugat",
+      "to": "ardea-9",
+      "label": "1 hour",
+      "note": "Station run"
+    }
   ],
   "_systemsAbout": "Local star systems: retcon each world's sky here. star: name/class/tint(photosphere)/radius(seed-driven surface)/seed. featured: the world itself rendered at its chart pin. biome list in the ? briefing. Moons under featured inherit names+lore from the world's moons; moonStyles keyed by moon id adds rendering traits. Anything missing is seeded from the world itself — every pin is enterable.",
   "systems": {
     "lexor-aurex-prime": {
-      "star": { "name": "Aurex", "class": "G2 V · sunlike", "tint": "#ffe9c4", "radius": 540, "seed": 11 },
-      "featured": { "biome": "capital", "radius": 30, "orbit": 6800, "seed": 101,
-        "cityColor": "#ffcf6e", "atmo": "#4f8fe0", "clouds": true },
+      "star": {
+        "name": "Aurex",
+        "class": "G2 V · sunlike",
+        "tint": "#ffe9c4",
+        "radius": 540,
+        "seed": 11
+      },
+      "featured": {
+        "biome": "capital",
+        "radius": 30,
+        "orbit": 6800,
+        "seed": 101,
+        "cityColor": "#ffcf6e",
+        "atmo": "#4f8fe0",
+        "clouds": true
+      },
       "planets": [
-        { "name": "Senatrix", "biome": "barren", "radius": 14, "orbit": 2400, "seed": 902 },
-        { "name": "Dover Keep", "biome": "desert", "radius": 22, "orbit": 4500, "seed": 903 },
-        { "name": "Farhold", "biome": "ice", "radius": 24, "orbit": 11800, "seed": 904 }
-      ] },
+        {
+          "name": "Senatrix",
+          "biome": "barren",
+          "radius": 14,
+          "orbit": 2400,
+          "seed": 902
+        },
+        {
+          "name": "Dover Keep",
+          "biome": "desert",
+          "radius": 22,
+          "orbit": 4500,
+          "seed": 903
+        },
+        {
+          "name": "Farhold",
+          "biome": "ice",
+          "radius": 24,
+          "orbit": 11800,
+          "seed": 904
+        }
+      ]
+    },
     "karna-vex": {
-      "star": { "name": "Veilfire", "class": "K2 V · orange", "tint": "#ffb165", "radius": 540, "seed": 41 },
-      "featured": { "biome": "gas-giant", "radius": 58, "orbit": 7600, "seed": 117,
-        "bands": ["#7a2b20","#b4502e","#d98a4e","#e8b873","#a5432c","#6e2a22","#d98a4e","#b4502e"],
-        "storms": [ { "u": 0.68, "v": 0.62, "r": 0.055, "color": "#f2d49b" } ],
-        "ring": { "inner": 1.35, "outer": 2.05, "color": "#c97b3f" },
-        "atmo": "#c96f3a", "clouds": true, "cloudCover": 0.40, "cloudTint": "#e8a060" },
+      "star": {
+        "name": "Veilfire",
+        "class": "K2 V · orange",
+        "tint": "#ffb165",
+        "radius": 540,
+        "seed": 41
+      },
+      "featured": {
+        "biome": "gas-giant",
+        "radius": 58,
+        "orbit": 7600,
+        "seed": 117,
+        "bands": [
+          "#7a2b20",
+          "#b4502e",
+          "#d98a4e",
+          "#e8b873",
+          "#a5432c",
+          "#6e2a22",
+          "#d98a4e",
+          "#b4502e"
+        ],
+        "storms": [
+          {
+            "u": 0.68,
+            "v": 0.62,
+            "r": 0.055,
+            "color": "#f2d49b"
+          }
+        ],
+        "ring": {
+          "inner": 1.35,
+          "outer": 2.05,
+          "color": "#c97b3f"
+        },
+        "atmo": "#c96f3a",
+        "clouds": true,
+        "cloudCover": 0.4,
+        "cloudTint": "#e8a060"
+      },
       "planets": [
-        { "name": "Keros", "biome": "lava", "radius": 16, "orbit": 2100, "seed": 911 },
-        { "name": "Halfax", "biome": "barren", "radius": 12, "orbit": 3600, "seed": 912 },
-        { "name": "Tyrra", "biome": "ice", "radius": 20, "orbit": 12400, "seed": 913 }
+        {
+          "name": "Keros",
+          "biome": "lava",
+          "radius": 16,
+          "orbit": 2100,
+          "seed": 911
+        },
+        {
+          "name": "Halfax",
+          "biome": "barren",
+          "radius": 12,
+          "orbit": 3600,
+          "seed": 912
+        },
+        {
+          "name": "Tyrra",
+          "biome": "ice",
+          "radius": 20,
+          "orbit": 12400,
+          "seed": 913
+        }
       ],
       "moonStyles": {
-        "veyra": { "biome": "ocean", "radius": 7.5, "orbit": 150, "seed": 201 },
-        "dramnos": { "biome": "desert", "radius": 5.5, "orbit": 210, "seed": 202 },
-        "callistra": { "biome": "ice", "radius": 8.5, "orbit": 280, "seed": 203 },
-        "velkor": { "biome": "barren", "radius": 6.5, "orbit": 350, "seed": 204 },
-        "neythra": { "biome": "lava", "radius": 5, "orbit": 430, "seed": 205 },
-        "zyphor": { "biome": "terra", "radius": 7, "orbit": 510, "seed": 206 },
-        "micqui-nobara": { "biome": "ocean", "radius": 6, "orbit": 590, "seed": 207 },
-        "relics-roost": { "biome": "outpost", "radius": 3.5, "orbit": 700, "seed": 208 }
-      } },
+        "veyra": {
+          "biome": "ocean",
+          "radius": 7.5,
+          "orbit": 150,
+          "seed": 201,
+          "atmo": "#4f8fe0"
+        },
+        "dramnos": {
+          "biome": "desert",
+          "radius": 5.5,
+          "orbit": 210,
+          "seed": 202
+        },
+        "callistra": {
+          "biome": "ice",
+          "radius": 8.5,
+          "orbit": 280,
+          "seed": 203
+        },
+        "velkor": {
+          "biome": "barren",
+          "radius": 6.5,
+          "orbit": 350,
+          "seed": 204
+        },
+        "neythra": {
+          "biome": "lava",
+          "radius": 5,
+          "orbit": 430,
+          "seed": 205
+        },
+        "zyphor": {
+          "biome": "terra",
+          "radius": 7,
+          "orbit": 510,
+          "seed": 206,
+          "atmo": "#7dc8e0"
+        },
+        "micqui-nobara": {
+          "biome": "ocean",
+          "radius": 6,
+          "orbit": 590,
+          "seed": 207
+        },
+        "relics-roost": {
+          "biome": "outpost",
+          "radius": 3.5,
+          "orbit": 700,
+          "seed": 208
+        }
+      }
+    },
     "calavra": {
-      "star": { "name": "Ashwin", "class": "F5 V · white dwarf-adjacent", "tint": "#fff6e8", "radius": 520, "seed": 21 },
-      "featured": { "biome": "desert", "radius": 26, "orbit": 7200, "seed": 301, "atmo": "#d9a441" },
+      "star": {
+        "name": "Ashwin",
+        "class": "F5 V · white dwarf-adjacent",
+        "tint": "#fff6e8",
+        "radius": 520,
+        "seed": 21
+      },
+      "featured": {
+        "biome": "desert",
+        "radius": 26,
+        "orbit": 7200,
+        "seed": 301,
+        "atmo": "#d9a441"
+      },
       "planets": [
-        { "name": "Blackhold", "biome": "barren", "radius": 11, "orbit": 2600, "seed": 921 },
-        { "name": "Obsidian Drift", "biome": "ash", "radius": 17, "orbit": 10600, "seed": 922 }
-      ] },
+        {
+          "name": "Blackhold",
+          "biome": "barren",
+          "radius": 11,
+          "orbit": 2600,
+          "seed": 921
+        },
+        {
+          "name": "Obsidian Drift",
+          "biome": "ash",
+          "radius": 17,
+          "orbit": 10600,
+          "seed": 922
+        }
+      ]
+    },
     "evergreen": {
-      "star": { "name": "Sylvane", "class": "K1 V · gold", "tint": "#ffd98e", "radius": 535, "seed": 31 },
-      "featured": { "biome": "garden", "radius": 28, "orbit": 6900, "seed": 401,
-        "atmo": "#3f9f6f", "clouds": true },
+      "star": {
+        "name": "Sylvane",
+        "class": "K1 V · gold",
+        "tint": "#ffd98e",
+        "radius": 535,
+        "seed": 31
+      },
+      "featured": {
+        "biome": "garden",
+        "radius": 28,
+        "orbit": 6900,
+        "seed": 401,
+        "atmo": "#3f9f6f",
+        "clouds": true
+      },
       "planets": [
-        { "name": "Vel'Zan Minor", "biome": "garden", "radius": 15, "orbit": 4200, "seed": 931 },
-        { "name": "The Waypoint", "biome": "outpost", "radius": 4, "orbit": 3100, "seed": 932 },
-        { "name": "Frost Lantern", "biome": "ice", "radius": 19, "orbit": 11200, "seed": 933 }
-      ] },
+        {
+          "name": "Vel'Zan Minor",
+          "biome": "garden",
+          "radius": 15,
+          "orbit": 4200,
+          "seed": 931
+        },
+        {
+          "name": "The Waypoint",
+          "biome": "outpost",
+          "radius": 4,
+          "orbit": 3100,
+          "seed": 932
+        },
+        {
+          "name": "Frost Lantern",
+          "biome": "ice",
+          "radius": 19,
+          "orbit": 11200,
+          "seed": 933
+        }
+      ]
+    },
     "myxan-homeworld": {
-      "star": { "name": "Hekate", "class": "M3 V · red dwarf", "tint": "#ff8a6a", "radius": 470, "seed": 51 },
-      "featured": { "biome": "toxic", "radius": 32, "orbit": 5900, "seed": 501,
-        "atmo": "#8fc73f", "clouds": true },
+      "star": {
+        "name": "Hekate",
+        "class": "M3 V · red dwarf",
+        "tint": "#ff8a6a",
+        "radius": 470,
+        "seed": 51
+      },
+      "featured": {
+        "biome": "toxic",
+        "radius": 32,
+        "orbit": 5900,
+        "seed": 501,
+        "atmo": "#8fc73f",
+        "clouds": true
+      },
       "planets": [
-        { "name": "Gullet", "biome": "lava", "radius": 13, "orbit": 1900, "seed": 941 },
-        { "name": "Slither", "biome": "toxic", "radius": 21, "orbit": 8800, "seed": 942 }
-      ] },
+        {
+          "name": "Gullet",
+          "biome": "lava",
+          "radius": 13,
+          "orbit": 1900,
+          "seed": 941
+        },
+        {
+          "name": "Slither",
+          "biome": "toxic",
+          "radius": 21,
+          "orbit": 8800,
+          "seed": 942
+        }
+      ]
+    },
     "qor-mazaan": {
-      "star": { "name": "Tempest", "class": "A7 V · hot white", "tint": "#e8f2ff", "radius": 525, "seed": 61 },
-      "featured": { "biome": "storm", "radius": 44, "orbit": 8100, "seed": 601,
-        "bands": ["#5d6b8a","#8b9ab8","#3f4a66","#a8b6cc","#5d6b8a"],
-        "storms": [ { "u": 0.3, "v": 0.45, "r": 0.085, "color": "#e8edf2" } ],
-        "atmo": "#7d8fb8" },
+      "star": {
+        "name": "Tempest",
+        "class": "A7 V · hot white",
+        "tint": "#e8f2ff",
+        "radius": 525,
+        "seed": 61
+      },
+      "featured": {
+        "biome": "storm",
+        "radius": 44,
+        "orbit": 8100,
+        "seed": 601,
+        "bands": [
+          "#5d6b8a",
+          "#8b9ab8",
+          "#3f4a66",
+          "#a8b6cc",
+          "#5d6b8a"
+        ],
+        "storms": [
+          {
+            "u": 0.3,
+            "v": 0.45,
+            "r": 0.085,
+            "color": "#e8edf2"
+          }
+        ],
+        "atmo": "#7d8fb8"
+      },
       "planets": [
-        { "name": "Gale", "biome": "storm", "radius": 18, "orbit": 3300, "seed": 951 },
-        { "name": "Ice Shard", "biome": "ice", "radius": 16, "orbit": 12200, "seed": 952 }
-      ] },
+        {
+          "name": "Gale",
+          "biome": "storm",
+          "radius": 18,
+          "orbit": 3300,
+          "seed": 951
+        },
+        {
+          "name": "Ice Shard",
+          "biome": "ice",
+          "radius": 16,
+          "orbit": 12200,
+          "seed": 952
+        }
+      ]
+    },
     "vaskor-3": {
-      "star": { "name": "Draq", "class": "G5 V · yellow", "tint": "#ffe2b0", "radius": 530, "seed": 71 },
-      "featured": { "biome": "outpost", "radius": 20, "orbit": 7100, "seed": 701, "atmo": "#d9a441" },
+      "star": {
+        "name": "Draq",
+        "class": "G5 V · yellow",
+        "tint": "#ffe2b0",
+        "radius": 530,
+        "seed": 71
+      },
+      "featured": {
+        "biome": "outpost",
+        "radius": 20,
+        "orbit": 7100,
+        "seed": 701,
+        "atmo": "#d9a441"
+      },
       "planets": [
-        { "name": "Cinder", "biome": "barren", "radius": 13, "orbit": 2900, "seed": 961 },
-        { "name": "The Kiln", "biome": "lava", "radius": 9, "orbit": 1800, "seed": 962 },
-        { "name": "Hollow End", "biome": "ice", "radius": 22, "orbit": 11600, "seed": 963 }
-      ] },
+        {
+          "name": "Cinder",
+          "biome": "barren",
+          "radius": 13,
+          "orbit": 2900,
+          "seed": 961
+        },
+        {
+          "name": "The Kiln",
+          "biome": "lava",
+          "radius": 9,
+          "orbit": 1800,
+          "seed": 962
+        },
+        {
+          "name": "Hollow End",
+          "biome": "ice",
+          "radius": 22,
+          "orbit": 11600,
+          "seed": 963
+        }
+      ]
+    },
     "ardea-9": {
-      "star": { "name": "Vesta Reach", "class": "K4 V · ember", "tint": "#ffc27d", "radius": 515, "seed": 81 },
-      "featured": { "biome": "outpost", "radius": 8, "orbit": 6400, "seed": 801,
-        "baseBiome": "ice", "atmo": "#4fc3d0" },
+      "star": {
+        "name": "Vesta Reach",
+        "class": "K4 V · ember",
+        "tint": "#ffc27d",
+        "radius": 515,
+        "seed": 81
+      },
+      "featured": {
+        "biome": "outpost",
+        "radius": 8,
+        "orbit": 6400,
+        "seed": 801,
+        "baseBiome": "ice",
+        "atmo": "#4fc3d0"
+      },
       "planets": [
-        { "name": "Long Watch", "biome": "barren", "radius": 12, "orbit": 3900, "seed": 971 },
-        { "name": "Grey Gate", "biome": "storm", "radius": 34, "orbit": 10500, "seed": 972 }
-      ] },
+        {
+          "name": "Long Watch",
+          "biome": "barren",
+          "radius": 12,
+          "orbit": 3900,
+          "seed": 971
+        },
+        {
+          "name": "Grey Gate",
+          "biome": "storm",
+          "radius": 34,
+          "orbit": 10500,
+          "seed": 972
+        }
+      ]
+    },
     "ugat": {
-      "star": { "name": "Merid", "class": "M1 V · burnt orange", "tint": "#ffa075", "radius": 480, "seed": 91 },
-      "featured": { "biome": "outpost", "radius": 14, "orbit": 6200, "seed": 901,
-        "baseBiome": "barren", "atmo": "#9fb6c9" },
+      "star": {
+        "name": "Merid",
+        "class": "M1 V · burnt orange",
+        "tint": "#ffa075",
+        "radius": 480,
+        "seed": 91
+      },
+      "featured": {
+        "biome": "outpost",
+        "radius": 14,
+        "orbit": 6200,
+        "seed": 901,
+        "baseBiome": "barren",
+        "atmo": "#9fb6c9"
+      },
       "planets": [
-        { "name": "Bazaarmoon", "biome": "desert", "radius": 10, "orbit": 3700, "seed": 981 },
-        { "name": "The Ledger", "biome": "outpost", "radius": 5, "orbit": 2500, "seed": 982 },
-        { "name": "Frozen Ledger", "biome": "ice", "radius": 18, "orbit": 10800, "seed": 983 }
-      ] },
+        {
+          "name": "Bazaarmoon",
+          "biome": "desert",
+          "radius": 10,
+          "orbit": 3700,
+          "seed": 981
+        },
+        {
+          "name": "The Ledger",
+          "biome": "outpost",
+          "radius": 5,
+          "orbit": 2500,
+          "seed": 982
+        },
+        {
+          "name": "Frozen Ledger",
+          "biome": "ice",
+          "radius": 18,
+          "orbit": 10800,
+          "seed": 983
+        }
+      ]
+    },
     "atlan-verdan": {
-      "star": { "name": "Verdis", "class": "G2 V · sunlike", "tint": "#ffecc8", "radius": 545, "seed": 95 },
-      "featured": { "biome": "terra", "radius": 29, "orbit": 7000, "seed": 1001,
-        "atmo": "#3f9fd9", "clouds": true },
+      "star": {
+        "name": "Verdis",
+        "class": "G2 V · sunlike",
+        "tint": "#ffecc8",
+        "radius": 545,
+        "seed": 95
+      },
+      "featured": {
+        "biome": "terra",
+        "radius": 29,
+        "orbit": 7000,
+        "seed": 1001,
+        "atmo": "#3f9fd9",
+        "clouds": true
+      },
       "planets": [
-        { "name": "Verdis Minor", "biome": "terra", "radius": 17, "orbit": 4800, "seed": 991 },
-        { "name": "The Long Winter", "biome": "ice", "radius": 21, "orbit": 11300, "seed": 992 }
-      ] },
+        {
+          "name": "Verdis Minor",
+          "biome": "terra",
+          "radius": 17,
+          "orbit": 4800,
+          "seed": 991
+        },
+        {
+          "name": "The Long Winter",
+          "biome": "ice",
+          "radius": 21,
+          "orbit": 11300,
+          "seed": 992
+        }
+      ]
+    },
     "caldrith-5": {
-      "star": { "name": "Ashfall", "class": "K3 V · ember", "tint": "#ffbf80", "radius": 525, "seed": 105 },
-      "featured": { "biome": "ash", "radius": 27, "orbit": 7400, "seed": 1101,
-        "atmo": "#b06a5a", "clouds": true },
+      "star": {
+        "name": "Ashfall",
+        "class": "K3 V · ember",
+        "tint": "#ffbf80",
+        "radius": 525,
+        "seed": 105
+      },
+      "featured": {
+        "biome": "ash",
+        "radius": 27,
+        "orbit": 7400,
+        "seed": 1101,
+        "atmo": "#b06a5a",
+        "clouds": true
+      },
       "planets": [
-        { "name": "Shatter", "biome": "barren", "radius": 12, "orbit": 3000, "seed": 993 },
-        { "name": "Grave Tally", "biome": "ice", "radius": 19, "orbit": 10900, "seed": 994 }
-      ] },
+        {
+          "name": "Shatter",
+          "biome": "barren",
+          "radius": 12,
+          "orbit": 3000,
+          "seed": 993
+        },
+        {
+          "name": "Grave Tally",
+          "biome": "ice",
+          "radius": 19,
+          "orbit": 10900,
+          "seed": 994
+        }
+      ]
+    },
     "krelios-7": {
-      "star": { "name": "Krelios Prime", "class": "F2 V · white", "tint": "#fff4e2", "radius": 532, "seed": 115 },
-      "featured": { "biome": "ice", "radius": 22, "orbit": 7800, "seed": 1201, "atmo": "#cfd8dc" },
+      "star": {
+        "name": "Krelios Prime",
+        "class": "F2 V · white",
+        "tint": "#fff4e2",
+        "radius": 532,
+        "seed": 115
+      },
+      "featured": {
+        "biome": "ice",
+        "radius": 22,
+        "orbit": 7800,
+        "seed": 1201,
+        "atmo": "#cfd8dc"
+      },
       "planets": [
-        { "name": "The Overseer", "biome": "barren", "radius": 10, "orbit": 3400, "seed": 995 },
-        { "name": "White Silence", "biome": "ice", "radius": 26, "orbit": 12100, "seed": 996 }
-      ] },
+        {
+          "name": "The Overseer",
+          "biome": "barren",
+          "radius": 10,
+          "orbit": 3400,
+          "seed": 995
+        },
+        {
+          "name": "White Silence",
+          "biome": "ice",
+          "radius": 26,
+          "orbit": 12100,
+          "seed": 996
+        }
+      ]
+    },
     "vel-malvara": {
-      "star": { "name": "Incandesc", "class": "A5 V · blue-white", "tint": "#e6ecff", "radius": 528, "seed": 125 },
-      "featured": { "biome": "neon", "radius": 36, "orbit": 7300, "seed": 1301,
-        "bands": ["#8a4fb8","#d56fa8","#6a3f94","#e08ac0","#8a4fb8"],
-        "storms": [ { "u": 0.55, "v": 0.5, "r": 0.07, "color": "#f2a8d0" } ],
-        "ring": { "inner": 1.42, "outer": 2.0, "color": "#d56fa8" },
-        "atmo": "#d56fa8" },
+      "star": {
+        "name": "Incandesc",
+        "class": "A5 V · blue-white",
+        "tint": "#e6ecff",
+        "radius": 528,
+        "seed": 125
+      },
+      "featured": {
+        "biome": "neon",
+        "radius": 36,
+        "orbit": 7300,
+        "seed": 1301,
+        "bands": [
+          "#8a4fb8",
+          "#d56fa8",
+          "#6a3f94",
+          "#e08ac0",
+          "#8a4fb8"
+        ],
+        "storms": [
+          {
+            "u": 0.55,
+            "v": 0.5,
+            "r": 0.07,
+            "color": "#f2a8d0"
+          }
+        ],
+        "ring": {
+          "inner": 1.42,
+          "outer": 2.0,
+          "color": "#d56fa8"
+        },
+        "atmo": "#d56fa8"
+      },
       "planets": [
-        { "name": "The Spire", "biome": "capital", "radius": 12, "orbit": 4400, "seed": 997 },
-        { "name": "Silk Road", "biome": "barren", "radius": 14, "orbit": 9600, "seed": 998 }
-      ] },
+        {
+          "name": "The Spire",
+          "biome": "capital",
+          "radius": 12,
+          "orbit": 4400,
+          "seed": 997
+        },
+        {
+          "name": "Silk Road",
+          "biome": "barren",
+          "radius": 14,
+          "orbit": 9600,
+          "seed": 998
+        }
+      ]
+    },
     "uncharted": {
-      "star": { "name": "— UNREGISTERED —", "class": "??? · classified", "tint": "#d8ffe8", "radius": 510, "seed": 135 },
-      "featured": { "biome": "alien", "radius": 34, "orbit": 6600, "seed": 1401,
-        "atmo": "#35e0c8", "clouds": true },
+      "star": {
+        "name": "— UNREGISTERED —",
+        "class": "??? · classified",
+        "tint": "#d8ffe8",
+        "radius": 510,
+        "seed": 135
+      },
+      "featured": {
+        "biome": "alien",
+        "radius": 34,
+        "orbit": 6600,
+        "seed": 1401,
+        "atmo": "#35e0c8",
+        "clouds": true
+      },
       "planets": [
-        { "name": "CLASSIFIED-1", "biome": "alien", "radius": 18, "orbit": 3900, "seed": 999 },
-        { "name": "CLASSIFIED-2", "biome": "ash", "radius": 24, "orbit": 10200, "seed": 1000 }
-      ] }
+        {
+          "name": "CLASSIFIED-1",
+          "biome": "alien",
+          "radius": 18,
+          "orbit": 3900,
+          "seed": 999
+        },
+        {
+          "name": "CLASSIFIED-2",
+          "biome": "ash",
+          "radius": 24,
+          "orbit": 10200,
+          "seed": 1000
+        }
+      ],
+      "blackhole": {
+        "name": "Hollow Star",
+        "radius": 55,
+        "orbit": 15600,
+        "seed": 1402,
+        "diskColor": "#c9a0ff"
+      }
+    }
   }
 }
