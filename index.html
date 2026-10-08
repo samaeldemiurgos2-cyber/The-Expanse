@@ -307,6 +307,11 @@ body.touch #touchui{display:block}
 body.sysmode #btn-return{display:inline-block}
 body.sysmode #btn-jump{display:none}
 body.sysmode #jumpbtn{display:none}
+body.sysmode #btn-board{display:none}
+/* Phase 1: airlock link — boarding fade veil */
+#boardveil{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;transition:opacity .4s;pointer-events:none}
+#boardveil.show{opacity:1;pointer-events:all}
+#boardveil span{letter-spacing:.35em;color:var(--gold);font-size:15px;font-family:var(--font-d)}
 body.sysmode #pinpanel{left:14px;top:86px}
 .lbl.sys{font-size:10px;letter-spacing:.2em;color:rgba(232,238,244,.85)}
 .lbl.sys .tick{background:linear-gradient(to bottom,rgba(232,179,74,.8),transparent)}
@@ -338,6 +343,7 @@ body.sysmode #sysbar{display:block}
     <button class="hudbtn" id="btn-list" title="World &amp; group index (L)">Index</button>
     <button class="hudbtn jump" id="btn-jump" title="Jump to selected world (J)" disabled>Jump</button>
     <button class="hudbtn" id="btn-return" title="Return to supercluster chart (R)">⏎ Chart</button>
+    <button class="hudbtn" id="btn-board" title="Board the GAS Ripley — walk Deck 1 (B)">Board</button>
     <button class="hudbtn" id="btn-cam" title="Toggle chase / free-orbit camera (C)">Chase</button>
     <button class="hudbtn" id="btn-map" title="Starmap overlay (M)">Map</button>
     <button class="hudbtn" id="btn-tlm" title="Telemetry panel (T)">Tlm</button>
@@ -409,6 +415,7 @@ body.sysmode #sysbar{display:block}
       <tr><td>Wheel</td><td>Camera distance</td></tr>
       <tr><td>Click pin</td><td>Select world · open dossier</td></tr>
       <tr><td>J</td><td>Jump to selected world</td></tr>
+      <tr><td>B</td><td>Board the GAS Ripley (walk Deck 1)</td></tr>
       <tr><td>F / R</td><td>Enter system (selected) / return to chart</td></tr>
       <tr><td>C</td><td>Chase ↔ free-orbit camera (drag orbits the camera, ship heading untouched)</td></tr>
       <tr><td>Right-drag / Shift+drag</td><td>Pan the free-orbit pivot</td></tr>
@@ -424,6 +431,7 @@ body.sysmode #sysbar{display:block}
       <tr><td>Right-side drag</td><td>Steer (chase) / orbit camera (free-orbit mode)</td></tr>
       <tr><td>Pinch</td><td>Camera distance</td></tr>
       <tr><td>JUMP</td><td>Jump to selected world</td></tr>
+      <tr><td>Board button</td><td>Board the Ripley — walk Deck 1</td></tr>
       <tr><td>Map / Tlm buttons</td><td>Starmap overlay / telemetry HUD</td></tr>
       <tr><td>Chase / Orbit button</td><td>Same as <code>C</code> — toggle chase ↔ free-orbit camera</td></tr>
       <tr><td>Enter System / ⏎ Chart</td><td>Dossier action / top button — cross scales</td></tr>
@@ -935,6 +943,9 @@ body.sysmode #sysbar{display:block}
    ===================================================================== */
 (function(){
 'use strict';
+
+/* Phase 1: airlock link — walkable Ripley deck lives at walkthrough/ on this Pages site */
+var WALK_URL = 'walkthrough/';
 
 /* ------------------------------ boot -------------------------------- */
 var $ = function(id){ return document.getElementById(id); };
@@ -2676,6 +2687,7 @@ window.addEventListener('keydown', function(ev){
   if (k === 'h') toggleHelp();
   if (k === 'm') toggleMap();                                                    // v3.6
   if (k === 't') toggleTelemetry();                                             // v3.6
+  if (k === 'b' && mode === 'chart') boardRipley();                               // Phase 1: airlock link
   if (k === '0'){ if (mapOpen) mapRecenter(); ship_state.pan.set(0, 0, 0); }     // v3.6 recenter
   if (k === 'escape'){ setSelected(null); sysSel = null; $('groupchip').classList.remove('open'); $('help').classList.remove('open'); }
 });
@@ -2751,6 +2763,20 @@ $('pinsearch').addEventListener('keydown', function(ev){
 });
 $('btn-jump').onclick = function(){ if (selectedId) startJump(selectedId); };
 $('btn-return').onclick = function(){ beginSysTransit('chart'); };
+/* Phase 1: airlock link — board the Ripley (walk Deck 1) */
+function boardRipley(){
+  if (mode !== 'chart') return;
+  if ($('boardveil')) return; // already boarding
+  var veil = document.createElement('div');
+  veil.id = 'boardveil';
+  veil.innerHTML = '<span>BOARDING — DECK 1…</span>';
+  document.body.appendChild(veil);
+  setTimeout(function(){ veil.classList.add('show'); }, 30);
+  setTimeout(function(){
+    location.href = WALK_URL + '?deck=1&return=' + encodeURIComponent(location.href);
+  }, 460);
+}
+$('btn-board').onclick = boardRipley;
 $('jumpbtn').onclick = function(){ if (selectedId) startJump(selectedId); };
 $('btn-cam').onclick = toggleCam;
 $('btn-quality').onclick = toggleQuality;
