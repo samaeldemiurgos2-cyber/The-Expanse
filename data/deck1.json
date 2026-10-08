@@ -1,0 +1,1070 @@
+{
+ "meta": {
+  "ship": "GAS Ripley",
+  "class": "Raptor-class Frigate",
+  "deck": "1st Deck (Main / Bridge Deck)",
+  "deck_height_ft": 10,
+  "units": "feet",
+  "coordinate_system": "x: feet starboard of centerline (port negative); z: feet aft of bow tip; y: up",
+  "scale_note": "0.5 ft/px from Homeboy's updated Deck 1 plan; beak-tip-to-stern ~855 ft (~261 m, cf. 252 m interior canon). Bridge pod built to cutaway dims (26x38x12 ft); the pod render in the plan is an oversized illustration.",
+  "source": "Transcription 2026-10-07 (user-supplied plans); bridge pod cutaway sheet",
+  "assumptions": [
+   "Corridor network inferred (doors pending from Homeboy): longitudinal port/center/starboard passageways + cross passages at row boundaries; pod passageways flanking the bridge pod.",
+   "Openings: room<->corridor and room<->room get 6 ft door gaps (8 ft tall + lintel) where edges overlap >= 4 ft; corridor<->corridor junctions fully open; wall segments inside another walkable rect are dropped.",
+   "Exterior masses (collectors, AGS wings, engines) are non-enterable context geometry.",
+   "No invented rooms: every name from the plan/transcription; '(as read)' items kept with notes."
+  ],
+  "canon_note": "Shared canon copy for the Expanse chart <-> walkable-deck integration (Phase 1). Mirrors the deck1.json embedded in the walkable 1st deck build; if the walkthrough's embedded copy changes, refresh this file to match."
+ },
+ "function_colors": {
+  "command": "#ffd34d",
+  "flight": "#4da3ff",
+  "operations": "#4dff88",
+  "comms": "#4de3ff",
+  "weapons": "#ff5a5a",
+  "engineering": "#ff9a3d",
+  "support": "#b07aff",
+  "berthing": "#9fd4ff",
+  "sensors": "#c0ff4d",
+  "circulation": "#8fa5bd"
+ },
+ "rooms": [
+  {
+   "id": "ew_suite_fwd",
+   "name": "Warbrood EW Sensor Suite",
+   "rect": [
+    -25.25,
+    1.0,
+    50.5,
+    83.0
+   ],
+   "function": "sensors",
+   "walkable": true
+  },
+  {
+   "id": "young_warbrood",
+   "name": "Young Warbrood Area",
+   "rect": [
+    -40.25,
+    84.0,
+    80.5,
+    96.0
+   ],
+   "function": "operations",
+   "walkable": true
+  },
+  {
+   "id": "fwd_gym",
+   "name": "Forward Physical Gym",
+   "rect": [
+    -60.25,
+    180.0,
+    120.5,
+    62.5
+   ],
+   "function": "support",
+   "walkable": true
+  },
+  {
+   "id": "berth_ground",
+   "name": "Ground Force Enlisted Berthing",
+   "rect": [
+    -76.25,
+    242.5,
+    45.0,
+    77.5
+   ],
+   "function": "berthing",
+   "walkable": true
+  },
+  {
+   "id": "shower_1",
+   "name": "Shower",
+   "rect": [
+    -31.25,
+    242.5,
+    30.0,
+    37.5
+   ],
+   "function": "support",
+   "walkable": true
+  },
+  {
+   "id": "shower_2",
+   "name": "Shower",
+   "rect": [
+    -1.25,
+    242.5,
+    30.0,
+    37.5
+   ],
+   "function": "support",
+   "walkable": true
+  },
+  {
+   "id": "head_1",
+   "name": "Head",
+   "rect": [
+    -31.25,
+    280.0,
+    30.0,
+    40.0
+   ],
+   "function": "support",
+   "walkable": true
+  },
+  {
+   "id": "head_2",
+   "name": "Head",
+   "rect": [
+    -1.25,
+    280.0,
+    30.0,
+    40.0
+   ],
+   "function": "support",
+   "walkable": true
+  },
+  {
+   "id": "berth_ship",
+   "name": "Shipboard Enlisted Berthing",
+   "rect": [
+    28.75,
+    242.5,
+    47.5,
+    77.5
+   ],
+   "function": "berthing",
+   "walkable": true
+  },
+  {
+   "id": "corr_f",
+   "name": "Forward Cross Passage",
+   "rect": [
+    -76.25,
+    320.0,
+    152.5,
+    11.0
+   ],
+   "function": "circulation",
+   "walkable": true
+  },
+  {
+   "id": "pdc_p1",
+   "name": "PDC",
+   "rect": [
+    -76.25,
+    331.0,
+    20.0,
+    22.5
+   ],
+   "function": "weapons",
+   "walkable": true,
+   "note": "retractable, stealth profile"
+  },
+  {
+   "id": "pdcmag_p1",
+   "name": "PDC Magazine",
+   "rect": [
+    -56.25,
+    331.0,
+    30.0,
+    22.5
+   ],
+   "function": "weapons",
+   "walkable": true
+  },
+  {
+   "id": "pdcmag_s1",
+   "name": "PDC Magazine",
+   "rect": [
+    28.75,
+    331.0,
+    25.0,
+    22.5
+   ],
+   "function": "weapons",
+   "walkable": true
+  },
+  {
+   "id": "pdc_s1",
+   "name": "PDC",
+   "rect": [
+    53.75,
+    331.0,
+    22.5,
+    22.5
+   ],
+   "function": "weapons",
+   "walkable": true,
+   "note": "retractable, stealth profile"
+  },
+  {
+   "id": "msl_p1",
+   "name": "Mini-Missile Launcher",
+   "rect": [
+    -61.25,
+    353.5,
+    32.5,
+    35.0
+   ],
+   "function": "weapons",
+   "walkable": true
+  },
+  {
+   "id": "mslm_p1",
+   "name": "Mini-Missile Launcher Magazine",
+   "rect": [
+    -61.25,
+    388.5,
+    32.5,
+    37.5
+   ],
+   "function": "weapons",
+   "walkable": true
+  },
+  {
+   "id": "msl_p2",
+   "name": "Mini-Missile Launcher",
+   "rect": [
+    -61.25,
+    426.0,
+    32.5,
+    35.0
+   ],
+   "function": "weapons",
+   "walkable": true
+  },
+  {
+   "id": "msl_s1",
+   "name": "Mini-Missile Launcher",
+   "rect": [
+    28.75,
+    353.5,
+    32.5,
+    35.0
+   ],
+   "function": "weapons",
+   "walkable": true
+  },
+  {
+   "id": "mslm_s1",
+   "name": "Mini-Missile Launcher Magazine",
+   "rect": [
+    28.75,
+    388.5,
+    32.5,
+    37.5
+   ],
+   "function": "weapons",
+   "walkable": true
+  },
+  {
+   "id": "msl_s2",
+   "name": "Mini-Missile Launcher",
+   "rect": [
+    28.75,
+    426.0,
+    32.5,
+    35.0
+   ],
+   "function": "weapons",
+   "walkable": true
+  },
+  {
+   "id": "warhead_stor",
+   "name": "Warhead Storage",
+   "rect": [
+    -76.25,
+    381.0,
+    15.0,
+    75.0
+   ],
+   "function": "weapons",
+   "walkable": true,
+   "note": "as read from plan"
+  },
+  {
+   "id": "stbd_weap_bay",
+   "name": "Starboard Weapons Bay",
+   "rect": [
+    61.25,
+    381.0,
+    15.0,
+    75.0
+   ],
+   "function": "weapons",
+   "walkable": true,
+   "note": "as read from plan"
+  },
+  {
+   "id": "sr_berth_p1",
+   "name": "Sr. Enlisted Berthing",
+   "rect": [
+    -76.25,
+    461.0,
+    47.5,
+    19.0
+   ],
+   "function": "berthing",
+   "walkable": true
+  },
+  {
+   "id": "sr_berth_s1",
+   "name": "Sr. Enlisted Berthing",
+   "rect": [
+    28.75,
+    461.0,
+    47.5,
+    19.0
+   ],
+   "function": "berthing",
+   "walkable": true
+  },
+  {
+   "id": "corr_pp1",
+   "name": "Pod Passageway (Port)",
+   "rect": [
+    -26.25,
+    331.0,
+    10.0,
+    160.0
+   ],
+   "function": "circulation",
+   "walkable": true
+  },
+  {
+   "id": "corr_pp2",
+   "name": "Pod Passageway (Starboard)",
+   "rect": [
+    16.25,
+    331.0,
+    10.0,
+    160.0
+   ],
+   "function": "circulation",
+   "walkable": true
+  },
+  {
+   "id": "corr_a1",
+   "name": "Berthing Cross Passage",
+   "rect": [
+    -76.25,
+    480.0,
+    152.5,
+    11.0
+   ],
+   "function": "circulation",
+   "walkable": true
+  },
+  {
+   "id": "bridge_pod",
+   "name": "Bridge Pod",
+   "rect": [
+    -13.25,
+    442.0,
+    26.5,
+    38.0
+   ],
+   "function": "command",
+   "walkable": true,
+   "note": "Escape pod / Raptor Core housing; cutaway dims 26x38x12 ft; aft bridge door"
+  },
+  {
+   "id": "stair_p",
+   "name": "Stairwell (Port)",
+   "rect": [
+    -76.25,
+    491.0,
+    21.0,
+    22.5
+   ],
+   "function": "circulation",
+   "walkable": true,
+   "note": "ladderwell through all decks"
+  },
+  {
+   "id": "xo_stateroom",
+   "name": "XO Stateroom",
+   "rect": [
+    -76.25,
+    513.5,
+    21.0,
+    32.5
+   ],
+   "function": "berthing",
+   "walkable": true
+  },
+  {
+   "id": "briefing",
+   "name": "Briefing Room",
+   "rect": [
+    -45.25,
+    491.0,
+    40.0,
+    32.5
+   ],
+   "function": "command",
+   "walkable": true
+  },
+  {
+   "id": "officer_sr_1",
+   "name": "Officer Stateroom",
+   "rect": [
+    -45.25,
+    523.5,
+    40.0,
+    22.5
+   ],
+   "function": "berthing",
+   "walkable": true
+  },
+  {
+   "id": "officer_sr_2",
+   "name": "Officer Stateroom",
+   "rect": [
+    4.75,
+    491.0,
+    40.0,
+    55.0
+   ],
+   "function": "berthing",
+   "walkable": true
+  },
+  {
+   "id": "co_stateroom",
+   "name": "CO Stateroom",
+   "rect": [
+    54.75,
+    491.0,
+    21.5,
+    55.0
+   ],
+   "function": "berthing",
+   "walkable": true
+  },
+  {
+   "id": "corr_l1",
+   "name": "Port Passageway",
+   "rect": [
+    -55.25,
+    491.0,
+    10.0,
+    290.0
+   ],
+   "function": "circulation",
+   "walkable": true
+  },
+  {
+   "id": "corr_l2a",
+   "name": "Center Passageway",
+   "rect": [
+    -5.25,
+    491.0,
+    10.0,
+    125.0
+   ],
+   "function": "circulation",
+   "walkable": true
+  },
+  {
+   "id": "corr_l3",
+   "name": "Starboard Passageway",
+   "rect": [
+    44.75,
+    491.0,
+    10.0,
+    290.0
+   ],
+   "function": "circulation",
+   "walkable": true
+  },
+  {
+   "id": "cross_x1",
+   "name": "Cross Passage",
+   "rect": [
+    -76.25,
+    546.0,
+    152.5,
+    10.0
+   ],
+   "function": "circulation",
+   "walkable": true
+  },
+  {
+   "id": "pdcmag_p2",
+   "name": "PDC Magazine",
+   "rect": [
+    -76.25,
+    556.0,
+    21.0,
+    25.0
+   ],
+   "function": "weapons",
+   "walkable": true
+  },
+  {
+   "id": "pdc_p2",
+   "name": "PDC",
+   "rect": [
+    -76.25,
+    581.0,
+    21.0,
+    25.0
+   ],
+   "function": "weapons",
+   "walkable": true,
+   "note": "retractable, stealth profile"
+  },
+  {
+   "id": "officer_sr_3",
+   "name": "Officer Stateroom",
+   "rect": [
+    -45.25,
+    556.0,
+    40.0,
+    50.0
+   ],
+   "function": "berthing",
+   "walkable": true
+  },
+  {
+   "id": "officer_sr_4",
+   "name": "Officer Stateroom",
+   "rect": [
+    4.75,
+    556.0,
+    40.0,
+    50.0
+   ],
+   "function": "berthing",
+   "walkable": true
+  },
+  {
+   "id": "pdcmag_s2",
+   "name": "PDC Magazine",
+   "rect": [
+    54.75,
+    556.0,
+    21.5,
+    25.0
+   ],
+   "function": "weapons",
+   "walkable": true
+  },
+  {
+   "id": "pdc_s2",
+   "name": "PDC",
+   "rect": [
+    54.75,
+    581.0,
+    21.5,
+    25.0
+   ],
+   "function": "weapons",
+   "walkable": true,
+   "note": "retractable, stealth profile"
+  },
+  {
+   "id": "cross_x2",
+   "name": "Cross Passage",
+   "rect": [
+    -76.25,
+    606.0,
+    152.5,
+    10.0
+   ],
+   "function": "circulation",
+   "walkable": true
+  },
+  {
+   "id": "pdc_p3",
+   "name": "PDC",
+   "rect": [
+    -76.25,
+    616.0,
+    21.0,
+    30.0
+   ],
+   "function": "weapons",
+   "walkable": true,
+   "note": "retractable, stealth profile"
+  },
+  {
+   "id": "jo_1",
+   "name": "Junior Officer Stateroom",
+   "rect": [
+    -45.25,
+    616.0,
+    30.0,
+    30.0
+   ],
+   "function": "berthing",
+   "walkable": true
+  },
+  {
+   "id": "jo_2",
+   "name": "Junior Officer Stateroom",
+   "rect": [
+    -15.25,
+    616.0,
+    30.0,
+    30.0
+   ],
+   "function": "berthing",
+   "walkable": true
+  },
+  {
+   "id": "jo_3",
+   "name": "Junior Officer Stateroom",
+   "rect": [
+    14.75,
+    616.0,
+    30.0,
+    30.0
+   ],
+   "function": "berthing",
+   "walkable": true
+  },
+  {
+   "id": "pdc_s3",
+   "name": "PDC",
+   "rect": [
+    54.75,
+    616.0,
+    21.5,
+    30.0
+   ],
+   "function": "weapons",
+   "walkable": true,
+   "note": "retractable, stealth profile"
+  },
+  {
+   "id": "cross_x3",
+   "name": "Cross Passage",
+   "rect": [
+    -76.25,
+    646.0,
+    152.5,
+    10.0
+   ],
+   "function": "circulation",
+   "walkable": true
+  },
+  {
+   "id": "mess",
+   "name": "Mess Deck",
+   "rect": [
+    -45.25,
+    656.0,
+    90.0,
+    45.0
+   ],
+   "function": "support",
+   "walkable": true
+  },
+  {
+   "id": "cross_x4",
+   "name": "Cross Passage",
+   "rect": [
+    -76.25,
+    701.0,
+    152.5,
+    10.0
+   ],
+   "function": "circulation",
+   "walkable": true
+  },
+  {
+   "id": "msl_big_p",
+   "name": "Missile Launcher",
+   "rect": [
+    -45.25,
+    711.0,
+    26.5,
+    40.0
+   ],
+   "function": "weapons",
+   "walkable": true
+  },
+  {
+   "id": "auto_msl",
+   "name": "Automated Missile Support",
+   "rect": [
+    -18.75,
+    711.0,
+    37.5,
+    40.0
+   ],
+   "function": "weapons",
+   "walkable": true
+  },
+  {
+   "id": "msl_big_s",
+   "name": "Missile Launcher",
+   "rect": [
+    18.75,
+    711.0,
+    26.0,
+    40.0
+   ],
+   "function": "weapons",
+   "walkable": true
+  },
+  {
+   "id": "stair_s",
+   "name": "Stairwell (Starboard)",
+   "rect": [
+    54.75,
+    711.0,
+    21.5,
+    40.0
+   ],
+   "function": "circulation",
+   "walkable": true,
+   "note": "ladderwell through all decks"
+  },
+  {
+   "id": "cross_x5",
+   "name": "Cross Passage",
+   "rect": [
+    -76.25,
+    751.0,
+    152.5,
+    10.0
+   ],
+   "function": "circulation",
+   "walkable": true
+  },
+  {
+   "id": "elevator",
+   "name": "Elevator",
+   "rect": [
+    -76.25,
+    761.0,
+    21.0,
+    20.0
+   ],
+   "function": "circulation",
+   "walkable": true,
+   "note": "port elevator line through all decks"
+  },
+  {
+   "id": "railgun_ctl",
+   "name": "Railgun Control",
+   "rect": [
+    -28.75,
+    761.0,
+    27.5,
+    20.0
+   ],
+   "function": "weapons",
+   "walkable": true
+  },
+  {
+   "id": "sr_berth_s2",
+   "name": "Sr. Enlisted Berthing",
+   "rect": [
+    54.75,
+    761.0,
+    21.5,
+    20.0
+   ],
+   "function": "berthing",
+   "walkable": true
+  },
+  {
+   "id": "dorsal_railgun",
+   "name": "Dorsal Railgun",
+   "rect": [
+    -28.75,
+    781.0,
+    57.5,
+    85.0
+   ],
+   "function": "weapons",
+   "walkable": true,
+   "note": "double-barrel, retractable, stealth profile"
+  },
+  {
+   "id": "ew_suite_p",
+   "name": "Aft Warbrood EW Sensor Suite",
+   "rect": [
+    -55.25,
+    770.0,
+    26.5,
+    78.5
+   ],
+   "function": "sensors",
+   "walkable": true
+  },
+  {
+   "id": "ew_suite_s",
+   "name": "Aft Warbrood EW Sensor Suite",
+   "rect": [
+    28.75,
+    770.0,
+    26.0,
+    78.5
+   ],
+   "function": "sensors",
+   "walkable": true
+  },
+  {
+   "id": "pdcmag_p3",
+   "name": "PDC Magazine",
+   "rect": [
+    -76.25,
+    831.0,
+    21.0,
+    17.5
+   ],
+   "function": "weapons",
+   "walkable": true
+  },
+  {
+   "id": "pdc_p4",
+   "name": "PDC",
+   "rect": [
+    -76.25,
+    848.5,
+    21.0,
+    17.5
+   ],
+   "function": "weapons",
+   "walkable": true,
+   "note": "retractable, stealth profile"
+  },
+  {
+   "id": "pdcmag_s3",
+   "name": "PDC Magazine",
+   "rect": [
+    54.75,
+    831.0,
+    21.5,
+    17.5
+   ],
+   "function": "weapons",
+   "walkable": true
+  },
+  {
+   "id": "pdc_s4",
+   "name": "PDC",
+   "rect": [
+    54.75,
+    848.5,
+    21.5,
+    17.5
+   ],
+   "function": "weapons",
+   "walkable": true,
+   "note": "retractable, stealth profile"
+  }
+ ],
+ "bridge_pod_stations": [
+  {
+   "id": "st_pilot",
+   "name": "Pilot",
+   "rect": [
+    3.5,
+    -16.5,
+    6,
+    6
+   ],
+   "function": "flight"
+  },
+  {
+   "id": "st_nav",
+   "name": "Navigation",
+   "rect": [
+    -9.5,
+    -16.5,
+    6,
+    6
+   ],
+   "function": "flight"
+  },
+  {
+   "id": "st_captain",
+   "name": "Captain's Chair",
+   "rect": [
+    -3,
+    -5,
+    6,
+    6
+   ],
+   "function": "command"
+  },
+  {
+   "id": "st_ops",
+   "name": "Ops",
+   "rect": [
+    -12,
+    -1,
+    6,
+    6
+   ],
+   "function": "operations"
+  },
+  {
+   "id": "st_comms",
+   "name": "Comms",
+   "rect": [
+    -12,
+    5,
+    6,
+    6
+   ],
+   "function": "comms"
+  },
+  {
+   "id": "st_eng",
+   "name": "Engineering",
+   "rect": [
+    6,
+    -1,
+    6,
+    6
+   ],
+   "function": "engineering"
+  },
+  {
+   "id": "st_weps",
+   "name": "Weps",
+   "rect": [
+    6,
+    5,
+    6,
+    6
+   ],
+   "function": "weapons"
+  },
+  {
+   "id": "st_head",
+   "name": "Toilet / Shower",
+   "rect": [
+    -12,
+    12,
+    6,
+    6
+   ],
+   "function": "support"
+  },
+  {
+   "id": "st_repl",
+   "name": "Replication Station",
+   "rect": [
+    6,
+    12,
+    6,
+    6
+   ],
+   "function": "support"
+  },
+  {
+   "id": "st_banks",
+   "name": "Mini Subatomic Particle Banks",
+   "rect": [
+    -3,
+    12,
+    6,
+    6
+   ],
+   "function": "engineering"
+  },
+  {
+   "id": "st_core",
+   "name": "Core Module (Overhead)",
+   "rect": [
+    -3,
+    1,
+    6,
+    5
+   ],
+   "function": "command",
+   "overhead": true,
+   "note": "Raptor Core, 6x5x5 ft, ceiling-mounted"
+  },
+  {
+   "id": "st_sap",
+   "name": "SAP Collectors",
+   "rect": [
+    -4,
+    -18.5,
+    8,
+    2
+   ],
+   "function": "engineering"
+  }
+ ],
+ "exterior_masses": [
+  {
+   "id": "ext_collector_p",
+   "name": "Port Subatomic Particle Collector",
+   "rect": [
+    -93.75,
+    320.0,
+    17.5,
+    390.0
+   ]
+  },
+  {
+   "id": "ext_collector_s",
+   "name": "Starboard Subatomic Particle Collector",
+   "rect": [
+    76.25,
+    320.0,
+    17.5,
+    390.0
+   ]
+  },
+  {
+   "id": "ext_ags_p",
+   "name": "Port Adaptive Gravity System",
+   "rect": [
+    -251.25,
+    495.0,
+    157.5,
+    200.0
+   ]
+  },
+  {
+   "id": "ext_ags_s",
+   "name": "Starboard Adaptive Gravity System",
+   "rect": [
+    93.75,
+    495.0,
+    157.5,
+    200.0
+   ]
+  },
+  {
+   "id": "ext_engine_p1",
+   "name": "Port Engine #1",
+   "rect": [
+    -116.25,
+    710.0,
+    40.0,
+    100.0
+   ]
+  },
+  {
+   "id": "ext_engine_s1",
+   "name": "Starboard Engine #1",
+   "rect": [
+    76.25,
+    710.0,
+    40.0,
+    100.0
+   ]
+  }
+ ],
+ "player_start": {
+  "pos": [
+   -65.75,
+   756
+  ],
+  "yaw_deg": 180,
+  "note": "Cross Passage x5, aft near the port elevator, facing forward (-z, toward bow/bridge pod)"
+ }
+}
