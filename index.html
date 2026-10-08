@@ -239,22 +239,33 @@ body{
 /* ---------- mobile controls ---------- */
 #touchui{display:none}
 body.touch #touchui{display:block}
-#stick{
-  position:fixed;left:22px;bottom:88px;width:124px;height:124px;z-index:25;
+.tstick{
+  position:fixed;bottom:88px;width:124px;height:124px;z-index:25;
   border:1px solid var(--line);border-radius:50%;background:rgba(7,11,18,.5);
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
   touch-action:none;
 }
-#knob{
+#stick-move{left:22px}
+#stick-look{right:22px}
+.tknob{
   position:absolute;left:50%;top:50%;width:52px;height:52px;border-radius:50%;
   background:rgba(125,216,255,.16);border:1px solid rgba(125,216,255,.5);
   transform:translate(-50%,-50%);
 }
-#stick .ax{position:absolute;font-family:var(--font-m);font-size:8.5px;color:var(--ink-faint);letter-spacing:.1em}
-#stick .f{top:6px;left:50%;transform:translateX(-50%)}
-#stick .b{bottom:6px;left:50%;transform:translateX(-50%)}
+.tstick .ax{position:absolute;font-family:var(--font-m);font-size:8.5px;color:var(--ink-faint);letter-spacing:.1em;pointer-events:none}
+.tstick .f{top:6px;left:50%;transform:translateX(-50%)}
+.tstick .b{bottom:6px;left:50%;transform:translateX(-50%)}
+.tstick .tname{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--font-m);font-size:9px;color:var(--ink-faint);letter-spacing:.24em;pointer-events:none}
+#btn-shipcam{
+  position:fixed;left:22px;bottom:232px;z-index:25;
+  padding:10px 16px;border:1px solid var(--line);border-radius:999px;
+  background:rgba(7,11,18,.6);color:var(--ink-dim);
+  font-family:var(--font-d);font-size:12px;letter-spacing:.2em;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);touch-action:none;
+}
+#btn-shipcam.cam{color:var(--gold);border-color:rgba(232,179,74,.6)}
 #jumpbtn{
-  position:fixed;right:26px;bottom:104px;z-index:25;
+  position:fixed;right:26px;bottom:236px;z-index:25;
   width:104px;height:104px;border-radius:50%;
   border:2px solid rgba(232,179,74,.6);background:rgba(20,14,4,.55);color:var(--gold);
   font-family:var(--font-d);font-weight:700;font-size:15px;letter-spacing:.18em;
@@ -262,7 +273,7 @@ body.touch #touchui{display:block}
 }
 #jumpbtn:disabled{border-color:var(--line);color:var(--ink-faint);background:rgba(7,11,18,.5)}
 #jumpbtn:not(:disabled):active{background:rgba(232,179,74,.25)}
-#updown{position:fixed;right:150px;bottom:104px;z-index:25;display:flex;flex-direction:column;gap:10px}
+#updown{position:fixed;right:154px;bottom:104px;z-index:25;display:flex;flex-direction:column;gap:10px}
 #updown button{
   width:56px;height:48px;border:1px solid var(--line);background:rgba(7,11,18,.6);
   color:var(--ink-dim);font-size:17px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);touch-action:none;
@@ -380,7 +391,9 @@ body.sysmode #sysbar{display:block}
 <aside id="telemetry" aria-label="Telemetry"></aside>
 
 <div id="touchui">
-  <div id="stick"><span class="ax f">THR</span><span class="ax b">REV</span><div id="knob"></div></div>
+  <div id="stick-move" class="tstick" aria-label="Move joystick"><span class="tname">MOVE</span><span class="ax f">THR</span><span class="ax b">REV</span><div class="tknob" id="knob-move"></div></div>
+  <div id="stick-look" class="tstick" aria-label="Look joystick"><span class="tname">LOOK</span><div class="tknob" id="knob-look"></div></div>
+  <button id="btn-shipcam" title="Toggle ship / free-camera control">SHIP</button>
   <button id="jumpbtn" disabled>JUMP</button>
   <div id="updown">
     <button id="btn-dn" aria-label="Thrust down">▼</button>
@@ -427,8 +440,10 @@ body.sysmode #sysbar{display:block}
 
     <h3>Fly · phone</h3>
     <table>
-      <tr><td>Left stick</td><td>Thrust &amp; strafe</td></tr>
-      <tr><td>Right-side drag</td><td>Steer (chase) / orbit camera (free-orbit mode)</td></tr>
+      <tr><td>MOVE stick</td><td>Thrust &amp; strafe the ship · flies the camera in CAM mode</td></tr>
+      <tr><td>LOOK stick</td><td>Look / orbit the camera</td></tr>
+      <tr><td>SHIP / CAM button</td><td>Ship control ↔ free camera (ship holds station)</td></tr>
+      <tr><td>Drag</td><td>Steer (chase) / orbit camera (free-orbit mode)</td></tr>
       <tr><td>Pinch</td><td>Camera distance</td></tr>
       <tr><td>JUMP</td><td>Jump to selected world</td></tr>
       <tr><td>Board button</td><td>Board the Ripley — walk Deck 1</td></tr>
@@ -2020,6 +2035,7 @@ var ship_state = {
   zoomMul: 1.0,           // chase distance multiplier
   camMode: 'chase',       // chase | orbit (orbit = free-orbit look, heading untouched)
   orbitAz: 0.8, orbitEl: 0.35, orbitR: 3.2,
+  lookAz: 0, lookEl: 0,     // touch LOOK stick: chase-camera peek offset, springs back on release
   pan: new THREE.Vector3(), // v3.6: free-orbit pivot offset, cleared on mode/scene change
   warp: 0,                // 0..1 warp amount
   warping: null
@@ -2049,7 +2065,9 @@ function shipUp(out){
 }
 
 var keys = {};
-var stick = { x: 0, y: 0, active: false };
+var stickMove = { x: 0, y: 0, active: false };  // left touch stick: thrust + strafe (was `stick`)
+var stickLook = { x: 0, y: 0, active: false };  // right touch stick: camera look
+var camFree = false;  // SHIP/CAM toggle: true = free camera flight, ship holds station
 var touchUpDown = { up: false, down: false };
 // v3.5: scripted engine spool for verification captures (null = flight-driven)
 var engineSpool = null;
@@ -2061,16 +2079,18 @@ function updateFlight(dt){
   var thrust = sysMode ? (boost ? 520 : 240) : (boost ? 26 : 11);
   var fwd = shipForward(), right = shipRight(), up = shipUp();
   var fi = 0, si = 0, vi = 0;
-  if (keys['keyw'] || keys['arrowup']) fi += 1;
-  if (keys['keys'] || keys['arrowdown']) fi -= 1;
-  if (keys['keyd'] || keys['arrowright']) si += 1;
-  if (keys['keya'] || keys['arrowleft']) si -= 1;
-  if (keys['keye']) vi += 1;
-  if (keys['keyq']) vi -= 1;
-  // touch stick: y up = forward, x = strafe
-  fi += stick.y; si += stick.x;
-  if (touchUpDown.up) vi += 1;
-  if (touchUpDown.down) vi -= 1;
+  if (!camFree){
+    if (keys['keyw'] || keys['arrowup']) fi += 1;
+    if (keys['keys'] || keys['arrowdown']) fi -= 1;
+    if (keys['keyd'] || keys['arrowright']) si += 1;
+    if (keys['keya'] || keys['arrowleft']) si -= 1;
+    if (keys['keye']) vi += 1;
+    if (keys['keyq']) vi -= 1;
+    // touch move stick: y up = forward, x = strafe (same code path as W/S, A/D)
+    fi += stickMove.y; si += stickMove.x;
+    if (touchUpDown.up) vi += 1;
+    if (touchUpDown.down) vi -= 1;
+  }
   acc.addScaledVector(fwd, fi * thrust)
      .addScaledVector(right, si * thrust)
      .addScaledVector(up, vi * thrust);
@@ -2549,10 +2569,16 @@ function toast(msg, ms){
 
 /* ------------------------------ camera ------------------------------ */
 var _chaseOffset = new THREE.Vector3();
+var _lookQ = new THREE.Quaternion(), _lookE = new THREE.Euler();  // touch LOOK stick: chase peek
 function updateCamera(){
   var S = ship_state;
+  if (camFree) return;  // touch SHIP/CAM toggle: free camera drives the transform directly
   if (S.camMode === 'chase'){
     var azOff = new THREE.Vector3(0, 0.34, 1.5).multiplyScalar(S.zoomMul);
+    if (S.lookAz || S.lookEl){  // touch LOOK stick peek: same feel as orbit drag
+      _lookQ.setFromEuler(_lookE.set(-S.lookEl, S.lookAz, 0, 'YXZ'));
+      azOff.applyQuaternion(_lookQ);
+    }
     _chaseOffset.copy(azOff).applyQuaternion(ship.quaternion);
     var target = S.pos.clone().add(_chaseOffset);
     camera.position.lerp(target, 1 - Math.exp(-7 * _dt));
@@ -2694,30 +2720,45 @@ window.addEventListener('keydown', function(ev){
 window.addEventListener('keyup', function(ev){ keys[ev.key.toLowerCase()] = false; keys[ev.code.toLowerCase()] = false; });
 window.addEventListener('blur', function(){ keys = {}; });
 
-/* --------------------------- touch stick ----------------------------- */
-(function initStick(){
-  var el = $('stick'), knob = $('knob');
-  var id = null, cx = 0, cy = 0, R = 40;
-  function setKnob(nx, ny){ knob.style.transform = 'translate(-50%,-50%) translate(' + nx*R + 'px,' + (-ny*R) + 'px)'; }
+/* --------------------------- touch sticks ---------------------------- */
+// Two-stick mobile controls: MOVE (left) thrusts/strafes, LOOK (right) drives the camera.
+// Walkthrough-derived feel: small dead zone, sub-linear response curve, pointer capture.
+function makeTouchStick(elId, knobId, state){
+  var el = $(elId), knob = $(knobId);
+  var id = null, cx = 0, cy = 0, R = 40, DZ = 0.14;
+  function setKnob(nx, ny){ knob.style.transform = 'translate(-50%,-50%) translate(' + (nx * R) + 'px,' + (-ny * R) + 'px)'; }
   el.addEventListener('pointerdown', function(ev){
+    if (id !== null) return;
     id = ev.pointerId; el.setPointerCapture(id);
-    var r = el.getBoundingClientRect(); cx = r.left + r.width/2; cy = r.top + r.height/2;
-    stick.active = true;
+    var r = el.getBoundingClientRect(); cx = r.left + r.width / 2; cy = r.top + r.height / 2;
+    state.x = 0; state.y = 0; state.active = true; setKnob(0, 0);
+    ev.preventDefault();
   });
   el.addEventListener('pointermove', function(ev){
     if (ev.pointerId !== id) return;
     var dx = ev.clientX - cx, dy = ev.clientY - cy;
-    var m = Math.hypot(dx, dy);
-    if (m > R){ dx *= R / m; dy *= R / m; }
-    stick.x = dx / R; stick.y = -dy / R;
-    setKnob(stick.x, stick.y);
+    var m = Math.hypot(dx, dy) / R, nx = 0, ny = 0;
+    if (m > DZ){
+      var cl = Math.min(m, 1);
+      var s = Math.pow((cl - DZ) / (1 - DZ), 0.72);
+      nx = (dx / (m * R)) * s; ny = (dy / (m * R)) * s;
+    }
+    state.x = nx; state.y = -ny;  // y up on screen = forward / look-up
+    setKnob(state.x, state.y);
+    ev.preventDefault();
   });
   function end(ev){
     if (ev.pointerId !== id) return;
-    id = null; stick.x = 0; stick.y = 0; stick.active = false; setKnob(0, 0);
+    id = null; state.x = 0; state.y = 0; state.active = false; setKnob(0, 0);
   }
   el.addEventListener('pointerup', end);
   el.addEventListener('pointercancel', end);
+  el.addEventListener('lostpointercapture', end);
+}
+makeTouchStick('stick-move', 'knob-move', stickMove);
+makeTouchStick('stick-look', 'knob-look', stickLook);
+$('btn-shipcam').addEventListener('click', toggleShipCam);
+(function initTouchButtons(){
   $('btn-up').addEventListener('pointerdown', function(){ touchUpDown.up = true; });
   $('btn-up').addEventListener('pointerup', function(){ touchUpDown.up = false; });
   $('btn-up').addEventListener('pointercancel', function(){ touchUpDown.up = false; });
@@ -2741,6 +2782,72 @@ function toggleCam(){
   toast(ship_state.camMode === 'chase' ? 'Chase camera'
     : IS_TOUCH ? 'Free-orbit camera · drag to look · pinch to zoom'
                : 'Free-orbit camera · drag to orbit · right-drag or Shift+drag pans · wheel zooms');
+}
+/* ---- touch LOOK stick: per-frame camera application (walkthrough-derived feel) ---- */
+function applyLookStick(dt){
+  if (camFree) return;  // free camera handles its own look in updateCamFree
+  var S = ship_state;
+  if (stickLook.active){
+    if (S.camMode === 'orbit'){
+      // mirror of canvas drag: push right = drag right, push up = drag up
+      steer(-stickLook.x * 2.6 * dt, stickLook.y * 2.0 * dt);
+    } else {
+      // chase: peek the camera around the ship (same feel as orbit drag)
+      S.lookAz = THREE.MathUtils.clamp(S.lookAz + stickLook.x * 1.6 * dt, -1.2, 1.2);
+      S.lookEl = THREE.MathUtils.clamp(S.lookEl - stickLook.y * 1.1 * dt, -1.0, 1.0);
+    }
+  } else if (S.lookAz || S.lookEl){
+    var d = Math.exp(-3.5 * dt);  // spring back to center on release
+    S.lookAz *= d; S.lookEl *= d;
+    if (Math.abs(S.lookAz) < 0.001) S.lookAz = 0;
+    if (Math.abs(S.lookEl) < 0.001) S.lookEl = 0;
+  }
+}
+/* ---- touch SHIP/CAM toggle: free camera flight, ship holds station ---- */
+var _cfFwd = new THREE.Vector3(), _cfRight = new THREE.Vector3();
+var _cfYawQ = new THREE.Quaternion(), _cfPitchQ = new THREE.Quaternion();
+var _UP_Y = new THREE.Vector3(0, 1, 0);
+function updateCamFree(dt){
+  var sysMode = (mode === 'system');
+  var thrust = sysMode ? 240 : 11;  // same scale as ship flight
+  camera.getWorldDirection(_cfFwd);
+  _cfRight.crossVectors(_cfFwd, camera.up).normalize();
+  var fi = 0, si = 0, vi = 0;
+  if (keys['keyw'] || keys['arrowup']) fi += 1;
+  if (keys['keys'] || keys['arrowdown']) fi -= 1;
+  if (keys['keyd'] || keys['arrowright']) si += 1;
+  if (keys['keya'] || keys['arrowleft']) si -= 1;
+  if (keys['keye']) vi += 1;
+  if (keys['keyq']) vi -= 1;
+  fi += stickMove.y; si += stickMove.x;
+  if (touchUpDown.up) vi += 1;
+  if (touchUpDown.down) vi -= 1;
+  camera.position.addScaledVector(_cfFwd, fi * thrust * dt)
+                 .addScaledVector(_cfRight, si * thrust * dt);
+  camera.position.y += vi * thrust * dt;
+  var lr = 2.4;  // look rate, rad/s at full deflection
+  if (stickLook.x || stickLook.y){
+    _cfYawQ.setFromAxisAngle(_UP_Y, -stickLook.x * lr * dt);
+    camera.quaternion.premultiply(_cfYawQ);
+    _cfRight.set(1, 0, 0).applyQuaternion(camera.quaternion);
+    _cfPitchQ.setFromAxisAngle(_cfRight, stickLook.y * lr * dt);
+    camera.quaternion.multiply(_cfPitchQ);
+    camera.up.set(0, 1, 0);
+  }
+  ship_state.vel.set(0, 0, 0);  // ship holds station
+}
+function toggleShipCam(){
+  camFree = !camFree;
+  var b = $('btn-shipcam');
+  b.textContent = camFree ? 'CAM' : 'SHIP';
+  b.classList.toggle('cam', camFree);
+  if (camFree){
+    toast('Free camera · left stick flies · right stick looks');
+  } else {
+    ship_state.lookAz = 0; ship_state.lookEl = 0;
+    if (ship_state.camMode === 'chase') snapChaseCamera();
+    toast('Ship control');
+  }
 }
 // v3.6: mode-aware zoom clamps — system view has room to breathe, chart stays tight
 function orbitZoomClamp(r){
@@ -2921,6 +3028,8 @@ function loop(now){
   _last = now; _dt = dt;
   var t = now / 1000;
   updateFlight(dt);
+  if (camFree) updateCamFree(dt);  // touch SHIP/CAM toggle: free camera flight
+  applyLookStick(dt);              // touch LOOK stick: per-frame camera application
   updateWarp(dt);
   updateSysTransit(dt);   // v3
   updateSystem(dt, t);    // v3: orbits, spins, corona
@@ -4514,7 +4623,7 @@ Object.assign(window.__expanse, {
 });
 console.log('[Expanse] system mode ready');
 
-toast(IS_TOUCH ? 'Left stick to thrust · drag to steer · tap a pin to jump' :
+toast(IS_TOUCH ? 'MOVE stick thrusts · LOOK stick aims the camera · tap a pin to jump' :
                 'WASD to thrust · drag to steer · click a pin', 3600);
 requestAnimationFrame(function(now){ _last = now; requestAnimationFrame(loop); });
 console.log('[Expanse] chart loaded · ' + POINT_TOTAL + ' galaxy sprites · ' + DATA.worlds.length + ' worlds · touch=' + IS_TOUCH);
