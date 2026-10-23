@@ -1,0 +1,13 @@
+.expanse-save-button{pointer-events:auto;cursor:pointer;font:inherit;min-height:32px;border:1px solid #526580;border-radius:6px;padding:5px 10px;color:#e5efff;background:#122136;white-space:nowrap}
+.expanse-save-button[data-state=error],.expanse-save-button[data-state=conflict]{border-color:#e5a55b}
+.expanse-save-panel{box-sizing:border-box;max-width:min(540px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow:auto;border:1px solid #7186a4;border-radius:12px;padding:20px;color:#e5efff;background:#101b2b;font:14px/1.5 system-ui,sans-serif;z-index:1000}
+.expanse-save-panel::backdrop{background:#000b}
+.expanse-save-panel h2{font-size:18px;margin:0 0 10px}
+.expanse-save-actions{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.expanse-save-panel button{font:inherit;cursor:pointer;padding:8px 12px;border-radius:6px;border:1px solid #657b99;background:#203650;color:#fff;min-height:40px}
+.expanse-save-panel button:focus-visible,.expanse-save-button:focus-visible,.expanse-save-panel input:focus-visible{outline:3px solid #87d4ff;outline-offset:3px}
+.expanse-save-panel button[hidden]{display:none}
+.expanse-save-panel label{display:block;margin-top:12px}
+.expanse-save-panel input{max-width:100%;font:inherit}
+#save-status[data-state=error],#save-status[data-state=conflict]{color:#ffc389}
+.expanse-save-live{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;pointer-events:none}

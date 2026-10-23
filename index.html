@@ -25,10 +25,14 @@
   --green:#4fd07a;
   --font-d:'Rajdhani',system-ui,sans-serif;
   --font-m:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --hud-top:64px;
+  --panel-top:86px;
+  --system-panel-top:90px;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
 body{
+  --overlay-top:var(--hud-top);
   margin:0;background:var(--bg);color:var(--ink);
   font-family:var(--font-d);overflow:hidden;
   overscroll-behavior:none;touch-action:none;
@@ -83,7 +87,7 @@ body{
 
 /* ---------- left pin list ---------- */
 #pinpanel{
-  position:fixed;left:14px;top:86px;bottom:110px;width:264px;z-index:18;
+  position:fixed;left:14px;top:var(--panel-top);bottom:110px;width:264px;z-index:18;
   background:var(--panel);border:1px solid var(--line);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   display:none;flex-direction:column;overflow:hidden;
@@ -114,7 +118,7 @@ body{
 
 /* ---------- lore panel ---------- */
 #lore{
-  position:fixed;right:14px;top:86px;width:min(320px,calc(100vw - 28px));z-index:18;
+  position:fixed;right:14px;top:var(--panel-top);width:min(320px,calc(100vw - 28px));z-index:18;
   background:var(--panel);border:1px solid var(--line);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   display:none;max-height:calc(100vh - 230px);overflow-y:auto;scrollbar-width:thin;
@@ -163,7 +167,7 @@ body{
 
 /* v3.6: starmap overlay */
 #mapwrap{
-  position:fixed;right:14px;top:64px;z-index:40;width:min(430px,86vw);
+  position:fixed;right:14px;top:var(--overlay-top);z-index:40;width:min(430px,86vw);
   background:rgba(7,11,18,.93);border:1px solid var(--line);border-radius:8px;
   box-shadow:0 8px 40px rgba(0,0,0,.6);overflow:hidden;user-select:none;
 }
@@ -172,13 +176,14 @@ body{
 #mapwrap .mh button{background:none;border:1px solid var(--line);border-radius:5px;color:var(--ink-dim);
   font-size:13px;line-height:1;padding:4px 9px;cursor:pointer}
 #mapwrap .mh button:hover{color:var(--ink);border-color:var(--gold)}
-#mapcanvas{display:block;width:100%;height:min(330px,52vh);touch-action:none;cursor:grab}
+#mapcanvas{display:block;width:100%;height:min(330px,52vh,max(0px,calc(100vh - var(--overlay-top) - 100px)));touch-action:none;cursor:grab}
+@supports(height:100dvh){#mapcanvas{height:min(330px,52dvh,max(0px,calc(100dvh - var(--overlay-top) - 100px)))}}
 #mapcanvas:active{cursor:grabbing}
 #mapwrap .mhint{padding:5px 10px;font-family:var(--font-m);font-size:9.5px;color:var(--ink-faint);
   border-top:1px solid var(--line);letter-spacing:.06em}
 /* v3.6: telemetry HUD */
 #telemetry{
-  position:fixed;left:16px;top:64px;z-index:35;min-width:196px;max-width:250px;
+  position:fixed;left:16px;top:var(--overlay-top);z-index:16;min-width:196px;max-width:250px;
   background:rgba(7,11,18,.88);border:1px solid var(--line);border-radius:8px;
   font-family:var(--font-m);font-size:10.5px;line-height:1.9;color:var(--ink-dim);
   padding:8px 11px;cursor:pointer;user-select:none;
@@ -293,15 +298,14 @@ body.touch #touchui{display:block}
   .titleblock{flex:0 0 auto;min-width:0}
   .titleblock h1{font-size:16px;letter-spacing:.32em;white-space:nowrap}
   .titleblock p{font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:34vw}
-  #topbar{padding:10px 10px 0;align-items:center;gap:8px}
-  /* v3.6.1: one compact, horizontally-scrollable HUD row — never wraps onto
-     the title, subtitle, sysbar, or panel headers at 390px */
-  #topbtns{flex:1 1 auto;min-width:0;flex-wrap:nowrap;overflow-x:auto;gap:6px;justify-content:flex-start;
-    padding-bottom:4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-  #topbtns::-webkit-scrollbar{display:none}
+  #topbar{padding:10px 10px 0;align-items:flex-start;gap:6px 8px;flex-wrap:wrap}
+  /* Keep every action visible: title first, then a wrapping, full-width toolbar. */
+  #topbtns{flex:1 0 100%;width:100%;min-width:0;flex-wrap:wrap;overflow:visible;gap:6px;
+    justify-content:flex-start;padding-bottom:0;pointer-events:none}
+  #topbtns .hudbtn{pointer-events:auto}
   .hudbtn{flex:0 0 auto;padding:7px 8px 6px;font-size:9.5px;letter-spacing:.12em}
-  #pinpanel{left:10px;right:10px;top:72px;bottom:auto;max-height:46vh;width:auto}
-  #lore{right:10px;left:10px;top:72px;width:auto;max-height:44vh}
+  #pinpanel{left:10px;right:10px;bottom:auto;max-height:46vh;width:auto}
+  #lore{right:10px;left:10px;width:auto;max-height:44vh}
   #readout{font-size:9px;bottom:46px;left:158px}
   #toast{bottom:238px;white-space:normal;text-align:center;max-width:80vw}
   #footer{font-size:8px;flex-direction:column;align-items:flex-start;gap:2px}
@@ -318,27 +322,32 @@ body.touch #touchui{display:block}
 body.sysmode #btn-return{display:inline-block}
 body.sysmode #btn-jump{display:none}
 body.sysmode #jumpbtn{display:none}
-body.sysmode #btn-board{display:none}
 /* Phase 1: airlock link — boarding fade veil */
 #boardveil{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;transition:opacity .4s;pointer-events:none}
 #boardveil.show{opacity:1;pointer-events:all}
 #boardveil span{letter-spacing:.35em;color:var(--gold);font-size:15px;font-family:var(--font-d)}
-body.sysmode #pinpanel{left:14px;top:86px}
+body.sysmode{--overlay-top:var(--system-panel-top)}
+body.sysmode #pinpanel{left:14px;top:var(--system-panel-top)}
+body.sysmode #lore{top:var(--system-panel-top)}
 .lbl.sys{font-size:10px;letter-spacing:.2em;color:rgba(232,238,244,.85)}
 .lbl.sys .tick{background:linear-gradient(to bottom,rgba(232,179,74,.8),transparent)}
 .lbl.sys.moon{font-size:9px;color:rgba(214,224,236,.72)}
 .lbl.sys.star{color:rgba(255,214,150,.95)}
 .lbl.sys .tag{display:block;font-size:8px;letter-spacing:.3em;color:rgba(154,167,180,.6);margin-top:2px}
 #sysbar{
-  position:fixed;left:50%;top:64px;transform:translateX(-50%);z-index:12;display:none;
+  position:fixed;left:50%;top:var(--hud-top);transform:translateX(-50%);z-index:12;display:none;
   font-family:var(--font-m);font-size:10px;letter-spacing:.2em;color:rgba(232,179,74,.9);
   text-transform:uppercase;pointer-events:none;text-shadow:0 1px 6px rgba(0,0,0,.9);
   white-space:nowrap;max-width:calc(100vw - 24px);overflow:hidden;text-overflow:ellipsis;text-align:center;
 }
 body.sysmode #sysbar{display:block}
-@media (max-width:700px){ #sysbar{font-size:8.5px;letter-spacing:.1em;top:58px} }
+@media (max-width:700px){ #sysbar{font-size:8.5px;letter-spacing:.1em} }
 #btn-return{border-color:rgba(125,216,255,.45);color:var(--accent)}
 </style>
+<link rel="stylesheet" href="./assets/save.css" />
+<script src="./assets/save-core.js"></script>
+<script src="./assets/save-storage.js"></script>
+<script src="./assets/save-session.js"></script>
 </head>
 <body>
 <div id="scene" aria-hidden="true"></div>
@@ -2065,6 +2074,9 @@ function shipUp(out){
 }
 
 var keys = {};
+var chartInputPaused = true;
+var chartRestoreBusy = false;
+var chartSaveSession = null;
 var stickMove = { x: 0, y: 0, active: false };  // left touch stick: thrust + strafe (was `stick`)
 var stickLook = { x: 0, y: 0, active: false };  // right touch stick: camera look
 var camFree = false;  // SHIP/CAM toggle: true = free camera flight, ship holds station
@@ -2072,6 +2084,7 @@ var touchUpDown = { up: false, down: false };
 // v3.5: scripted engine spool for verification captures (null = flight-driven)
 var engineSpool = null;
 function updateFlight(dt){
+  if (chartInputPaused) return;
   if (ship_state.warping || sysTransit) return; // warp/transit has the helm
   var acc = new THREE.Vector3();
   var boost = keys['shiftleft'] || keys['shiftright'];
@@ -2134,6 +2147,7 @@ function updateFlight(dt){
 /* ------------------------------ jump -------------------------------- */
 var warpVignette = $('warpvignette');
 function startJump(targetId){
+  if (chartInputPaused) return;
   if (ship_state.warping || sysTransit || mode !== 'chart') return;
   var target = null;
   DATA.worlds.forEach(function(w){ if (w.id === targetId) target = w; });
@@ -2187,6 +2201,7 @@ function updateWarp(dt){
     // v3.5: a completed jump carries straight into the target's system scene (v3 intent).
     // F / the dossier ENTER SYSTEM remain as the alternate route.
     enterSystemFor(W.id);
+    requestChartCheckpoint();
   }
 }
 
@@ -2305,7 +2320,7 @@ function applyQuality(){
       : window.__gal.nTotal;
   }
   // v3: in a system view, rebuild it at the new quality (seeded geometry — ship pose survives)
-  if (mode === 'system' && sysCurrent && !sysTransit){ rebuildSystem(sysCurrent); }
+  if (mode === 'system' && sysCurrent && !sysTransit && !chartRestoreBusy){ rebuildSystem(sysCurrent); }
   postQuad.material = compMat;
   onResize();
 }
@@ -2604,6 +2619,7 @@ var drag = null;   // {x,y, moved}
 var canvas = renderer.domElement;
 
 function steer(dyaw, dpitch){
+  if (chartInputPaused) return;
   if (ship_state.camMode === 'orbit'){
     ship_state.orbitAz += dyaw * 1.0;
     ship_state.orbitEl = THREE.MathUtils.clamp(ship_state.orbitEl + dpitch, -1.4, 1.4);
@@ -2615,6 +2631,7 @@ function steer(dyaw, dpitch){
 }
 
 canvas.addEventListener('pointerdown', function(ev){
+  if (chartInputPaused) return;
   canvas.setPointerCapture && canvas.setPointerCapture(ev.pointerId);
   drag = { x: ev.clientX, y: ev.clientY, moved: 0, id: ev.pointerId, t: performance.now(),
            panning: (ev.button === 2 || ev.shiftKey) && ship_state.camMode === 'orbit' };
@@ -2631,6 +2648,7 @@ function panCamera(dx, dy){
   S.pan.addScaledVector(_pv1, -dx * k).addScaledVector(_pv2, dy * k);
 }
 canvas.addEventListener('pointermove', function(ev){
+  if (chartInputPaused){ drag = null; return; }
   if (!drag || ev.pointerId !== drag.id) return;
   var dx = ev.clientX - drag.x, dy = ev.clientY - drag.y;
   drag.x = ev.clientX; drag.y = ev.clientY; drag.moved += Math.abs(dx) + Math.abs(dy);
@@ -2640,6 +2658,7 @@ canvas.addEventListener('pointermove', function(ev){
   }
 });
 canvas.addEventListener('pointerup', function(ev){
+  if (chartInputPaused){ drag = null; pinch.ptrs.delete(ev.pointerId); pinch.last = null; return; }
   if (drag && ev.pointerId === drag.id){
     // tap (not drag) → hit test
     if (drag.moved <= 7 && performance.now() - drag.t < 600){
@@ -2671,14 +2690,16 @@ canvas.addEventListener('pointercancel', function(ev){
 // pinch zoom (touch): two pointers on canvas
 var pinch = { ptrs: new Map(), last: null };
 canvas.addEventListener('pointermove', function(ev){
+  if (chartInputPaused){ pinch.ptrs.delete(ev.pointerId); pinch.last = null; return; }
   if (ev.pointerType !== 'touch') return;
   if (pinch.ptrs.has(ev.pointerId)) pinch.ptrs.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
 });
 var _pd = canvas.addEventListener.bind(canvas);
 canvas.addEventListener('pointerdown', function(ev){
-  if (ev.pointerType === 'touch'){ pinch.ptrs.set(ev.pointerId, { x: ev.clientX, y: ev.clientY }); pinch.last = null; }
+  if (!chartInputPaused && ev.pointerType === 'touch'){ pinch.ptrs.set(ev.pointerId, { x: ev.clientX, y: ev.clientY }); pinch.last = null; }
 });
 function pinchTick(){
+  if (chartInputPaused) return;
   if (pinch.ptrs.size !== 2) return;
   var pts = Array.from(pinch.ptrs.values());
   var d = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
@@ -2689,14 +2710,19 @@ function pinchTick(){
   }
   pinch.last = d;
 }
-canvas.addEventListener('wheel', function(ev){
-  ev.preventDefault();
-  var k = ev.deltaY > 0 ? 1.12 : 0.89;
-  if (ship_state.camMode === 'chase') ship_state.zoomMul = THREE.MathUtils.clamp(ship_state.zoomMul * k, 0.45, 4);
-  else ship_state.orbitR = orbitZoomClamp(ship_state.orbitR * k);
-}, { passive: false });
+function installChartInputHandlers(){
+  canvas.addEventListener('wheel', function(ev){
+    if (chartInputPaused) return;
+    ev.preventDefault();
+    var k = ev.deltaY > 0 ? 1.12 : 0.89;
+    if (ship_state.camMode === 'chase') ship_state.zoomMul = THREE.MathUtils.clamp(ship_state.zoomMul * k, 0.45, 4);
+    else ship_state.orbitR = orbitZoomClamp(ship_state.orbitR * k);
+  }, { passive: false });
+}
+installChartInputHandlers();
 
 window.addEventListener('keydown', function(ev){
+  if (chartInputPaused) return;
   var k = ev.key.toLowerCase();
   keys[k] = true; keys[ev.code.toLowerCase()] = true;  // v3 fix: flight reads code names (keyw, shiftleft…)
   if (ev.target === $('pinsearch')) return; // typing in search
@@ -2713,7 +2739,7 @@ window.addEventListener('keydown', function(ev){
   if (k === 'h') toggleHelp();
   if (k === 'm') toggleMap();                                                    // v3.6
   if (k === 't') toggleTelemetry();                                             // v3.6
-  if (k === 'b' && mode === 'chart') boardRipley();                               // Phase 1: airlock link
+  if (k === 'b' && chartBoardAllowed()) boardRipley();                             // save-aware airlock handoff
   if (k === '0'){ if (mapOpen) mapRecenter(); ship_state.pan.set(0, 0, 0); }     // v3.6 recenter
   if (k === 'escape'){ setSelected(null); sysSel = null; $('groupchip').classList.remove('open'); $('help').classList.remove('open'); }
 });
@@ -2728,7 +2754,7 @@ function makeTouchStick(elId, knobId, state){
   var id = null, cx = 0, cy = 0, R = 40, DZ = 0.14;
   function setKnob(nx, ny){ knob.style.transform = 'translate(-50%,-50%) translate(' + (nx * R) + 'px,' + (-ny * R) + 'px)'; }
   el.addEventListener('pointerdown', function(ev){
-    if (id !== null) return;
+    if (chartInputPaused || id !== null) return;
     id = ev.pointerId; el.setPointerCapture(id);
     var r = el.getBoundingClientRect(); cx = r.left + r.width / 2; cy = r.top + r.height / 2;
     state.x = 0; state.y = 0; state.active = true; setKnob(0, 0);
@@ -2736,6 +2762,7 @@ function makeTouchStick(elId, knobId, state){
   });
   el.addEventListener('pointermove', function(ev){
     if (ev.pointerId !== id) return;
+    if (chartInputPaused){ end(ev); return; }
     var dx = ev.clientX - cx, dy = ev.clientY - cy;
     var m = Math.hypot(dx, dy) / R, nx = 0, ny = 0;
     if (m > DZ){
@@ -2759,10 +2786,10 @@ makeTouchStick('stick-move', 'knob-move', stickMove);
 makeTouchStick('stick-look', 'knob-look', stickLook);
 $('btn-shipcam').addEventListener('click', toggleShipCam);
 (function initTouchButtons(){
-  $('btn-up').addEventListener('pointerdown', function(){ touchUpDown.up = true; });
+  $('btn-up').addEventListener('pointerdown', function(){ if (!chartInputPaused) touchUpDown.up = true; });
   $('btn-up').addEventListener('pointerup', function(){ touchUpDown.up = false; });
   $('btn-up').addEventListener('pointercancel', function(){ touchUpDown.up = false; });
-  $('btn-dn').addEventListener('pointerdown', function(){ touchUpDown.down = true; });
+  $('btn-dn').addEventListener('pointerdown', function(){ if (!chartInputPaused) touchUpDown.down = true; });
   $('btn-dn').addEventListener('pointerup', function(){ touchUpDown.down = false; });
   $('btn-dn').addEventListener('pointercancel', function(){ touchUpDown.down = false; });
 })();
@@ -2785,6 +2812,7 @@ function toggleCam(){
 }
 /* ---- touch LOOK stick: per-frame camera application (walkthrough-derived feel) ---- */
 function applyLookStick(dt){
+  if (chartInputPaused) return;
   if (camFree) return;  // free camera handles its own look in updateCamFree
   var S = ship_state;
   if (stickLook.active){
@@ -2808,6 +2836,7 @@ var _cfFwd = new THREE.Vector3(), _cfRight = new THREE.Vector3();
 var _cfYawQ = new THREE.Quaternion(), _cfPitchQ = new THREE.Quaternion();
 var _UP_Y = new THREE.Vector3(0, 1, 0);
 function updateCamFree(dt){
+  if (chartInputPaused) return;
   var sysMode = (mode === 'system');
   var thrust = sysMode ? 240 : 11;  // same scale as ship flight
   camera.getWorldDirection(_cfFwd);
@@ -2871,17 +2900,10 @@ $('pinsearch').addEventListener('keydown', function(ev){
 $('btn-jump').onclick = function(){ if (selectedId) startJump(selectedId); };
 $('btn-return').onclick = function(){ beginSysTransit('chart'); };
 /* Phase 1: airlock link — board the Ripley (walk Deck 1) */
-function boardRipley(){
-  if (mode !== 'chart') return;
-  if ($('boardveil')) return; // already boarding
-  var veil = document.createElement('div');
-  veil.id = 'boardveil';
-  veil.innerHTML = '<span>BOARDING — DECK 1…</span>';
-  document.body.appendChild(veil);
-  setTimeout(function(){ veil.classList.add('show'); }, 30);
-  setTimeout(function(){
-    location.href = WALK_URL + '?deck=1&return=' + encodeURIComponent(location.href);
-  }, 460);
+async function boardRipley(){
+  if (!chartBoardAllowed()) return;
+  try { await chartSaveSession.handoff('interior'); }
+  catch(e){ toast(e.message || 'Could not save before changing view'); }
 }
 $('btn-board').onclick = boardRipley;
 $('jumpbtn').onclick = function(){ if (selectedId) startJump(selectedId); };
@@ -3026,6 +3048,7 @@ function loop(now){
   requestAnimationFrame(loop);
   var dt = Math.min(0.05, (now - _last) / 1000);
   _last = now; _dt = dt;
+  if (chartSaveSession) chartSaveSession.tick();
   var t = now / 1000;
   updateFlight(dt);
   if (camFree) updateCamFree(dt);  // touch SHIP/CAM toggle: free camera flight
@@ -4024,7 +4047,7 @@ function setChromeSys(on){
   }
 }
 function beginSysTransit(to, targetId, moonId){
-  if (sysTransit || ship_state.warping) return false;
+  if (chartInputPaused || sysTransit || ship_state.warping) return false;
   if (to === 'system'){
     if (!targetId) return false;
     if (mode === 'system' && targetId === sysCurrent && !moonId){ toast('Already in that system'); return false; }
@@ -4061,12 +4084,12 @@ function updateSysTransit(dt){
     camera.fov = 60; camera.updateProjectionMatrix();
     warpVignette.style.opacity = 0; streakMat.opacity = 0;
     toast(T.to === 'system' ? 'LOCAL SYSTEM · ' + sysCurrentName.toUpperCase() : 'CHART · THE EXPANSE');
+    requestChartCheckpoint();
   }
 }
 function enterSystemScene(worldId, moonId){
   if (mode === 'chart'){
-    sysReturn = { pos: ship_state.pos.clone(), yaw: ship_state.yaw, pitch: ship_state.pitch,
-                  vel: ship_state.vel.clone(), sel: selectedId };
+    sysReturn = captureChartReturnState(true);
     setSelected(null);
   }
   var B = acquireSystem(worldId);
@@ -4103,14 +4126,232 @@ function exitSystemScene(){
   ship_state.pan.set(0, 0, 0); // v3.6: recenter free-orbit pivot on return
   $('groupchip').classList.remove('open');
   if (sysReturn){
-    ship_state.pos.copy(sysReturn.pos);
-    ship_state.vel.copy(sysReturn.vel);
-    ship_state.yaw = sysReturn.yaw; ship_state.pitch = sysReturn.pitch;
-    ship.position.copy(ship_state.pos);
-    syncShipQuat();
-    if (ship_state.camMode === 'chase') snapChaseCamera();
-    setSelected(sysReturn.sel); // restores the dossier too
+    ship_state.vel.set(0, 0, 0);
+    applySavedPose(sysReturn.pose);
+    applySavedCamera(sysReturn.camera);
+    setSelected(sysReturn.selection); // restores the dossier too
   }
+  sysReturn = null;
+}
+
+/* --------------------- local chart save adapter --------------------- */
+function captureSavedCamera(){
+  return { mode: ship_state.camMode, zoom: ship_state.zoomMul, orbitAz: ship_state.orbitAz,
+    orbitEl: ship_state.orbitEl, orbitR: ship_state.orbitR, pan: ship_state.pan.toArray() };
+}
+function captureChartReturnState(forceCurrent){
+  if (!forceCurrent && sysReturn){
+    return { pose: { position: sysReturn.pose.position.slice(), yaw: sysReturn.pose.yaw, pitch: sysReturn.pose.pitch },
+      camera: { mode: sysReturn.camera.mode, zoom: sysReturn.camera.zoom, orbitAz: sysReturn.camera.orbitAz,
+        orbitEl: sysReturn.camera.orbitEl, orbitR: sysReturn.camera.orbitR, pan: sysReturn.camera.pan.slice() },
+      selection: sysReturn.selection };
+  }
+  return { pose: { position: ship_state.pos.toArray(), yaw: ship_state.yaw, pitch: ship_state.pitch },
+    camera: captureSavedCamera(), selection: selectedId };
+}
+function captureChartPose(){
+  return { position: ship_state.pos.toArray(), yaw: ship_state.yaw, pitch: ship_state.pitch };
+}
+function chartRuntimeBodyId(worldId, key, B){
+  if (!B || !B.bodyMap) return null;
+  if (key === 'star') return worldId + ':star:' + B.def.star.seed;
+  var body = typeof key === 'string' ? B.bodyMap[key] : key;
+  if (!body || !body.def) return null;
+  if (body.def.kind === 'featured') return worldId + ':featured:' + body.def.seed;
+  if (body.def.kind === 'moon') return worldId + ':moon:' + String(key).slice(1);
+  if (body.def.kind === 'planet') return worldId + ':planet:' + body.def.seed;
+  if (body.def.kind === 'bh' && B.def.blackhole) return worldId + ':blackhole:' + B.def.blackhole.seed;
+  return null;
+}
+function chartKnownRuntimeIds(worldId){
+  var world = worldById(worldId);
+  if (!world) return null;
+  var def = (DATA.systems && DATA.systems[worldId]) || genSystemDef(world);
+  var ids = Object.create(null);
+  ids[worldId + ':star:' + def.star.seed] = { key: 'star', kind: 'star', phase: false };
+  ids[worldId + ':featured:' + def.featured.seed] = { key: 'feat', kind: 'featured', phase: true };
+  (world.moons || []).forEach(function(m){
+    ids[worldId + ':moon:' + m.id] = { key: 'm' + m.id, kind: 'moon', phase: true };
+  });
+  (def.planets || []).forEach(function(p){
+    ids[worldId + ':planet:' + p.seed] = { key: null, kind: 'planet', phase: true };
+  });
+  if (def.blackhole) ids[worldId + ':blackhole:' + def.blackhole.seed] = { key: 'bh', kind: 'blackhole', phase: true };
+  return ids;
+}
+function resolveChartRuntimeBody(runtimeId){
+  if (!sysCurrent) return null;
+  var B = sysCache[sysCurrent + ':' + quality];
+  if (!B) return null;
+  var keys = Object.keys(B.bodyMap);
+  for (var i = 0; i < keys.length; i++){
+    var key = keys[i], body = B.bodyMap[key];
+    if (chartRuntimeBodyId(sysCurrent, key, B) === runtimeId) return { B: B, body: body, key: key };
+  }
+  return null;
+}
+function captureOrbitalPhases(){
+  if (mode !== 'system' || !sysCurrent) return [];
+  var B = sysCache[sysCurrent + ':' + quality];
+  if (!B) return [];
+  return B.anim.orbiters.map(function(orbiter){
+    var keys = Object.keys(B.bodyMap), id = null;
+    for (var i = 0; i < keys.length; i++){
+      if (B.bodyMap[keys[i]].group === orbiter.node){ id = chartRuntimeBodyId(sysCurrent, keys[i], B); break; }
+    }
+    return id ? { id: id, angle: orbiter.ang } : null;
+  }).filter(Boolean);
+}
+function captureChartNavigation(){
+  var inSystem = mode === 'system' && !!sysCurrent;
+  var B = inSystem ? sysCache[sysCurrent + ':' + quality] : null;
+  return { frame: inSystem ? 'system-1000km' : 'chart-mly', systemId: inSystem ? sysCurrent : null,
+    pose: captureChartPose(), camera: captureSavedCamera(),
+    selection: inSystem ? (B && sysSel ? chartRuntimeBodyId(sysCurrent, sysSel, B) : null) : selectedId,
+    phases: inSystem ? captureOrbitalPhases() : [], chartReturn: inSystem ? captureChartReturnState() : null };
+}
+function captureChartSnapshot(){
+  return { navigation: captureChartNavigation(), preferences: { quality: quality } };
+}
+function validateChartSnapshot(snapshot){
+  var checked = ExpanseSaveCore.validate(snapshot), nav = checked.navigation;
+  if (!nav) return checked;
+  function validChartSelection(id){ return id === null || !!worldById(id) || Object.prototype.hasOwnProperty.call(moons, id); }
+  if (nav.frame === 'chart-mly'){
+    if (!validChartSelection(nav.selection)) throw new Error('Unknown chart selection');
+    return checked;
+  }
+  var known = chartKnownRuntimeIds(nav.systemId);
+  if (!known) throw new Error('Unknown saved system');
+  if (nav.selection !== null && !Object.prototype.hasOwnProperty.call(known, nav.selection))
+    throw new Error('Unknown saved system selection');
+  if (!validChartSelection(nav.chartReturn.selection)) throw new Error('Unknown chart return selection');
+  var expectedPhases = Object.keys(known).filter(function(id){ return known[id].phase; });
+  if (nav.phases.length !== expectedPhases.length) throw new Error('Incomplete saved orbital phase set');
+  for (var i = 0; i < nav.phases.length; i++){
+    var phase = nav.phases[i], identity = known[phase.id];
+    if (!identity || !identity.phase) throw new Error('Unknown saved orbital identity');
+  }
+  return checked;
+}
+function clearChartTransientInput(){
+  keys = {};
+  stickMove.x = 0; stickMove.y = 0; stickMove.active = false;
+  stickLook.x = 0; stickLook.y = 0; stickLook.active = false;
+  touchUpDown.up = false; touchUpDown.down = false;
+  drag = null;
+  if (typeof pinch !== 'undefined' && pinch){ pinch.ptrs.clear(); pinch.last = null; }
+  camFree = false;
+  ship_state.vel.set(0, 0, 0);
+  ship_state.lookAz = 0; ship_state.lookEl = 0;
+  var shipCam = $('btn-shipcam');
+  if (shipCam){ shipCam.textContent = 'SHIP'; shipCam.classList.remove('cam'); }
+}
+function setChartInputPaused(paused){
+  chartInputPaused = !!paused;
+  if (chartInputPaused) clearChartTransientInput();
+}
+function chartSaveStable(){
+  if (!chartInputPaused && !chartRestoreBusy && !ship_state.warping && !sysTransit){
+    if (mode === 'chart') return activeScene === scene;
+    if (mode === 'system' && sysCurrent){
+      var B = sysCache[sysCurrent + ':' + quality];
+      return !!B && activeScene === B.scene && sysBodies === B.bodyMap;
+    }
+  }
+  return false;
+}
+function applySavedPose(pose){
+  ship_state.pos.fromArray(pose.position);
+  ship_state.vel.set(0, 0, 0);
+  ship_state.yaw = pose.yaw; ship_state.pitch = pose.pitch;
+  ship_state.warp = 0; ship_state.warping = null;
+  ship.position.copy(ship_state.pos); syncShipQuat();
+}
+function applySavedCamera(saved){
+  ship_state.camMode = saved.mode;
+  ship_state.zoomMul = saved.zoom;
+  ship_state.orbitAz = saved.orbitAz; ship_state.orbitEl = saved.orbitEl;
+  ship_state.orbitR = saved.orbitR; ship_state.pan.fromArray(saved.pan);
+  ship_state.lookAz = 0; ship_state.lookEl = 0; camFree = false;
+  camera.fov = 60; camera.updateProjectionMatrix();
+  updateCamera();
+  $('btn-cam').textContent = ship_state.camMode === 'chase' ? 'Chase' : 'Orbit';
+}
+function applyOrbitalPhases(nav){
+  if (!nav || nav.frame !== 'system-1000km' || !sysCurrent) return;
+  for (var i = 0; i < nav.phases.length; i++){
+    var resolved = resolveChartRuntimeBody(nav.phases[i].id);
+    if (!resolved) throw new Error('Saved orbital body is unavailable');
+    var orbiters = resolved.B.anim.orbiters, found = false;
+    for (var j = 0; j < orbiters.length; j++) if (orbiters[j].node === resolved.body.group){
+      orbiters[j].ang = nav.phases[i].angle; found = true; break;
+    }
+    if (!found) throw new Error('Saved body has no orbital phase');
+  }
+  updateSystem(0, performance.now() / 1000);
+}
+function restoreChartReturnState(saved){
+  if (!saved){ sysReturn = null; return; }
+  sysReturn = { pose: { position: saved.pose.position.slice(), yaw: saved.pose.yaw, pitch: saved.pose.pitch },
+    camera: { mode: saved.camera.mode, zoom: saved.camera.zoom, orbitAz: saved.camera.orbitAz,
+      orbitEl: saved.camera.orbitEl, orbitR: saved.camera.orbitR, pan: saved.camera.pan.slice() },
+    selection: saved.selection };
+}
+function defaultChartPose(){
+  var position = [6.5, 2.6, 3.5], d = groups.virgo.center.clone().sub(new THREE.Vector3(position[0], position[1], position[2])).normalize();
+  return { position: position, yaw: Math.atan2(-d.x, -d.z), pitch: Math.asin(THREE.MathUtils.clamp(d.y, -1, 1)) };
+}
+function defaultChartCamera(){
+  return { mode: 'chase', zoom: 1, orbitAz: 0.8, orbitEl: 0.35, orbitR: 3.2, pan: [0, 0, 0] };
+}
+function installChartSaveScene(nav){
+  if (mode === 'system' || activeScene !== scene) exitSystemScene();
+  if (!nav) return;
+  if (nav.frame === 'system-1000km') enterSystemScene(nav.systemId, null);
+}
+function restoreChartSelection(nav){
+  sysSel = null;
+  setSelected(null);
+  if (!nav) return;
+  if (nav.frame === 'chart-mly'){ setSelected(nav.selection); return; }
+  if (nav.selection){
+    var resolved = resolveChartRuntimeBody(nav.selection);
+    if (!resolved) throw new Error('Saved system selection is unavailable');
+    sysSelectBody(resolved.key);
+  }
+}
+async function applyChartSnapshot(snapshot){
+  snapshot = await validateChartSnapshot(snapshot);
+  chartRestoreBusy = true;
+  try {
+    quality = snapshot.preferences.quality;
+    applyQuality();
+    var nav = snapshot.navigation;
+    installChartSaveScene(nav);
+    applyOrbitalPhases(nav);
+    if (nav) restoreChartReturnState(nav.chartReturn);
+    else restoreChartReturnState(null);
+    if (nav) applySavedPose(nav.pose);
+    else applySavedPose(defaultChartPose());
+    if (nav) applySavedCamera(nav.camera);
+    else applySavedCamera(defaultChartCamera());
+    restoreChartSelection(nav);
+  } finally { chartRestoreBusy = false; }
+}
+var chartSaveAdapter = { stable: chartSaveStable, capture: captureChartSnapshot,
+  validate: validateChartSnapshot, apply: applyChartSnapshot, pause: setChartInputPaused };
+function chartBoardAllowed(){
+  return !!chartSaveSession && chartSaveStable() && (mode === 'chart' || mode === 'system');
+}
+function requestChartCheckpoint(){
+  if (!chartSaveSession || !chartSaveStable()) return;
+  chartSaveSession.checkpoint().catch(function(){});
+}
+async function startChartSaveSession(){
+  chartSaveSession = await ExpanseSave.start({ view: 'chart', baseURL: new URL('./', location.href),
+    host: document.getElementById('topbtns'), adapter: chartSaveAdapter });
+  return chartSaveSession;
 }
 function enterSystemFor(id){
   if (sysTransit || ship_state.warping) return;
@@ -4623,6 +4864,37 @@ Object.assign(window.__expanse, {
 });
 console.log('[Expanse] system mode ready');
 
+/* Keep HUD panels clear when controls wrap, fonts load, or system mode changes. */
+(function initHudLayout(){
+  var rootStyle = document.documentElement.style, bar = $('topbar'), systemBar = $('sysbar');
+  function updateHudLayout(){
+    var hudTop = Math.max(64, Math.ceil(bar.getBoundingClientRect().bottom) + 10);
+    var values = {
+      '--hud-top': hudTop,
+      '--panel-top': Math.max(86, hudTop),
+      '--system-panel-top': hudTop + Math.ceil(systemBar.getBoundingClientRect().height || 16) + 10
+    };
+    var changed = false;
+    Object.keys(values).forEach(function(name){
+      var value = values[name] + 'px';
+      if (rootStyle.getPropertyValue(name) !== value){ rootStyle.setProperty(name, value); changed = true; }
+    });
+    if (changed && mapOpen){ sizeMapCanvas(); drawMap(); }
+  }
+  if (typeof ResizeObserver === 'function'){
+    var observer = new ResizeObserver(updateHudLayout);
+    observer.observe(bar); observer.observe(systemBar);
+  }
+  window.addEventListener('resize', updateHudLayout);
+  if (document.fonts) document.fonts.ready.then(updateHudLayout);
+  updateHudLayout();
+})();
+
+startChartSaveSession().catch(function(error){
+  setChartInputPaused(true);
+  console.error('[Expanse] local save session unavailable', error);
+  toast('Local save controls could not start · navigation paused');
+});
 toast(IS_TOUCH ? 'MOVE stick thrusts · LOOK stick aims the camera · tap a pin to jump' :
                 'WASD to thrust · drag to steer · click a pin', 3600);
 requestAnimationFrame(function(now){ _last = now; requestAnimationFrame(loop); });

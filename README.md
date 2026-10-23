@@ -12,12 +12,29 @@ with the worlds of the Space Adventures / Warbrood canon pinned to it.
 - **Live:** https://samaeldemiurgos2-cyber.github.io/The-Expanse/
 - **Local:** open `index.html` in any modern browser. No build step, no server.
 
+Keep the repository's `assets/` folder alongside the pages. Direct-file viewing uses
+memory-only journey state; serve over HTTP(S) for automatic local save/resume.
+
 ## Controls
 
 | Desktop | Phone |
 |---|---|
 | `W A S D` thrust, mouse-drag look | Left thumb: virtual joystick · Right thumb: drag to steer |
 | Click a pin → dossier · `JUMP` button warps to it | Tap a pin → dossier · `JUMP` warps |
+
+Inside Ripley, use `W A S D` / arrows to move. In non-touch desktop layouts, click
+the scene for captured-mouse look (`Esc` releases). Hold the primary mouse button
+and drag to look in any layout, including when capture is unavailable. On the
+LOOK stick, hold off-center to keep turning; release to stop.
+Opening Save, losing focus, or reloading clears held input. Start a new gesture
+after resuming.
+
+## Local journey saves
+
+**Save** in the chart and interior opens Save now, JSON backup/import and recovery
+controls. Reload resumes stationary; settled-system Board and Return preserve the
+exterior/interior journey. Saves are browser/profile/origin/base-path local, not
+cloud sync. See [local save behavior and recovery](docs/local-saves.md).
 
 ## Retconning
 
