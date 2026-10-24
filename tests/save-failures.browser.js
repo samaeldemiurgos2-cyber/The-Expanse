@@ -6,7 +6,7 @@ async (page) => {
     const adapter={capture:()=>({preferences:{quality}}),stable:()=>stable,pause:v=>{paused=v;},validate:async v=>{if(v.interior&&v.interior.x===123)throw new Error('Unsafe position');},apply:async v=>{quality=v.preferences.quality;}};
     const base=new URL('/tests/failure-'+Date.now()+'/',location.href),repo=await S.open(base);
     const first=await repo.commit(C.fresh(),0);const second=await repo.commit(C.merge(first,{preferences:{quality:'low'}}),1);repo.close();
-    async function rawPut(value){await new Promise((resolve,reject)=>{const request=indexedDB.open(S.scope(base),1);request.onsuccess=()=>{const db=request.result,tx=db.transaction('snapshots','readwrite');tx.objectStore('snapshots').put(value,'current');tx.oncomplete=()=>{db.close();resolve();};tx.onabort=()=>reject(tx.error);};});}
+    async function rawPut(value){await new Promise((resolve,reject)=>{const request=indexedDB.open(S.scope(base),2);request.onsuccess=()=>{const db=request.result,tx=db.transaction('snapshots','readwrite');tx.objectStore('snapshots').put(value,'current');tx.oncomplete=()=>{db.close();resolve();};tx.onabort=()=>reject(tx.error);};});}
     const corrupt={...second,schemaVersion:99};await rawPut(corrupt);
     const session=await ExpanseSave.start({view:'chart',baseURL:base,host:document.getElementById('controls'),adapter});
     check('future checkpoint pauses input without replacing record',paused&&session.status().code==='error');

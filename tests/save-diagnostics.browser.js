@@ -4,7 +4,7 @@ async (page)=>{
     const checks=[];const check=(name,ok)=>{checks.push({name,pass:!!ok});if(!ok)throw Error(name);};
     const base=new URL('/tests/nonjson-'+Date.now()+'/',location.href),a=await ExpanseSaveStorage.open(base),b=await ExpanseSaveStorage.open(base);a.close();
     const value={revision:'bad',odd:1n};value.cycle=value;
-    await new Promise(resolve=>{const r=indexedDB.open(ExpanseSaveStorage.scope(base),1);r.onsuccess=()=>{const db=r.result,tx=db.transaction('snapshots','readwrite'),store=tx.objectStore('snapshots');store.put(value,'current');store.put({invalid:true},'previous');tx.oncomplete=()=>{db.close();resolve();};};});
+    await new Promise(resolve=>{const r=indexedDB.open(ExpanseSaveStorage.scope(base),2);r.onsuccess=()=>{const db=r.result,tx=db.transaction('snapshots','readwrite'),store=tx.objectStore('snapshots');store.put(value,'current');store.put({invalid:true},'previous');tx.oncomplete=()=>{db.close();resolve();};};});
     const adapter={stable:()=>true,capture:()=>({}),pause:()=>{},validate:async()=>{},apply:async()=>{}};
     const session=await ExpanseSave.start({view:'chart',baseURL:base,adapter});
     let diagnostic;try{diagnostic=JSON.parse(session.exportOriginal());}catch(_){}

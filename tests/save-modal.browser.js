@@ -11,6 +11,7 @@ async (page) => {
   await page.getByRole('button',{name:'Save now',exact:true}).click();
   await page.waitForFunction(()=>modalSession.status().code==='saved');
   await page.getByRole('button',{name:'Close',exact:true}).click();
+  await page.waitForFunction(()=>!window.modalPaused&&!document.querySelector('#save-panel').open);
   if(await page.evaluate(()=>window.modalPaused))throw Error('Closing Save should resume playable input');
   return {passed:3,checks:[{name:'Save dialog pauses input',pass:true},{name:'manual save remains available while dialog pauses input',pass:true},{name:'Close resumes input and focus',pass:await page.locator('#save-control').evaluate(el=>el===document.activeElement)}]};
 }

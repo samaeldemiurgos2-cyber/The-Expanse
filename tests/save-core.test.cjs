@@ -35,7 +35,7 @@ if (core) {
   });
   test('size is bounded before parsing',()=>assert.throws(()=>core.parse(' '.repeat(262145)),{code:'SIZE'}));
   test('malformed and future records fail closed',()=>{
-    assert.throws(()=>core.parse('{')); assert.throws(()=>core.validate({...core.fresh(),schemaVersion:2}),{code:'VERSION'});
+    assert.throws(()=>core.parse('{')); assert.throws(()=>core.validate({...core.fresh(),schemaVersion:3}),{code:'VERSION'});
     assert.throws(()=>core.validate({...core.fresh(),runtimeCatalogVersion:2}),{code:'VERSION'});
   });
   const cases = [

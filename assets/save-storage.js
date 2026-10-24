@@ -12,7 +12,7 @@
   function open(baseURL) {
     return new Promise((resolve,reject) => {
       let request, name;
-      try { name=scope(baseURL); request=root.indexedDB.open(name,1); }
+      try { name=scope(baseURL); request=root.indexedDB.open(name,2); }
       catch (_) { reject(error('UNAVAILABLE','Browser storage is unavailable. Use Export JSON.')); return; }
       let settled=false;
       const timer=setTimeout(()=>{settled=true;reject(error('UNAVAILABLE','Browser storage is blocked by another connection. Close old tabs and Retry.'));},4000);
@@ -43,7 +43,7 @@
                 const revision=raw===undefined ? 0 : raw && Number.isSafeInteger(raw.revision) && raw.revision>=0 ? raw.revision : null;
                 if(revision!==expectedRevision){reason=error('CONFLICT','Another tab changed this save. Export your progress, then reload before replacing it.');tx.abort();return;}
                 let preceding=null;
-                if(raw!==undefined){try{preceding=C.validate(raw);}catch(e){if(!recovery){reason=e;tx.abort();return;}}}
+                if(raw!==undefined){try{C.validate(raw);preceding=raw;}catch(e){if(!recovery){reason=e;tx.abort();return;}}}
                 const nextRevision=revision===null?1:revision+1;
                 if(!Number.isSafeInteger(nextRevision)){reason=error('INVALID','Save revision limit reached; export a backup.');tx.abort();return;}
                 next=C.validate({...candidate,revision:nextRevision,savedAt:new Date().toISOString()});

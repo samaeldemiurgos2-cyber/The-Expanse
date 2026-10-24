@@ -91,23 +91,30 @@
     return {deckId: value.deckId, x: number(value.x, -1e9, 1e9, 'Interior x'), z: number(value.z, -1e9, 1e9, 'Interior z'),
       yaw: angle(value.yaw), pitch: number(value.pitch, -1.43, 1.43, 'Interior pitch'), roomId: id(value.roomId, true)};
   }
+  function survey(value) {
+    if (value === null) return null;
+    object(value, 'Survey');
+    if (value.targetId !== 'karna-vex:moon:micqui-nobara') fail('Unknown survey target');
+    if (typeof value.observedAt !== 'string' || value.observedAt.length > 32 || !Number.isFinite(Date.parse(value.observedAt)) || new Date(value.observedAt).toISOString() !== value.observedAt) fail('Invalid survey timestamp');
+    return {targetId: value.targetId, observedAt: value.observedAt};
+  }
   function bytes(text) { return new TextEncoder().encode(text).byteLength; }
   function validate(value) {
     object(value, 'Save'); safeTree(value, 0);
     if (value.format !== 'the-expanse/save') fail('Not a The Expanse save');
-    if (value.schemaVersion !== 1 || value.runtimeCatalogVersion !== 1) fail('Unsupported save/catalog version; original data retained', 'VERSION');
+    if (![1,2].includes(value.schemaVersion) || value.runtimeCatalogVersion !== 1) fail('Unsupported save/catalog version; original data retained', 'VERSION');
     if (!Number.isSafeInteger(value.revision) || value.revision < 0) fail('Invalid revision');
     if (value.savedAt !== null && (typeof value.savedAt !== 'string' || value.savedAt.length > 32 || !Number.isFinite(Date.parse(value.savedAt)) || new Date(value.savedAt).toISOString() !== value.savedAt)) fail('Invalid checkpoint timestamp');
     object(value.preferences, 'Preferences');
-    const result = {format: value.format, schemaVersion: 1, runtimeCatalogVersion: 1,
+    const result = {format: value.format, schemaVersion: 2, runtimeCatalogVersion: 1,
       revision: value.revision, savedAt: value.savedAt, lastView: choice(value.lastView, ['chart','interior'], 'view'),
-      navigation: navigation(value.navigation), interior: interior(value.interior),
+      navigation: navigation(value.navigation), interior: interior(value.interior), survey: value.schemaVersion === 1 ? null : survey(value.survey),
       preferences: {quality: choice(value.preferences.quality, ['high','low'], 'quality'), sensitivity: number(value.preferences.sensitivity, .5, 2, 'Sensitivity')} };
     if (bytes(JSON.stringify(result)) > MAX_BYTES) fail('Snapshot exceeds 256 KiB', 'SIZE');
     return result;
   }
   function fresh(preferences) {
-    return validate({format:'the-expanse/save',schemaVersion:1,runtimeCatalogVersion:1,revision:0,savedAt:null,lastView:'chart',navigation:null,interior:null,
+    return validate({format:'the-expanse/save',schemaVersion:2,runtimeCatalogVersion:1,revision:0,savedAt:null,lastView:'chart',navigation:null,interior:null,survey:null,
       preferences:{quality: preferences && preferences.quality || 'high', sensitivity: preferences && preferences.sensitivity !== undefined ? preferences.sensitivity : 1}});
   }
   function parse(text) {

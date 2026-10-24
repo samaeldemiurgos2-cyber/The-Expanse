@@ -1,0 +1,19 @@
+.expanse-survey-panel {
+  width: min(500px, calc(100vw - 24px));
+  max-width: calc(100vw - 24px);
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto;
+  overflow-wrap: anywhere;
+}
+.expanse-survey-panel #survey-identity,
+.expanse-survey-panel #survey-checkpoint,
+.expanse-survey-panel #survey-scale,
+.expanse-survey-panel #survey-facts {
+  color: var(--muted, #9eb0c2);
+}
+.expanse-survey-panel #survey-status,
+.expanse-survey-panel #survey-record-view {
+  color: var(--amber-bright, #ffc76f);
+}
+.expanse-survey-panel #survey-status[data-state="error"] { color: #ffc389; }
+.expanse-survey-panel #survey-record { border-color: var(--amber, #e8a33d); }

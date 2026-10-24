@@ -59,6 +59,28 @@ direct-file console editing is unavailable. With browser storage unavailable,
 an explicit HTTP console change is this-page-only: close the panel and export
 JSON before leaving. No automatic memory-only cross-page transfer is promised.
 
+## Sensors and visitor survey
+
+Use the existing Micqui-Nobara dossier to enter Karna Vex, then fly closer with
+the ordinary controls. Arrival is outside the survey band. Stop with Space,
+board Ripley, and approach **Ops** in the Bridge Pod. Press `E` or tap **Sensors**,
+then choose **Record survey**. The closest of Navigation and Ops owns the prompt.
+
+Sensors uses the actual exterior position and orbital phases saved when boarding.
+For this first target, permitted surface clearance is greater than zero and no
+more than 12 scene units (twice its rendered radius). These are compressed
+gameplay distances. Selecting a destination does not grant survey eligibility.
+
+One visitor observation is retained with the journey and shown separately in
+Micqui-Nobara's dossier. Reopening or repeating does not replace its original
+timestamp. Browser-local storage and JSON backups preserve it; imports, recovery
+and New journey replace progress rather than combining records. Existing version1
+backups remain importable, with no survey record. See [save boundaries](docs/local-saves.md).
+
+If storage fails, close Sensors and choose **Save → Use memory only** before
+recording a page-only observation, or retry storage. An incompatible Karna Vex
+catalog disables new recording while preserving existing visitor records.
+
 ## Retconning
 
 All content lives in one JSON block — the **RETcon ZONE** — at the top of

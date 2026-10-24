@@ -14,7 +14,9 @@ Resume is intentionally stationary. Momentum, held keys, joystick input, pointer
 
 Export JSON downloads a versioned data-only backup. Import JSON accepts backups up to 256 KiB, validates their structure and active renderer references/geometry, then asks before replacing progress. Cancel to export your current progress first. Invalid imports must not overwrite a good checkpoint. Import applies only the current page's renderer; other-domain data is retained for its renderer to validate when visited. It cannot choose a URL, asset, command or executable content.
 
-New journey requires confirmation and replaces only this application's save. One previous valid checkpoint is retained for explicit recovery. Export original preserves the raw stored record if it is corrupt or from an unsupported version. No untested migration is guessed.
+New journey requires confirmation and replaces only this application's save. One previous valid checkpoint is retained for explicit recovery. Export original preserves the raw stored record if it is corrupt or from an unsupported version. Version1 journey payloads normalize to version2 in memory without changing their pose, revision or saved time. The next ordinary checkpoint writes version2; opening the upgraded database does not rewrite its payloads. An older app cannot write through the version2 database fence.
+
+Version2 adds one optional Micqui-Nobara visitor survey. A completed local recording survives ordinary checkpoints, reload and Board/Return. Recording again retains its first timestamp. Import, previous-checkpoint recovery and New journey replace the entire record with the chosen journey's value. Importing a version1 backup therefore clears a current survey, with a warning. Export before replacing progress if you want to keep it.
 
 An unsupported/corrupt restore opens the recovery dialog visibly and keeps movement paused. If non-JSON structured-clone values prevent ordinary JSON export, Export original uses tagged diagnostic JSON; that diagnostic is not an importable journey backup. Before replacing an unreadable original, the confirmation warns that it will be permanently replaced and offers cancellation for export.
 
@@ -30,7 +32,11 @@ Conflict backups capture current live progress, including changes since the conf
 
 ## Scope
 
-These records are visitor state, not canon. They do not alter world definitions, source documents, model assets or lore. No scanning, discoveries, new decks, functional bridge console, account service or publication is included. Initial acceptance is Chromium desktop and mobile emulation; physical devices, Safari/Firefox and comprehensive collision coverage remain separate checks.
+These records are visitor state, not canon. They do not alter world definitions, source documents, model assets or lore. Navigation stages existing destinations, and Sensors at Ops records one explicit Micqui-Nobara observation from an eligible boarding context. Catalog facts remain separate from that observation. Surveys add no new lore, instrument measurements, decks, accounts or cloud service. Initial acceptance is Chromium desktop and mobile emulation; physical devices, Safari/Firefox and comprehensive collision coverage remain separate checks.
+
+Sensors reports whether its specific record is in a completed local checkpoint; an older checkpoint timestamp alone does not prove that a newly imported or page-only record is durable. A failed durable recording retains the preceding record. Storage failure alone does not authorize a page-only survey: close Sensors and choose **Save → Use memory only**, or retry storage. After that explicit memory choice, recording over HTTP can create a page-only record; close Sensors and export JSON before leaving. Direct-file Sensors remains read-only and cannot fetch its catalog or create a record.
+
+A validation error keeps console editing unavailable until existing Save controls resolve it. After closing Sensors, **Save now** can validate and checkpoint the unchanged pose again; **Retry / reload saved** restores the durable journey. Conflicts still require the existing recovery flow before mutation.
 
 ## Regression checks
 

@@ -2,7 +2,7 @@
   'use strict';
   const C=root.ExpanseSaveCore,S=root.ExpanseSaveStorage;
   const err=(code,message)=>new C.SaveError(code,message);
-  const signature=value=>JSON.stringify({navigation:value.navigation,interior:value.interior,preferences:value.preferences,lastView:value.lastView});
+  const signature=value=>JSON.stringify({navigation:value.navigation,interior:value.interior,preferences:value.preferences,lastView:value.lastView,survey:value.survey});
   function originalJSON(value){
     try{return JSON.stringify(value,null,2);}catch(_){
       const seen=new WeakMap();
@@ -30,7 +30,7 @@
     const base=new URL('./',options.baseURL);
     const defaults=C.merge(C.fresh(),adapter.capture());
     let state=C.merge(defaults,{lastView:view}),repo=null,raw=null,previous=null,expected=0,checkpointValue=null;
-    let busy=false,blocked=false,hardBlocked=false,memory=false,ready=false,lastTick=0,lastWritten='',pendingRoute=null,navLease=null,leaseSequence=0;
+    let busy=false,blocked=false,hardBlocked=false,memory=false,memoryChosen=false,ready=false,lastTick=0,lastWritten='',pendingRoute=null,navLease=null,leaseSequence=0;
     let statusValue={code:'loading',message:'Loading local save…'};
     let statusNode,dialog,saveButton,originalButton,recoveryButton,continueButton,panelStable=false;
     function pause(value){adapter.pause(!!value||!!navLease||!!(dialog&&dialog.open));}
@@ -53,7 +53,7 @@
       if(view==='interior'&&Object.prototype.hasOwnProperty.call(page,'navigation')){page={...page};delete page.navigation;}
       return C.merge(state,{...page,lastView:lastView||view});
     }
-    function noNavigationLease(){if(navLease)throw err('BUSY','Close the navigation console before using another save operation.');}
+    function noNavigationLease(){if(navLease)throw err('BUSY','Close the bridge console before using another save operation.');}
     function assertLease(lease){if(!lease||!lease.active||navLease!==lease)throw err('STALE','This navigation console is no longer active.');}
     function available() {
       noNavigationLease();
@@ -72,7 +72,7 @@
       if(!keepPaused)pause(false);
     }
     async function load() {
-      pause(true);blocked=false;hardBlocked=false;status('loading','Loading local save…');
+      pause(true);blocked=false;hardBlocked=false;memoryChosen=false;status('loading','Loading local save…');
       try {
         if(repo)repo.close();repo=await S.open(base);memory=false;
         const records=await repo.read();raw=records.current;previous=records.previous;
@@ -188,7 +188,7 @@
     function useMemoryOnly() {
       noNavigationLease();
       if(busy)throw err('BUSY','Wait for the current save operation.');
-      pendingRoute=null;memory=true;blocked=false;hardBlocked=false;pause(false);if(dialog&&dialog.open)panelStable=true;status('memory','Memory only — original browser save retained. Export JSON before leaving.');
+      pendingRoute=null;memory=true;memoryChosen=true;blocked=false;hardBlocked=false;pause(false);if(dialog&&dialog.open)panelStable=true;status('memory','Memory only — original browser save retained. Export JSON before leaving.');
     }
     function catalogIdentity(lease,id) {
       if(typeof id!=='string')return null;
@@ -217,13 +217,13 @@
       lease.catalogStatus='loading';lease.catalogError=null;lease.catalog=null;
       const request=Promise.resolve().then(()=>{
         assertLease(lease);
-        const target=root.ExpanseNavigationTarget;
+        const target=lease.kind==='survey'?root.ExpanseSurvey:root.ExpanseNavigationTarget;
         if(!target||typeof target.load!=='function')throw err('UNAVAILABLE','The chart catalog loader is unavailable.');
         return target.load(base);
       }).then(catalog=>{
         assertLease(lease);
         lease.catalog=catalog;lease.catalogStatus='ready';lease.catalogError=null;
-        return catalog.worlds.map(item=>({id:item.id,name:item.name}));
+        return lease.kind==='survey'?catalog.target:catalog.worlds.map(item=>({id:item.id,name:item.name}));
       }).catch(error=>{
         if(lease.active&&navLease===lease){lease.catalog=null;lease.catalogStatus='error';lease.catalogError=error.message||'Catalog could not be loaded.';}
         throw error;
@@ -235,7 +235,7 @@
       assertLease(lease);
       if(busy||lease.busy)throw err('BUSY','Wait for destination validation and save to finish.');
       if(lease.catalogStatus==='loading')throw err('BUSY','The catalog request is already in progress.');
-      if(lease.catalogStatus==='ready')return lease.catalog.worlds.map(item=>({id:item.id,name:item.name}));
+      if(lease.catalogStatus==='ready')return lease.kind==='survey'?lease.catalog.target:lease.catalog.worlds.map(item=>({id:item.id,name:item.name}));
       return catalogRequest(lease);
     }
     async function closeNavigation(lease) {
@@ -288,26 +288,77 @@
         }
       })();
     }
-    function openNavigationConsole() {
+    function openConsoleLease(kind) {
       if(view!=='interior')throw err('INVALID','The navigation console is available only aboard the ship.');
       if(!ready||busy||navLease||(dialog&&dialog.open))throw err('BUSY','Close other operations and wait until the ship is settled.');
       if(blocked||hardBlocked||['loading','saving','error','conflict'].includes(statusValue.code))throw err('BLOCKED','Resolve the save error before opening the navigation console.');
       const stable=adapter.stable();
       if(!stable)throw err('BUSY','Wait until the ship and current interaction are settled.');
-      const lease={id:++leaseSequence,active:true,stable:!!stable,busy:false,catalogStatus:'idle',catalogError:null,catalog:null,catalogPromise:null};
+      const lease={id:++leaseSequence,kind,active:true,stable:!!stable,busy:false,catalogStatus:'idle',catalogError:null,catalog:null,catalogPromise:null};
       navLease=lease;
       try{pause(true);}catch(error){lease.active=false;navLease=null;throw error;}
-      const controller=Object.freeze({
+      lease.catalogStatus='loading';
+      catalogRequest(lease).catch(()=>{});
+      return lease;
+    }
+    function openNavigationConsole() {
+      const lease=openConsoleLease('navigation');
+      return Object.freeze({
         readModel:()=>navigationModel(lease),
         setChartTarget:worldId=>setChartTarget(lease,worldId),
         close:()=>closeNavigation(lease),
         retryCatalog:()=>retryCatalog(lease)
       });
-      lease.catalogStatus='loading';
-      catalogRequest(lease).catch(()=>{});
-      return controller;
     }
-    const session=Object.freeze({tick,checkpoint,handoff,importJSON,exportJSON,recoverPrevious,newJourney,retry,continueWithoutSaving,useMemoryOnly,openNavigationConsole,
+    function surveyModel(lease) {
+      assertLease(lease);
+      const snapshot=capture(),record=snapshot.survey||null;
+      let range={eligible:false,reason:lease.catalogError||'Wait for the survey catalog.',centerDistance:null,clearance:null,radius:null,maxClearance:null,units:'system-1000km'};
+      if(lease.catalogStatus==='ready'){
+        try{range=root.ExpanseSurvey.evaluate(snapshot.navigation,lease.catalog);}
+        catch(error){range={...range,reason:error.message||'Exterior observation context is invalid.'};}
+      }
+      let recordDurable=false;
+      if(record&&raw!==null){
+        try{const saved=C.validate(raw).survey;recordDurable=!!saved&&saved.targetId===record.targetId&&saved.observedAt===record.observedAt;}catch(_){}
+      }
+      return {snapshot,status:{...statusValue},busy:!!lease.busy,
+        catalog:{status:lease.catalogStatus,error:lease.catalogError},
+        target:lease.catalog?{...lease.catalog.target}:null,range,record,recordDurable,memoryChoiceRequired:memory&&!memoryChosen,
+        checkpoint:checkpointValue?{...checkpointValue}:null};
+    }
+    async function recordSurvey(lease) {
+      assertLease(lease);
+      if(blocked||hardBlocked||statusValue.code==='conflict'||statusValue.code==='error')throw err('BLOCKED','Resolve the save error before recording a survey.');
+      if(busy||lease.busy)throw err('BUSY','Wait for the current survey operation.');
+      if(state.survey)return C.validate(state);
+      if(memory&&!memoryChosen)throw err('BLOCKED','Close Sensors, then choose Save → Use memory only (or Retry storage) before recording on this page.');
+      if(lease.catalogStatus==='loading')throw err('BUSY','Wait for the survey catalog.');
+      if(lease.catalogStatus!=='ready'||!lease.catalog)throw err('UNAVAILABLE',lease.catalogError||'Survey catalog unavailable.');
+      busy=true;lease.busy=true;
+      let before,candidate;
+      try{before=capture();state=before;candidate=root.ExpanseSurvey.patch(before,lease.catalog,new Date().toISOString());}
+      catch(error){busy=false;lease.busy=false;throw error;}
+      try{
+        status('validating','Validating survey range…');
+        await adapter.validate(candidate);assertLease(lease);
+        if(memory||!repo){
+          state=candidate;status('memory','Survey recorded on this page only — close Sensors and export JSON before leaving.');
+          return C.validate(state);
+        }
+        status('saving','Saving survey…');return await persist(candidate,false);
+      }catch(error){state=before;failure(error,true);throw error;}
+      finally{busy=false;lease.busy=false;if(lease.active&&navLease===lease)pause(false);}
+    }
+    function openSurveyConsole() {
+      const lease=openConsoleLease('survey');
+      return Object.freeze({readModel:()=>surveyModel(lease),recordSurvey:()=>recordSurvey(lease),
+        retryCatalog:()=>retryCatalog(lease),close:()=>closeNavigation(lease)});
+    }
+    function surveyReplacementWarning(candidate){
+      return state.survey&&(!candidate||!candidate.survey)?' This removes the recorded Micqui-Nobara survey.':'';
+    }
+    const session=Object.freeze({tick,checkpoint,handoff,importJSON,exportJSON,recoverPrevious,newJourney,retry,continueWithoutSaving,useMemoryOnly,openNavigationConsole,openSurveyConsole,
       snapshot:()=>C.validate(state),status:()=>({...statusValue}),
       exportOriginal:()=>raw===null?null:originalJSON(raw)});
     function controls() {
@@ -331,14 +382,14 @@
       button('Import JSON',async()=>{
         const file=input.files[0];if(!file)throw err('INVALID','Choose a JSON backup first.');
         if(file.size>C.MAX_BYTES)throw err('SIZE','Import exceeds 256 KiB.');
-        const text=await file.text();C.parse(text);
-        if(!confirm('Replace current progress with this backup? Cancel to Export JSON first.'))return;
+        const text=await file.text();const parsed=C.parse(text);
+        if(!confirm('Replace current progress with this backup? Cancel to Export JSON first.'+surveyReplacementWarning(parsed)))return;
         await importJSON(text);input.value='';
       });
       function replacementWarning(){try{if(raw!==null)C.validate(raw);return '';}catch(_){return ' The unreadable original will be permanently replaced. Cancel and use Export original first.';}}
       originalButton=button('Export original',()=>{const text=session.exportOriginal();if(text!==null)download(text,'the-expanse-original.json');});
-      recoveryButton=button('Recover previous',async()=>{if(confirm('Replace current progress with the previous checkpoint? Cancel to export a backup first.'+replacementWarning()))await recoverPrevious();});
-      button('New journey',async()=>{if(confirm('Start a new journey and replace this app’s current save? Cancel to Export JSON first.'+replacementWarning()))await newJourney();});
+      recoveryButton=button('Recover previous',async()=>{if(confirm('Replace current progress with the previous checkpoint? Cancel to export a backup first.'+replacementWarning()+surveyReplacementWarning(previous===null?null:C.validate(previous))))await recoverPrevious();});
+      button('New journey',async()=>{if(confirm('Start a new journey and replace this app’s current save? Cancel to Export JSON first.'+replacementWarning()+surveyReplacementWarning(null)))await newJourney();});
       button('Retry / reload saved',async()=>{if(confirm('Reload browser checkpoint? Unsaved changes will be lost. Cancel to export first.'))await retry();});
       button('Use memory only',()=>{if(confirm('Continue without automatic saving? Existing browser records stay untouched; export before leaving.'))useMemoryOnly();});
       continueButton=button('Continue without saving',()=>{if(confirm('Change view WITHOUT saving? Cross-page progress may be lost.'))continueWithoutSaving();});
