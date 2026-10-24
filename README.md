@@ -26,8 +26,8 @@ Inside Ripley, use `W A S D` / arrows to move. In non-touch desktop layouts, cli
 the scene for captured-mouse look (`Esc` releases). Hold the primary mouse button
 and drag to look in any layout, including when capture is unavailable. On the
 LOOK stick, hold off-center to keep turning; release to stop.
-Opening Save, losing focus, or reloading clears held input. Start a new gesture
-after resuming.
+Opening Save or the navigation console, losing focus, or reloading clears held
+input. Start a new gesture after resuming.
 
 ## Local journey saves
 
@@ -36,11 +36,37 @@ controls. Reload resumes stationary; settled-system Board and Return preserve th
 exterior/interior journey. Saves are browser/profile/origin/base-path local, not
 cloud sync. See [local save behavior and recovery](docs/local-saves.md).
 
+## Bridge navigation console
+
+Board from the exterior chart to establish the ship's exterior location. Inside
+Ripley, approach the existing Navigation station in the Bridge Pod, then press
+`E` or tap **Navigation console**. The prompt appears within six feet of its
+footprint, from a collision-valid position inside the bridge.
+
+Inspect exterior coordinates, interior feet, the current chart target and the
+last completed local checkpoint. Choose an existing world and press **Set
+destination**. Changing the picker alone does nothing. Setting a destination
+replaces chart selection/dossier focus; it does not move the ship or start Jump.
+
+Close the console and use the existing **Return to chart** control. If the ship
+was in a stellar system, it returns to that same system first; use its existing
+Return control to reach the supercluster chart, then activate **Jump** deliberately.
+Both saved poses, headings and cameras are retained.
+
+Direct interior starts without exterior navigation are read-only until the chart
+has established that location. The catalog requires same-origin HTTP(S), so
+direct-file console editing is unavailable. With browser storage unavailable,
+an explicit HTTP console change is this-page-only: close the panel and export
+JSON before leaving. No automatic memory-only cross-page transfer is promised.
+
 ## Retconning
 
 All content lives in one JSON block — the **RETcon ZONE** — at the top of
 `index.html` (`<script type="application/json" id="expanse-data">`).
-The engine reads that block and nothing else for content.
+The chart reads that block for content. The bridge console reads the matching
+standalone `expanse-data.json` over same-origin HTTP(S); keep world IDs/names and
+the system index synchronized. `tests/navigation-target.test.cjs` checks catalog
+parity. Journey saves cannot introduce new canon or catalog identities.
 
 - `expanse-data.json` is a standalone copy of the same block, for convenient
   editing. After editing it, paste it back into the DATA block in `index.html`

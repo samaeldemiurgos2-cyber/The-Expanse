@@ -1,0 +1,88 @@
+.expanse-navigation-control {
+  position: fixed;
+  left: 50%;
+  top: calc(50% + 34px);
+  transform: translateX(-50%);
+  z-index: 4;
+  pointer-events: auto;
+  min-height: 38px;
+  padding: 7px 12px;
+  border: 1px solid var(--amber, #e8a33d);
+  border-radius: 5px;
+  color: var(--ink, #e8f0f8);
+  background: var(--panel-solid, #0a111c);
+  box-shadow: 0 3px 14px #0008;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+}
+.expanse-navigation-control:hover { border-color: var(--amber-bright, #ffc76f); }
+.expanse-navigation-control:focus-visible,
+.expanse-navigation-panel button:focus-visible,
+.expanse-navigation-panel select:focus-visible {
+  outline: 3px solid #87d4ff;
+  outline-offset: 3px;
+}
+.expanse-navigation-panel {
+  box-sizing: border-box;
+  width: min(500px, calc(100vw - 24px));
+  max-width: calc(100vw - 24px);
+  max-height: calc(100dvh - 24px);
+  overflow: auto;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #7186a4;
+  border-radius: 10px;
+  color: var(--ink, #e8f0f8);
+  background: var(--panel-solid, #0a111c);
+  font: 14px/1.5 system-ui, sans-serif;
+  z-index: 1001;
+}
+.expanse-navigation-panel::backdrop { background: #000b; }
+.expanse-navigation-panel h2 { margin: 0 0 10px; font-size: 18px; }
+.expanse-navigation-panel p { margin: 9px 0; }
+.expanse-navigation-panel #navigation-identity,
+.expanse-navigation-panel #navigation-interior-position,
+.expanse-navigation-panel #navigation-frame-hint,
+.expanse-navigation-panel #navigation-target-current,
+.expanse-navigation-panel #navigation-system-current,
+.expanse-navigation-panel #navigation-body-current,
+.expanse-navigation-panel #navigation-checkpoint { color: var(--muted, #9eb0c2); }
+.expanse-navigation-panel #navigation-status { color: var(--amber-bright, #ffc76f); }
+.expanse-navigation-panel #navigation-status[data-state="error"],
+.expanse-navigation-panel #navigation-status[data-state="conflict"] { color: #ffc389; }
+.expanse-navigation-panel label { display: block; margin-top: 15px; font-weight: 600; }
+.expanse-navigation-panel select {
+  display: block;
+  width: 100%;
+  min-height: 42px;
+  margin-top: 5px;
+  padding: 8px;
+  color: var(--ink, #e8f0f8);
+  background: #101c2b;
+  border: 1px solid #526580;
+  border-radius: 4px;
+  font: inherit;
+}
+.expanse-navigation-panel select:disabled,
+.expanse-navigation-panel button:disabled { opacity: .62; cursor: not-allowed; }
+.expanse-navigation-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
+.expanse-navigation-panel button {
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #657b99;
+  border-radius: 5px;
+  color: var(--ink, #e8f0f8);
+  background: #203650;
+  font: inherit;
+  cursor: pointer;
+}
+.expanse-navigation-panel #navigation-set { border-color: var(--amber, #e8a33d); }
+.expanse-navigation-panel button[hidden] { display: none; }
+
+@media (max-width: 520px) {
+  .expanse-navigation-control { top: calc(50% + 31px); min-height: 36px; padding: 6px 10px; }
+  .expanse-navigation-panel { width: calc(100vw - 20px); max-width: calc(100vw - 20px); max-height: calc(100dvh - 20px); padding: 16px; }
+}

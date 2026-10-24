@@ -29,12 +29,12 @@
     if(!['chart','interior'].includes(view))throw err('INVALID','Unknown renderer');
     const base=new URL('./',options.baseURL);
     const defaults=C.merge(C.fresh(),adapter.capture());
-    let state=C.merge(defaults,{lastView:view}),repo=null,raw=null,previous=null,expected=0;
-    let busy=false,blocked=false,hardBlocked=false,memory=false,ready=false,lastTick=0,lastWritten='',pendingRoute=null;
+    let state=C.merge(defaults,{lastView:view}),repo=null,raw=null,previous=null,expected=0,checkpointValue=null;
+    let busy=false,blocked=false,hardBlocked=false,memory=false,ready=false,lastTick=0,lastWritten='',pendingRoute=null,navLease=null,leaseSequence=0;
     let statusValue={code:'loading',message:'Loading local save…'};
     let statusNode,dialog,saveButton,originalButton,recoveryButton,continueButton,panelStable=false;
-    function pause(value){adapter.pause(value||!!(dialog&&dialog.open));}
-    function settled(){return dialog&&dialog.open?panelStable:adapter.stable();}
+    function pause(value){adapter.pause(!!value||!!navLease||!!(dialog&&dialog.open));}
+    function settled(){return navLease?navLease.stable:(dialog&&dialog.open?panelStable:adapter.stable());}
     function validPrevious(){try{return previous!==null&&!!C.validate(previous);}catch(_){return false;}}
     pause(true);
     function status(code,message) {
@@ -44,17 +44,24 @@
       if(originalButton)originalButton.hidden=raw===null;
       if(recoveryButton)recoveryButton.hidden=!validPrevious();
       if(continueButton)continueButton.hidden=!pendingRoute;
-      if(hardBlocked&&dialog&&!dialog.open){panelStable=false;dialog.showModal();if(originalButton&&!originalButton.hidden)originalButton.focus();}
+      if(hardBlocked&&dialog&&!dialog.open&&!navLease){panelStable=false;dialog.showModal();if(originalButton&&!originalButton.hidden)originalButton.focus();}
       return statusValue;
     }
     function capture(lastView) {
-      return C.merge(state,{...adapter.capture(),lastView:lastView||view});
+      let page=adapter.capture();
+      // The ship adapter owns only aboard pose/preferences; exterior navigation belongs to this session.
+      if(view==='interior'&&Object.prototype.hasOwnProperty.call(page,'navigation')){page={...page};delete page.navigation;}
+      return C.merge(state,{...page,lastView:lastView||view});
     }
+    function noNavigationLease(){if(navLease)throw err('BUSY','Close the navigation console before using another save operation.');}
+    function assertLease(lease){if(!lease||!lease.active||navLease!==lease)throw err('STALE','This navigation console is no longer active.');}
     function available() {
+      noNavigationLease();
       if(busy||!ready||!settled())throw err('BUSY','Wait until movement/scene transition or save operation has settled.');
       if(blocked)throw err('BLOCKED','Resolve this save error using Retry, recovery or New journey before saving.');
     }
     function recoveryAvailable(){
+      noNavigationLease();
       if(busy||!ready)throw err('BUSY','Wait for the current operation.');
       if(!hardBlocked&&!settled())throw err('BUSY','Wait for warp or scene transition to finish before recovery.');
     }
@@ -71,6 +78,7 @@
         const records=await repo.read();raw=records.current;previous=records.previous;
         expected=raw===null?0:raw&&Number.isSafeInteger(raw.revision)&&raw.revision>=0?raw.revision:null;
         const loaded=raw===null?C.merge(defaults,{lastView:view}):C.validate(raw);
+        checkpointValue=raw===null?null:{revision:loaded.revision,savedAt:loaded.savedAt};
         await adapter.validate(loaded);await adapter.apply(loaded);state=loaded;
         lastWritten=raw===null?'':signature(loaded);
         ready=true;pause(false);if(dialog&&dialog.open)panelStable=true;
@@ -90,6 +98,7 @@
       const saved=await (recovery?repo.replace(candidate,expected):repo.commit(candidate,expected));
       previous=raw===null?previous:(()=>{try{return C.validate(raw);}catch(_){return previous;}})();
       state=saved;raw=saved;expected=saved.revision;lastWritten=signature(saved);pendingRoute=null;
+      checkpointValue={revision:saved.revision,savedAt:saved.savedAt};
       status('saved','Saved at '+new Date(saved.savedAt).toLocaleTimeString());
       return C.validate(saved);
     }
@@ -100,7 +109,7 @@
       finally{busy=false;}
     }
     function tick() {
-      if(!ready||busy||blocked||(dialog&&dialog.open)||!adapter.stable()||performance.now()-lastTick<2000)return;
+      if(!ready||busy||blocked||navLease||(dialog&&dialog.open)||!adapter.stable()||performance.now()-lastTick<2000)return;
       lastTick=performance.now();
       try{
         const next=capture();state=next;
@@ -110,6 +119,7 @@
       }catch(e){failure(e,false);}
     }
     function exportJSON() {
+      noNavigationLease();
       if(ready&&!busy&&settled())state=capture();
       else if(hardBlocked)status('error','No journey was restored. This export contains safe defaults, not the unreadable journey. Use Export original to preserve the stored record, then choose recovery.');
       else status(blocked||busy?statusValue.code:'unsaved','Exported the preceding stable snapshot; the current transition or save is not included.'+(blocked?' Resolve the save error using recovery.':''));
@@ -128,6 +138,7 @@
       finally{busy=false;}
     }
     async function importJSON(text) {
+      noNavigationLease();
       const candidate=C.parse(text); // Reject size/schema before touching live state.
       available();const before=capture();busy=true;pause(true);let applyStarted=false;
       try {
@@ -157,6 +168,7 @@
       return C.validate(state);
     }
     async function recoverPrevious() {
+      noNavigationLease();
       if(previous===null)throw err('INVALID','No previous checkpoint is available.');
       return replaceWith(C.validate(previous),'Previous checkpoint recovered');
     }
@@ -168,26 +180,149 @@
       busy=true;try{await load();}finally{busy=false;}
     }
     function continueWithoutSaving() {
+      noNavigationLease();
+      if(busy)throw err('BUSY','Wait for the current save operation.');
       if(!pendingRoute)throw err('INVALID','No pending view change.');
       const destination=pendingRoute;pendingRoute=null;location.assign(destination);
     }
     function useMemoryOnly() {
+      noNavigationLease();
+      if(busy)throw err('BUSY','Wait for the current save operation.');
       pendingRoute=null;memory=true;blocked=false;hardBlocked=false;pause(false);if(dialog&&dialog.open)panelStable=true;status('memory','Memory only — original browser save retained. Export JSON before leaving.');
     }
-    const session=Object.freeze({tick,checkpoint,handoff,importJSON,exportJSON,recoverPrevious,newJourney,retry,continueWithoutSaving,useMemoryOnly,
+    function catalogIdentity(lease,id) {
+      if(typeof id!=='string')return null;
+      const world=lease.catalog&&lease.catalog.worlds.find(item=>item.id===id);
+      return {id,name:world?world.name:id};
+    }
+    function navigationModel(lease) {
+      assertLease(lease);
+      const snapshot=capture(),nav=snapshot.navigation;
+      const targetId=!nav?null:nav.frame==='chart-mly'?nav.selection:nav.chartReturn.selection;
+      const systemId=nav&&nav.frame==='system-1000km'?nav.systemId:null;
+      const bodyId=nav&&nav.frame==='system-1000km'?nav.selection:null;
+      return {
+        snapshot,
+        status:{...statusValue},
+        busy:!!lease.busy,
+        catalog:{status:lease.catalogStatus,error:lease.catalogError,
+          worlds:lease.catalog?lease.catalog.worlds.map(item=>({id:item.id,name:item.name})):[]},
+        readableIdentities:{chartTarget:catalogIdentity(lease,targetId),system:catalogIdentity(lease,systemId),
+          localBody:typeof bodyId==='string'?{id:bodyId,label:bodyId}:null},
+        checkpoint:checkpointValue?{revision:checkpointValue.revision,savedAt:checkpointValue.savedAt}:null
+      };
+    }
+    function catalogRequest(lease) {
+      assertLease(lease);
+      lease.catalogStatus='loading';lease.catalogError=null;lease.catalog=null;
+      const request=Promise.resolve().then(()=>{
+        assertLease(lease);
+        const target=root.ExpanseNavigationTarget;
+        if(!target||typeof target.load!=='function')throw err('UNAVAILABLE','The chart catalog loader is unavailable.');
+        return target.load(base);
+      }).then(catalog=>{
+        assertLease(lease);
+        lease.catalog=catalog;lease.catalogStatus='ready';lease.catalogError=null;
+        return catalog.worlds.map(item=>({id:item.id,name:item.name}));
+      }).catch(error=>{
+        if(lease.active&&navLease===lease){lease.catalog=null;lease.catalogStatus='error';lease.catalogError=error.message||'Catalog could not be loaded.';}
+        throw error;
+      });
+      lease.catalogPromise=request;
+      return request;
+    }
+    async function retryCatalog(lease) {
+      assertLease(lease);
+      if(busy||lease.busy)throw err('BUSY','Wait for destination validation and save to finish.');
+      if(lease.catalogStatus==='loading')throw err('BUSY','The catalog request is already in progress.');
+      if(lease.catalogStatus==='ready')return lease.catalog.worlds.map(item=>({id:item.id,name:item.name}));
+      return catalogRequest(lease);
+    }
+    async function closeNavigation(lease) {
+      assertLease(lease);
+      if(busy||lease.busy)throw err('BUSY','Wait for destination validation and save to finish before closing.');
+      // Clear keyboard, pointer and touch state while this lease still owns the pause.
+      adapter.pause(true);
+      lease.active=false;
+      navLease=null;
+      pause(false);
+    }
+    async function setChartTarget(lease,worldId) {
+      assertLease(lease);
+      if(blocked||hardBlocked||statusValue.code==='conflict'||statusValue.code==='error')throw err('BLOCKED','Resolve the save error before setting another destination.');
+      if(busy||lease.busy)throw err('BUSY','A destination update is already in progress.');
+      if(lease.catalogStatus==='loading')throw err('BUSY','Wait for the chart catalog to load.');
+      if(lease.catalogStatus!=='ready'||!lease.catalog)throw err('UNAVAILABLE',lease.catalogError||'The chart catalog is unavailable.');
+      busy=true;lease.busy=true;
+      let before,candidate;
+      try {
+        before=capture();
+        state=before;
+        candidate=root.ExpanseNavigationTarget.patch(before,worldId,lease.catalog);
+      } catch(error) {
+        busy=false;lease.busy=false;
+        return Promise.reject(error);
+      }
+      return (async()=>{
+        try {
+          status('validating','Validating destination…');
+          await adapter.validate(candidate);
+          assertLease(lease);
+          if(memory||!repo){
+            assertLease(lease);
+            state=candidate;
+            status('memory','This page only — export JSON before leaving.');
+            return C.validate(state);
+          }
+          assertLease(lease);
+          status('saving','Saving destination…');
+          assertLease(lease);
+          return await persist(candidate,false);
+        } catch(error) {
+          state=before;
+          failure(error,true);
+          throw error;
+        } finally {
+          busy=false;lease.busy=false;
+          if(lease.active&&navLease===lease)pause(false);
+        }
+      })();
+    }
+    function openNavigationConsole() {
+      if(view!=='interior')throw err('INVALID','The navigation console is available only aboard the ship.');
+      if(!ready||busy||navLease||(dialog&&dialog.open))throw err('BUSY','Close other operations and wait until the ship is settled.');
+      if(blocked||hardBlocked||['loading','saving','error','conflict'].includes(statusValue.code))throw err('BLOCKED','Resolve the save error before opening the navigation console.');
+      const stable=adapter.stable();
+      if(!stable)throw err('BUSY','Wait until the ship and current interaction are settled.');
+      const lease={id:++leaseSequence,active:true,stable:!!stable,busy:false,catalogStatus:'idle',catalogError:null,catalog:null,catalogPromise:null};
+      navLease=lease;
+      try{pause(true);}catch(error){lease.active=false;navLease=null;throw error;}
+      const controller=Object.freeze({
+        readModel:()=>navigationModel(lease),
+        setChartTarget:worldId=>setChartTarget(lease,worldId),
+        close:()=>closeNavigation(lease),
+        retryCatalog:()=>retryCatalog(lease)
+      });
+      lease.catalogStatus='loading';
+      catalogRequest(lease).catch(()=>{});
+      return controller;
+    }
+    const session=Object.freeze({tick,checkpoint,handoff,importJSON,exportJSON,recoverPrevious,newJourney,retry,continueWithoutSaving,useMemoryOnly,openNavigationConsole,
       snapshot:()=>C.validate(state),status:()=>({...statusValue}),
       exportOriginal:()=>raw===null?null:originalJSON(raw)});
     function controls() {
       const host=options.host||document.body;
       saveButton=document.createElement('button');saveButton.type='button';saveButton.className='expanse-save-button';saveButton.id='save-control';saveButton.textContent='Save';saveButton.setAttribute('aria-haspopup','dialog');
       dialog=document.createElement('dialog');dialog.className='expanse-save-panel';dialog.id='save-panel';dialog.setAttribute('aria-labelledby','save-heading');
+      const nativeShowModal=dialog.showModal.bind(dialog);
+      dialog.showModal=function(){noNavigationLease();return nativeShowModal();};
       const heading=document.createElement('h2');heading.id='save-heading';heading.textContent='Local journey save';dialog.append(heading);
       statusNode=document.createElement('p');statusNode.id='save-status';statusNode.setAttribute('role','status');statusNode.setAttribute('aria-live','polite');dialog.append(statusNode);
       const note=document.createElement('p');note.textContent='Browser-local, not cloud sync. Resume is stationary. Export JSON for a portable backup. Import, recovery and New journey replace progress only after confirmation.';dialog.append(note);
       const row=document.createElement('div');row.className='expanse-save-actions';dialog.append(row);
       function button(label,action){
         const element=document.createElement('button');element.type='button';element.textContent=label;
-        element.addEventListener('click',()=>{Promise.resolve().then(action).catch(e=>{if(e.code!=='BUSY')failure(e,blocked);else status('unsaved',e.message);});});row.append(element);return element;
+        element.addEventListener('click',()=>{Promise.resolve().then(action).catch(e=>{if(e.code!=='BUSY')failure(e,blocked);else if(!navLease)status('unsaved',e.message);});});row.append(element);return element;
       }
       button('Save now',checkpoint);
       button('Export JSON',()=>download(exportJSON(),'the-expanse-save.json'));
@@ -208,7 +343,10 @@
       button('Use memory only',()=>{if(confirm('Continue without automatic saving? Existing browser records stay untouched; export before leaving.'))useMemoryOnly();});
       continueButton=button('Continue without saving',()=>{if(confirm('Change view WITHOUT saving? Cross-page progress may be lost.'))continueWithoutSaving();});
       button('Close',()=>dialog.close());
-      saveButton.addEventListener('click',()=>{panelStable=ready&&!busy&&adapter.stable();dialog.showModal();pause(true);dialog.querySelector('button').focus();});
+      saveButton.addEventListener('click',()=>{
+        if(navLease)return;
+        panelStable=ready&&!busy&&adapter.stable();dialog.showModal();pause(true);dialog.querySelector('button').focus();
+      });
       dialog.addEventListener('close',()=>{pendingRoute=null;pause(busy||hardBlocked);status(statusValue.code,statusValue.message);saveButton.focus();});
       host.append(saveButton);document.body.append(dialog);
       // Live status remains announced even when the modal is closed.
@@ -217,8 +355,8 @@
       status(statusValue.code,statusValue.message);
     }
     controls();root.__expanseSave=session;
-    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&ready&&!busy&&!blocked&&adapter.stable())checkpoint().catch(()=>{});});
-    root.addEventListener('pagehide',()=>{if(ready&&!busy&&!blocked&&adapter.stable())checkpoint().catch(()=>{});});
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&ready&&!busy&&!blocked&&!navLease&&adapter.stable())checkpoint().catch(()=>{});});
+    root.addEventListener('pagehide',()=>{if(ready&&!busy&&!blocked&&!navLease&&adapter.stable())checkpoint().catch(()=>{});});
     await load();return session;
   }
   root.ExpanseSave=Object.freeze({start});
