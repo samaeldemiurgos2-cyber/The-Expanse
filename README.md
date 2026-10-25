@@ -1,7 +1,8 @@
 # The Expanse — Virgo Supercluster Chart
 
-> **SOURCE OF TRUTH (private).** Approved site snapshots are published to
-> `The-Expanse` without publishing this repository's private commit history.
+> **SOURCE OF TRUTH (private).** Files are automatically mirrored to
+> `The-Expanse` through separate public commits. Pages excludes development
+> documentation, tests and tools from the website.
 
 A navigable Three.js visualization of **The Expanse**, which *is* the Virgo Supercluster.
 Fly the GAS *Ripley* through ~110 million light-years of real cosmic structure,
