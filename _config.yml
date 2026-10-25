@@ -1,0 +1,7 @@
+# The app and Scale Preview are static files. Keep development material out of
+# the generated website while the public repository mirrors the source tree.
+exclude:
+  - docs
+  - tests
+  - tools
+  - README.md
