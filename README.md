@@ -1,7 +1,7 @@
 # The Expanse — Virgo Supercluster Chart
 
-> **SOURCE OF TRUTH (private).** This repo is auto-mirrored to the public
-> `The-Expanse` every few minutes. Push here; the mirror follows.
+> **SOURCE OF TRUTH (private).** Approved site snapshots are published to
+> `The-Expanse` without publishing this repository's private commit history.
 
 A navigable Three.js visualization of **The Expanse**, which *is* the Virgo Supercluster.
 Fly the GAS *Ripley* through ~110 million light-years of real cosmic structure,
@@ -10,7 +10,13 @@ with the worlds of the Space Adventures / Warbrood canon pinned to it.
 ## View it
 
 - **Live:** https://samaeldemiurgos2-cyber.github.io/The-Expanse/
+- **Scale Preview:** https://samaeldemiurgos2-cyber.github.io/The-Expanse/scale/
 - **Local:** open `index.html` in any modern browser. No build step, no server.
+
+The separate Scale Preview demonstrates the 312 m working Ripley reference,
+nominal compressed system distances, Maneuver/Cruise, braking and chase/overview
+views. It does not save progress or provide boarding. Open it directly or from
+the main chart's **?** briefing. The main app retains its existing journey flows.
 
 Keep the repository's `assets/` folder alongside the pages. Direct-file viewing uses
 memory-only journey state; serve over HTTP(S) for automatic local save/resume.
