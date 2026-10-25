@@ -1,0 +1,6 @@
+async function(page){
+ await page.waitForFunction(()=>window.__scalePrototype);await page.click('#flight');await page.waitForFunction(()=>window.__scalePrototype.flightSample()?.running);const samples=[];
+ async function cycle(){await page.keyboard.press('c');await page.waitForFunction(()=>window.__scalePrototype.flightSample().mode==='overview'&&!window.__scalePrototype.flightSample().transition);await page.selectOption('#quality','low');await page.keyboard.press('c');await page.waitForFunction(()=>window.__scalePrototype.flightSample().mode==='chase'&&!window.__scalePrototype.flightSample().transition);await page.selectOption('#quality','high');await page.waitForFunction(()=>window.__scalePrototype.flightSample().hullAlpha===1);}
+ await cycle();await cycle();const baseline=await page.evaluate(()=>window.__scalePrototype.flightSample().rendererMemory);for(let i=0;i<10;i++){await cycle();const s=await page.evaluate(()=>window.__scalePrototype.flightSample());samples.push({cycle:i+1,memory:s.rendererMemory,invariant:s.history.every(t=>JSON.stringify(t.before)===JSON.stringify(t.after))});}
+ const stable=samples.every(s=>s.invariant&&s.memory.geometries<=baseline.geometries&&s.memory.textures<=baseline.textures&&s.memory.programs<=baseline.programs);return {passed:Number(stable),failed:Number(!stable),baseline,samples};
+}
